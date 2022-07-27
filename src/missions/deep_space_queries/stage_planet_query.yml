@@ -1,0 +1,138 @@
+# <% const ScanMeta = Atlas.Config.DeepSpaceQuery.find((s) => s.MissionID === Atlas.Metadata.Name); %>
+
+Stage:
+  $: GcMissionSequenceGroup
+  Silent: true
+  Stages:
+    - $: GcMissionSequenceShowMissionUpdateMessage
+      MissionUpdateMessage: Start
+      SetMissionSelected: true
+      PlayMusicSting: Start
+      WaitForMessageOver: false
+
+    - $: GcMissionSequenceGroup
+      Silent: true
+      RepeatLogic: Loop
+      ConditionTest: AnyTrue
+      Conditions:
+        - $: GcMissionConditionIsScanEventActive
+          Event: <%= Atlas.Stage.Config.ScanEvent %>
+          MustMatchThisMissionSeed: true
+      Stages:
+        # stabalize env
+        - $: GcMissionSequenceWait
+          Time: 2
+
+        - $: GcMissionSequenceGroup
+          ObjectiveID: <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ') %>
+          ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ_TIP') %>
+          ConditionTest: AllFalse
+          Conditions:
+            - $: GcMissionConditionOnMultiplayerMission
+            - $: GcMissionConditionOnOtherSideOfPortal
+          Stages:
+            - $: GcMissionSequenceStop
+
+        - $: GcMissionSequenceGroup
+          ConditionTest: AnyTrue
+          ObjectiveID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ') %>
+          ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ_TIP') %>
+          Conditions:
+            - $: GcMissionConditionOnMultiplayerMission
+            - $: GcMissionConditionOnOtherSideOfPortal
+          Stages:
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AnyFalse
+              Conditions:
+                - $: GcMissionConditionLocation
+                  MissionPlayerLocation: InShipInSpace
+              Stages:
+                # do search
+                - $: GcMissionSequenceStartScanEvent
+                  Participant: Secondary2
+                  Event: <%= Atlas.Stage.Config.ScanEvent %>
+
+                # give it a second to bail if found
+                - $: GcMissionSequenceWait
+                  Time: 2
+
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionMissionMessageWarp
+              Stages:
+                - $: GcMissionSequenceWaitForConditions
+                  ConditionTest: AllFalse
+                  Conditions:
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInSpace
+
+                - $: GcMissionSequenceWaitForConditions
+                  ConditionTest: AllTrue
+                  Conditions:
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInSpace
+
+    - $: GcMissionSequenceGroup
+      Icon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
+      ObjectiveID: <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ') %>
+      ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ_TIP') %>
+      ConditionTest: AnyTrue
+      Conditions:
+        - $: GcMissionConditionMissionMessage
+          Message: <%= Atlas.Stage.Message('ARVL') %>
+      Stages:
+        - $: GcMissionSequenceShowMissionUpdateMessage
+          MissionUpdateMessage: Start
+          SetMissionSelected: true
+          WaitForMessageOver: false
+
+        - $: GcMissionSequenceGroup
+          Silent: true
+          RepeatLogic: Loop
+          Stages:
+            - $: GcMissionSequenceWaitForConditions
+              Message: <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ_WAIT') %>
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionIsScanEventLocal
+                  Event: <%= Atlas.Stage.Config.ScanEvent %>
+
+            - $: GcMissionSequenceGroup
+              Icon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
+              ObjectiveID: <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ') %>
+              ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ_TIP') %>
+              ConditionTest: AnyFalse
+              Conditions:
+                - $: GcMissionConditionIsScanEventLocal
+                  Event: <%= Atlas.Stage.Config.ScanEvent %>
+              Stages:
+                - $: GcMissionSequenceShowMissionUpdateMessage
+                  MissionUpdateMessage: Start
+                  SetMissionSelected: true
+                  WaitForMessageOver: false
+
+                - $: GcMissionSequenceWaitForConditions
+                  Message: <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ_WAIT') %>
+                  ConditionTest: AnyTrue
+                  Conditions:
+                    - $: GcMissionConditionIsScanEventOnCurrentPlanet
+                      Event: <%= Atlas.Stage.Config.ScanEvent %>
+                      AllowInShip: true
+                - $: GcMissionSequenceBroadcastMessage
+                  MessageID: <%= Atlas.Stage.Message('ARVL') %>
+                  Seeded: true
+                - $: GcMissionSequenceWait
+                  Time: 3.0
+
+    # clean up
+    - $: GcMissionSequenceEndScanEvent
+      Event: <%= Atlas.Stage.Config.ScanEvent %>
+
+    - $: GcMissionSequenceShowMissionUpdateMessage
+      MissionUpdateMessage: End
+      SetMissionSelected: false
+      WaitForMessageOver: true
+      PlayMusicSting: End

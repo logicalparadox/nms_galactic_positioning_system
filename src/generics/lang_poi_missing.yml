@@ -1,0 +1,11 @@
+LanguageKeys:
+  <%= Atlas.Mod.LocKey('POI_TREA_MENU') %>: Treasure Ruins
+
+  <%= Atlas.Mod.LocKey('POI_UWCF') %>: Submerged Freighter
+  <%= Atlas.Mod.LocKey('POI_UWTR') %>: Submerged Ruins
+  <%= Atlas.Mod.LocKey('POI_UWDS') %>: Submerged Ship
+  <%= Atlas.Mod.LocKey('POI_UWAB') %>: Submerged Building
+
+  <%= Atlas.Mod.LocKey('PIO_GRAVE_TIP') %>: |
+    <TITLE>Fallen traveler exosuit signal detected<>
+    Echo may have knowledge required for Portal travel

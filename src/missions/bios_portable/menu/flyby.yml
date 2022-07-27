@@ -1,0 +1,76 @@
+Rewards:
+  # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
+  - Id: <%= Atlas.Reward(`FLY_${groupKey}`) %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardModifyStat
+        Stat: <%= Atlas.Mod.Stat('FLYBY_ID') %>
+        ModifyType: Set
+        Amount: <%= Atlas.Config.SearchGroups[groupKey].FlybyId %>
+      - $: GcRewardMission
+        Mission: <%= Atlas.Config.FlybyMission %>
+        SetAsSelected: true
+  # <% }); %>
+
+Dialog:
+  - Id: <%= Atlas.Dialog('FLYBY_REQ1') %>
+    TranslationBrackets: true
+    TextAlien: <%= Atlas.Mod.LocKey('FLYBY_COMM_DESC') %>
+    Options:
+      # <% ;['SVG', 'BLD', 'ANC'].forEach((groupKey) => { %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_NAME`) %>
+        Text: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_FLYBY`) %>
+        IsAlien: true
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Cost('FRIG') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - <%= Atlas.Reward(`FLY_${groupKey}`) %>
+      # <% }); %>
+      # <% }); %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog('FLYBY_REQ2') %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+
+  - Id: <%= Atlas.Dialog('FLYBY_REQ2') %>
+    TranslationBrackets: true
+    TextAlien: <%= Atlas.Mod.LocKey('FLYBY_COMM_DESC') %>
+    Options:
+      # <% ;['SIG', 'UW'].forEach((groupKey) => { %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_NAME`) %>
+        Text: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_FLYBY`) %>
+        IsAlien: true
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Cost('FRIG') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - <%= Atlas.Reward(`FLY_${groupKey}`) %>
+      # <% }); %>
+      # <% }); %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true

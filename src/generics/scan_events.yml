@@ -1,0 +1,31 @@
+ScanEvents:
+  # <% Atlas.Config.ScanEventTable.forEach((se) => { %>
+  - Name: '<%= Atlas.Mod.ScanEvent(`${se.ID}_N`) %>'
+    $Table: Planet
+    ForceInteractionType: <%= se.ScanEvent.ForceInteractionType || 'None' %>
+    EventStartType: ObjectScan
+    EventEndType: Proximity
+    BuildingLocation: "<%= se.ScanEvent.BuildingLocation || 'Nearest' %>"
+    BuildingType: <%= se.ScanEvent.BuildingType || 'BuildingClass' %>
+    BuildingClass: <%= se.ScanEvent.BuildingClass || 'None' %>
+    ForceWideRandom: <%= se.ScanEvent.ForceWideRandom || false %>
+    SolarSystemLocation: Local
+    AllowOverriddenBuildings: <%= se.ScanEvent.AllowOverriddenBuildings || false %>
+    OSDMessage: <%= se.ScanEvent.OSDMessage || `SIGNAL_${se.Name}` %>
+    TooltipMessage: <%= se.ScanEvent.TooltipMessage || `TIP_${se.Name}` %>
+    MarkerLabel: <%= se.ScanEvent.MarkerLabel || '' %>
+    ReplaceEventIfAlreadyActive: true
+  # <% }); %>
+
+  - Name: <%= Atlas.Mod.ScanEvent('GPS_INTRO') %>
+    $Table: Planet
+    NeverShow: true
+    EventStartType: ObjectScan
+    EventEndType: Proximity
+    BuildingLocation: Nearest
+    BuildingType: AnyShelter
+    SolarSystemLocation: Local
+    AllowOverriddenBuildings: true
+    OSDMessage: <%= Atlas.Mod.LocKey('GPS_INTRO_OSD') %>
+    MarkerIcon: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.PIN.ON.DDS
+    ReplaceEventIfAlreadyActive: true

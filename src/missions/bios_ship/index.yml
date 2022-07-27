@@ -1,0 +1,423 @@
+Include:
+  - ../../shared/GenericPlanetSearch.yml
+  - ../../shared/menu_exact_poi.yml
+  - ./menu/boot.yml
+  - ./menu/frigate_recon.yml
+  - ./menu/planet_sweep.yml
+  - ./menu/settings.yml
+
+LanguageKeys:
+  <%= Atlas.LocKey('SHIP_OBJ') %>: Interface With Ship in Flight
+  <%= Atlas.LocKey('SHIP_OBJ_TIP') %>: Ship sensors require <TRADEABLE>space or atmospheric flight<> for complex <TECHNOLOGY>signal analysis<>.
+  <%= Atlas.LocKey('SHIP_OBJ_WAIT') %>: |
+    Complex <TECHNOLOGY>signal analysis<> <FUEL>unavailable<> <IMG>DANGER<> 
+    <TRADEABLE>Space or atmospheric flight<> required
+  <%= Atlas.LocKey('SPACE_OBJ') %>: Optimal Scanning Conditions
+  <%= Atlas.LocKey('SPACE_OBJ_TIP') %>: |
+    <IMG>DANGER<> <FUEL>INTERFERENCE DETECTED<>
+    <TECHNOLOGY>Signal analysis<> is currently blocked by pulse travel, combatants, or a competing scanning operation.
+  <%= Atlas.LocKey('SPACE_OBJ_WAIT') %>: |
+    Complex <TECHNOLOGY>signal analysis<> <FUEL>unavailable<> <IMG>DANGER<>
+  <%= Atlas.LocKey('SCAN_OBJ') %>: Initiate Scan
+  <%= Atlas.LocKey('SCAN_OBJ_TIP') %>: Use scan (<IMG>SCAN<>) to initiate complex <TECHNOLOGY>signal analysis<>.
+  <%= Atlas.LocKey('SCAN_OBJ_MSG') %>: |
+    Complex <TECHNOLOGY>signal analysis<> available
+    Use scan (<IMG>SCAN<>) to initiate interface
+  <%= Atlas.LocKey('MISSION_DESC') %>: |
+    While selected in the <STELLAR>Mission Log<> during <TRADEABLE>flight<>, use scan (<IMG>SCAN<>) to initiate complex <TECHNOLOGY>signal analysis<>.
+
+    <TRADEABLE>Atmospheric flight<> may reveal closer sources and enables <TECHNOLOGY>signal sweep mode<> to reveal all targets of a given <SPECIAL>frequency type<>.
+
+    <TRADEABLE>Space flight<> enables <TECHNOLOGY>deep space scanning<> allowing the user to locate planets in remote systems that match the given <SPECIAL>query parameters<>.
+  <%= Atlas.LocKey('MENU_HOME_DESC') %>:
+    - <STELLAR>Ship Scanner<> <IMG>SLASH<> Enhanced Scanning Tasks ~ <TRADEABLE>AVAILABLE<> <IMG>SLASH<> Awaiting user task selection...
+
+StatDefinitions:
+  - Id: <%= Atlas.Stat('CFG_DONE') %>
+    TrackType: Set
+  - Id: <%= Atlas.Stat('CFG_COST') %>
+    TrackType: Set
+  - Id: <%= Atlas.Stat('CFG_TECH') %>
+    TrackType: Set
+
+Costs:
+  # ?
+  - Id: <%= Atlas.Cost('RECON') %>
+    Cost:
+      $: GcCostProduct
+      Id: NAV_DATA
+      Amount: 4
+
+  # UI Elements
+  - Id: <%= Atlas.Cost('TECHA') %>
+    Cost:
+      $: GcCostInstalledTech
+      Id: SHIPSCAN_COMBAT
+      InventoryToCheck: Ship
+  - Id: <%= Atlas.Cost('TECHB') %>
+    Cost:
+      $: GcCostInstalledTech
+      Id: SHIPSCAN_ECON
+      InventoryToCheck: Ship
+
+  # Mission Conditions
+  - Id: <%= Atlas.Cost('CONDA') %>
+    DisplayCost: false
+    MustAffordInCreative: true
+    CannotAffordOSDMsg: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON_ERR') %>
+    Cost:
+      $: GcCostMissionComplete
+      Cost: <%= Atlas.Metadata.Name %>
+
+  - Id: <%= Atlas.Cost('CONDB') %>
+    DisplayCost: false
+    MustAffordInCreative: true
+    CannotAffordOSDMsg: <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE_ERR') %>
+    Cost:
+      $: GcCostMissionComplete
+      Cost: <%= Atlas.Metadata.Name %>
+
+Rewards:
+  - Id: <%= Atlas.Reward('REBOOT') %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardMissionMessage
+        MessageID: <%= Atlas.Mod.Message('SM_RSRT') %>
+
+Dialog:
+  - Id: <%= Atlas.Config.HomeDialogId %>
+    Text: <%= Atlas.LocKey('MENU_HOME_DESC') %>
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_INIT') %>
+        NextInteraction: <%= Atlas.Dialog('BOOT') %>
+        KeepOpen: true
+        MarkInteractionComplete: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 0
+            Test: Equal
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_RAND') %>
+        NextInteraction: <%= Atlas.Dialog('RAND_P1') %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        Cost: <%= Atlas.Cost('TECHA') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionGroup
+            ConditionTest: AllFalse
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+        KeepOpen: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+
+      - Name: ALL_REQUEST_LEAVE
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+
+  - Id: <%= Atlas.Dialog('UTIL') %>
+    Text: <%= Atlas.LocKey('MENU_HOME_DESC') %>
+    Options:
+      #
+      # PLANETARY SWEEP
+      #
+
+      # planetary sweep costs enabled in space
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
+        NextInteraction: <%= Atlas.Dialog('RECON_REQ1') %>
+        Cost: <%= Atlas.Cost('TECHA') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInPlanetOrbit
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+
+      # planetary sweep costs disabled in space
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
+        NextInteraction: <%= Atlas.Dialog('RECON_REQ1') %>
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInPlanetOrbit
+          - $: GcMissionConditionGroup
+            ConditionTest: AllFalse
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
+        Cost: <%= Atlas.Cost('CONDA') %>
+        DisplayCost: false
+        EnablingConditionTest: AnyTrue
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInPlanetOrbit
+
+      #
+      # INTERSTELLAR SEARCH
+      #
+
+      #
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE') %>
+        NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
+        Cost: <%= Atlas.Cost('TECHA') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInSpace
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+              - $: GcMissionConditionOnMultiplayerMission
+              - $: GcMissionConditionOnOtherSideOfPortal
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE') %>
+        NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInSpace
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionOnMultiplayerMission
+              - $: GcMissionConditionOnOtherSideOfPortal
+          - $: GcMissionConditionGroup
+            ConditionTest: AllFalse
+            Conditions:
+              - $: GcMissionConditionStatLevel
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                Level: 0
+                Test: Equal
+              - $: GcMissionConditionHasShip
+                ShipType: Alien
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE') %>
+        Cost: <%= Atlas.Cost('CONDB') %>
+        DisplayCost: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionOnMultiplayerMission
+          - $: GcMissionConditionOnOtherSideOfPortal
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionLocation
+                MissionPlayerLocation: InShipInSpace
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_CONFIG') %>
+        NextInteraction: <%= Atlas.Dialog('CONFIG') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  AutoStart: AllModes
+  MissionClass: Secondary
+  PrefixTitle: true
+
+  $MissionTitles:
+    - Ship Scanning Interface
+
+  $MissionSubtitles:
+    - Enhanced Scanning Options
+
+  MissionDescriptions:
+    Format: <%= Atlas.LocKey('MISSION_DESC') %>
+
+  MissionIconSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.ON.DDS
+  MissionIconNotSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.OFF.DDS
+
+  Stages:
+    - $: GcMissionSequenceGroup
+      Silent: true
+      RepeatLogic: Loop
+      Stages:
+        - $: GcMissionSequenceGroup
+          ObjectiveID: <%= Atlas.LocKey('SHIP_OBJ') %>
+          ObjectiveTipID: <%= Atlas.LocKey('SHIP_OBJ_TIP') %>
+          Stages:
+            - $: GcMissionSequenceWaitForConditions
+              Message: <%= Atlas.LocKey('SHIP_OBJ_WAIT') %>
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionLocation
+                  MissionPlayerLocation: InShipInPlanetOrbit
+                - $: GcMissionConditionLocation
+                  MissionPlayerLocation: InShipInSpace
+
+        - $: GcMissionSequenceGroup
+          Silent: true
+          RepeatLogic: Loop
+          ConditionTest: AllFalse
+          Conditions:
+            - $: GcMissionConditionLocation
+              MissionPlayerLocation: InShipInPlanetOrbit
+            - $: GcMissionConditionLocation
+              MissionPlayerLocation: InShipInSpace
+          Stages:
+            - $: GcMissionSequenceGroup
+              ObjectiveID: <%= Atlas.LocKey('SPACE_OBJ') %>
+              ObjectiveTipID: <%= Atlas.LocKey('SPACE_OBJ_TIP') %>
+              Stages:
+                - $: GcMissionSequenceWaitForConditions
+                  Message: <%= Atlas.LocKey('SPACE_OBJ_WAIT') %>
+                  ConditionTest: AllFalse
+                  Conditions:
+                    - $: GcMissionConditionMissionMessageWarp
+                    - $: GcMissionConditionShipEngineStatus
+                      EngineStatus: Pulsing
+                    - $: GcMissionConditionInCombat
+                      CombatType: SpaceCombat
+                    - $: GcMissionConditionIsMissionInProgress
+                      MissionID: <%= Atlas.Config.ReconMissionFrig %>
+                    - $: GcMissionConditionIsMissionInProgress
+                      MissionID: <%= Atlas.Config.ReconMissionShip %>
+
+            - $: GcMissionSequenceGroup
+              ObjectiveID: <%= Atlas.LocKey('SCAN_OBJ') %>
+              ObjectiveTipID: <%= Atlas.LocKey('SCAN_OBJ_TIP') %>
+              RepeatLogic: Loop
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionMissionMessageWarp
+                - $: GcMissionConditionShipEngineStatus
+                  EngineStatus: Pulsing
+                - $: GcMissionConditionInCombat
+                  CombatType: SpaceCombat
+                - $: GcMissionConditionIsMissionInProgress
+                  MissionID: <%= Atlas.Config.ReconMissionFrig %>
+                - $: GcMissionConditionIsMissionInProgress
+                  MissionID: <%= Atlas.Config.ReconMissionShip %>
+
+              Stages:
+                - $: GcMissionSequenceWaitForConditions
+                  ConditionTest: AllTrue
+                  Conditions:
+                    - $: GcMissionConditionIsCurrentMission
+
+                - $: GcMissionSequenceGroup
+                  Silent: true
+                  RepeatLogic: Loop
+                  ConditionTest: AnyFalse
+                  Conditions:
+                    - $: GcMissionConditionIsCurrentMission
+                  Stages:
+                    - $: GcMissionSequenceScan
+                      Message: <%= Atlas.LocKey('SCAN_OBJ_MSG') %>
+                      RequiresMissionActive: true
+
+                    - $: GcMissionSequenceGroup
+                      Silent: true
+                      RepeatLogic: Loop
+                      ConditionTest: AnyTrue
+                      Conditions:
+                        - $: GcMissionConditionMissionMessage
+                          Message: <%= Atlas.Mod.Message('SM_DONE') %>
+                      Stages:
+                        - $: GcMissionSequenceGroup
+                          Silent: true
+                          ConditionTest: AnyTrue
+                          Conditions:
+                            # stay in loop if restart signal
+                            - $: GcMissionConditionMissionMessage
+                              Message: <%= Atlas.Mod.Message('SM_RSRT') %>
+
+                          Stages:
+                            - $: GcMissionSequenceWait
+                              Time: 0.5
+
+                            - $: GcMissionSequenceBroadcastMessage
+                              MessageID: <%= Atlas.Mod.Message('SM_OPEN') %>
+                              Seeded: false
+
+                            - $: GcMissionSequenceCommunicator
+                              Message: <%= Atlas.LocKey('COMM_CARGO') %>
+                              # OSTMessage: <%= Atlas.LocKey('COMM_CARGO_OSD') %>
+                              AutoOpen: true
+                              Comms:
+                                Dialog: <%= Atlas.Config.HomeDialogId %>
+
+                            # small wait to let reboot message recv
+                            - $: GcMissionSequenceWait
+                              Time: 0.5
+
+                            # breaks loop if menu closed without reboot
+                            - $: GcMissionSequenceBroadcastMessage
+                              MessageID: <%= Atlas.Mod.Message('SM_DONE') %>
+                              Seeded: false
+
+                        - $: GcMissionSequenceWait
+                          Time: 1.0

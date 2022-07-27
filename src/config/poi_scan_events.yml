@@ -1,0 +1,232 @@
+ScanEventTable:
+  - Name: SHELTER
+    ID: SHLT
+    Cost: XS
+    ScanEvent:
+      BuildingType: AnyShelter
+
+  - Name: TERMINAL
+    ID: TERM
+    Cost: XS
+    ScanEvent:
+      BuildingClass: Terminal
+
+  - Name: DAMAGEDMACHINE
+    ID: DPOD
+    Cost: DP
+    ScanEvent:
+      BuildingClass: DamagedMachine
+
+  - Name: DEPOT
+    ID: DPOT
+    Cost: SM
+    ScanEvent:
+      BuildingClass: Depot
+
+  - Name: SHOP
+    ID: SHOP
+    Cost: SM
+    ScanEvent:
+      BuildingClass: Shop
+      AllowOverriddenBuildings: true
+
+  - Name: OUTPOST
+    ID: OUTP
+    Cost: LG
+    ScanEvent:
+      BuildingClass: Outpost
+      AllowOverriddenBuildings: true
+
+  - Name: DISTRESS
+    ID: DIST
+    Cost: MD
+    Menu: BUILDING_DISTRESSSIGNAL_L
+    ScanEvent:
+      BuildingClass: DistressSignal
+      OSDMessage: SIGNAL_DISTRESSSIGNAL
+      TooltipMessage: TIP_DISTRESSSIGNAL
+      MarkerLabel: BUILDING_DISTRESSSIGNAL_L
+
+  - Name: DISTRESS_NPC
+    ID: DNPC
+    Cost: SM
+    Menu: UI_PULSE_ENCOUNTER_NAME_REPAIR
+    ScanEvent:
+      BuildingClass: NPCDistressSignal
+      OSDMessage: SIGNAL_DISTRESSSIGNAL
+      TooltipMessage: TIP_DISTRESSSIGNAL
+      MarkerLabel: UI_PULSE_ENCOUNTER_NAME_REPAIR
+
+  - Name: CRASHED_FREIGHTER
+    ID: CRFR
+    Cost: MD
+    Menu: BUILDING_FREIGHTER_ALT
+    ScanEvent:
+      BuildingClass: CrashedFreighter
+      OSDMessage: UI_CORE_ACT2_STEP8_OSD1
+      TooltipMessage: UI_CORE_ACT2_STEP8_OBJ2
+      MarkerLabel: UI_CORE_ACT2_STEP8_MARKER
+
+  - Name: ABANDONED
+    ID: ABAN
+    Cost: MD
+    ScanEvent:
+      BuildingClass: Abandoned
+
+  - Name: PORTAL
+    ID: PORT
+    Cost: LG
+    ScanEvent:
+      ForceInteractionType: Portal
+      BuildingClass: Portal
+      AllowOverriddenBuildings: true
+
+  - Name: GRAVE
+    ID: GRV
+    Cost: LG
+    Menu: SCAN_GRAVE
+    ScanEvent:
+      BuildingClass: GraveInCave
+      OSDMessage: UI_MP_PLANTKILL_GRAVE_OSD
+      TooltipMessage: <%= Atlas.Mod.LocKey('PIO_GRAVE_TIP') %>
+      MarkerLabel: SCAN_GRAVE
+
+  - Name: MONOLITH
+    ID: MONO
+    Cost: MD
+    ScanEvent:
+      BuildingClass: Monolith
+
+  - Name: PLAQUE
+    ID: PLAQ
+    Cost: SM
+    ScanEvent:
+      BuildingClass: Plaque
+
+  - Name: RADIOTOWER
+    ID: RDIO
+    Cost: SM
+    ScanEvent:
+      BuildingClass: RadioTower
+
+  - Name: OBSERVATORY
+    ID: OBSV
+    Cost: MD
+    ScanEvent:
+      BuildingClass: Observatory
+
+  - Name: FACTORY
+    ID: FACT
+    Cost: LG
+    ScanEvent:
+      BuildingClass: Factory
+
+  - Name: BASE
+    ID: BASE
+    Cost: MD
+    Menu: INTRCT_CLAIM_BASE
+    ScanEvent:
+      BuildingClass: Base
+
+  # Harvester = Operations Center
+  - Name: HARVESTER
+    ID: HARV
+    Cost: LG
+    ScanEvent:
+      BuildingClass: Harvester
+      MarkerLabel: BUILDING_HARVESTER_L
+
+  - Name: MISSIONTOWER
+    ID: MTOW
+    Cost: XS
+    ScanEvent:
+      BuildingClass: MissionTower
+      AllowOverriddenBuildings: true
+
+  - Name: SETTLEMENT
+    ID: SETL
+    Cost: LG
+    OmitFromQuickSearch: true
+    Menu: UI_SETTLEMENT_LABEL
+    ScanEvent:
+      BuildingType: UnownedSettlement
+      BuildingLocation: Random
+      ForceWideRandom: true
+      OSDMessage: UI_SETTLEMENT_LOCATED_OSD
+      TooltipMessage: UI_SETTLEMENT_LOCATED
+      AllowOverriddenBuildings: true
+
+  - Name: LIBRARY
+    ID: LBRY
+    Cost: MD
+    Menu: UI_LIBRARY_ENTRANCE_DESC
+    ScanEvent:
+      BuildingClass: LargeBuilding
+      AllowOverriddenBuildings: true
+
+  - Name: RUIN
+    ID: RUIN
+    Cost: MD
+    ScanEvent:
+      BuildingClass: Ruin
+      OSDMessage: SIGNAL_PLAQUE
+      TooltipMessage: TIP_PLAQUE
+
+  - Name: TREASURERUIN
+    ID: TREA
+    Cost: LG
+    OmitFromQuickSearch: true
+    Menu: <%= Atlas.Mod.LocKey('POI_TREA_MENU') %>
+    ScanEvent:
+      BuildingClass: TreasureRuins
+      OSDMessage: UI_SIGNAL_TREASURERUIN
+      TooltipMessage: UI_TIP_TREASURERUIN
+
+  # Sentinel Pillars (3.8)
+  - Name: DRONEHIVE
+    ID: DRHV
+    Cost: MD
+    Menu: UI_SENTINEL_HIVE_NAME
+    ScanEvent:
+      BuildingClass: DroneHive
+      OSDMessage: UI_DRONEHIVE_LOCATED_OSD
+      TooltipMessage: UI_DRONEHIVE_LOCATED
+
+  # WaterCrashedFreighter, WaterTreasureRuins, WaterAbandoned, WaterDistressSignal
+  - Name: CRASHED_FREIGHTER
+    ID: UWCF
+    Cost: MD
+    Menu: BUILDING_FREIGHTER_ALT
+    ScanEvent:
+      BuildingClass: WaterCrashedFreighter
+      OSDMessage: UI_CORE_ACT2_STEP8_OSD1
+      TooltipMessage: UI_CORE_ACT2_STEP8_OBJ2
+      MarkerLabel: <%= Atlas.Mod.LocKey('POI_UWCF') %>
+
+  - Name: TREASURERUIN
+    ID: UWTR
+    Cost: LG
+    OmitFromQuickSearch: false
+    Menu: <%= Atlas.Mod.LocKey('POI_TREA_MENU') %>
+    ScanEvent:
+      BuildingClass: WaterTreasureRuins
+      OSDMessage: UI_SIGNAL_TREASURERUIN
+      TooltipMessage: UI_TIP_TREASURERUIN
+      MarkerLabel: <%= Atlas.Mod.LocKey('POI_UWTR') %>
+
+  - Name: DISTRESS
+    ID: UWDS
+    Cost: MD
+    Menu: BUILDING_DISTRESSSIGNAL_L
+    ScanEvent:
+      BuildingClass: WaterDistressSignal
+      OSDMessage: SIGNAL_DISTRESSSIGNAL
+      TooltipMessage: TIP_DISTRESSSIGNAL
+      MarkerLabel: <%= Atlas.Mod.LocKey('POI_UWDS') %>
+
+  - Name: ABANDONED
+    ID: UWAB
+    Cost: MD
+    ScanEvent:
+      BuildingClass: WaterAbandoned
+      MarkerLabel: <%= Atlas.Mod.LocKey('POI_UWAB') %>

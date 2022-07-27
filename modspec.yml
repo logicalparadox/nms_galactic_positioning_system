@@ -1,0 +1,270 @@
+Mod:
+  Name: GPS
+  Author: alchemist
+  Description: |
+    Overhaul to Ship and Signal Scanner capabilities. Find nearest 
+    building by type or planet by biome. Optional costs and tech requirements.
+
+    https://www.nexusmods.com/nomanssky/mods/2144
+  Version: 1.3.0
+  GameVersion: 3.97
+  Language: English
+  Metadata:
+    Name: ALCH_SCAN
+    ID: ALSCAN
+  Templates:
+    ModLua: ./templates/mod.template.lua
+
+ConfigSources:
+  - ./src/config/poi_scan_events.yml
+  - ./src/config/poi_search_groups.yml
+  - ./src/config/deep_space_query.yml
+
+Config:
+  FlybyMission: ALCH_FLYBY_PORT
+  ReconMissionFrig: ALCH_FLYBY_PORT
+  ReconMissionShip: ALCH_RECON_SHIP
+
+MissionArchetypes:
+  PlanetaryExpedition:
+    Source: ./src/archetypes/deep_space_query.yml
+    Metadata:
+      Name: ALCH_PLANET_EXP
+      ID: ALSCPE
+
+GenericTables:
+  - Source: ./src/generics/index.yml
+    Metadata:
+      Name: ALCH_SCAN
+      ID: ALSCAN
+
+Missions:
+  #
+  # Core Features
+  #
+
+  # Signal Scanner Dialog Override
+  - Source: ./src/missions/bios_portable/index.yml
+    Metadata:
+      Name: ALCH_BIOS_PORT
+      ID: ALSCPB
+    Config:
+      WideRandom: false
+      HomeDialogId: SIGNALSCANNER
+      Bios:
+        Type: SignalScanner
+        IsAlienText: true
+        ShowTranslationBrackets: false
+
+  # Drone Friend Dialog Override
+  # - Source: ./src/PortableBios/index.yml
+  #   Metadata:
+  #     Name: ALCH_BIOS_ROBT
+  #     ID: ALSCRB
+  #     Table: ENABLINGCONDITIONSTABLE
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Config:
+  #     WideRandom: false
+  #     HomeDialogId: DRONESCANNER # wong
+  #     FlybyMission: ALCH_FLYBY_PORT
+  #     Bios:
+  #       Type: SentryBot # wrong
+  #       IsAlienText: true
+  #       ShowTranslationBrackets: true
+
+  # Ship Mission
+  - Source: ./src/missions/bios_ship/index.yml
+    Metadata:
+      Name: ALCH_BIOS_SHIP
+      ID: ALSCSB
+    Config:
+      WideRandom: false
+      HomeDialogId: D_ALSASB_HOME
+
+  # Ship Signal Sweep
+  - Source: ./src/missions/planet_sweep_ship/index.yml
+    Metadata:
+      Name: ALCH_RECON_SHIP
+      ID: ALSCFS
+
+  # Frigate Deployment Mission
+  - Source: ./src/missions/planet_sweep_frigate/index.yml
+    Metadata:
+      Name: ALCH_FLYBY_PORT
+      ID: ALSCFP
+    Config:
+      FlybyTime: 120
+
+  #
+  # COMMON PLANETARY QUERIES
+  #
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QA
+      ID: ALSCQA
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QB
+      ID: ALSCQB
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QC
+      ID: ALSCQC
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QD
+      ID: ALSCQD
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QE
+      ID: ALSCQE
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QF
+      ID: ALSCQF
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QG
+      ID: ALSCQG
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QH
+      ID: ALSCQH
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QI
+      ID: ALSCQI
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QJ
+      ID: ALSCQJ
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QK
+      ID: ALSCQK
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_by_biome.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_QL
+      ID: ALSCQL
+
+  #
+  # RARE RESOURCE QUERIES
+  #
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_resource_hint.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RA
+      ID: ALSCRA
+
+  - Source: ./src/missions/deep_space_queries/mission_planet_resource_hint.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RB
+      ID: ALSCRB
+
+  - Source: ./src/missions/deep_space_queries/resource/RC_WealthySystem.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RC
+      ID: ALSCRC
+
+  - Source: ./src/missions/deep_space_queries/resource/RD_PirateSystem.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RD
+      ID: ALSCRD
+  #
+  # RARE PLANETARY QUERIES
+  #
+
+  # - Source: ./src/PlanetQuery/complex/Debutante.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Metadata:
+  #     Name: ALCH_SCAN_ZA
+  #     ID: ALSCZA
+  #     Table: NPCMISSIONTABLE
+
+  # - Source: ./src/PlanetQuery/complex/Reckoner.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Metadata:
+  #     Name: ALCH_SCAN_ZB
+  #     ID: ALSCZB
+  #     Table: NPCMISSIONTABLE
+
+  # - Source: ./src/PlanetQuery/complex/Voices.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Metadata:
+  #     Name: ALCH_SCAN_ZC
+  #     ID: ALSCZC
+  #     Table: NPCMISSIONTABLE
+
+  # - Source: ./src/PlanetQuery/complex/TradeTestA.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Metadata:
+  #     Name: ALCH_SCAN_ZD
+  #     ID: ALSCZD
+  #     Table: NPCMISSIONTABLE
+
+  # - Source: ./src/PlanetQuery/complex/TradeTestB.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   ConfigSources:
+  #     - ./src/global/ScanEventsConfig.yml
+  #   Metadata:
+  #     Name: ALCH_SCAN_ZE
+  #     ID: ALSCZE
+  #     Table: NPCMISSIONTABLE

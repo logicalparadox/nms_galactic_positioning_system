@@ -1,0 +1,65 @@
+LanguageKeys:
+  <%= Atlas.LocKey('RECON_OBJ') %>: Planetary Sweep
+  <%= Atlas.LocKey('RECON_OBJ_TIP') %>: Remain in atmospheric flight
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  MissionClass: Guide
+
+  MissionIcon: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.ON.DDS
+  MissionIconSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.ON.DDS
+  MissionIconNotSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.OFF.DDS
+
+  CancelConditionTest: AnyTrue
+  CancelingConditions:
+    - $: GcMissionConditionMissionMessage
+      Message: <%= Atlas.Message('ERR') %>
+
+  Stages:
+    - $: GcMissionSequenceGroup
+      ObjectiveID: <%= Atlas.LocKey('RECON_OBJ') %>
+      ObjectiveTipID: <%= Atlas.LocKey('RECON_OBJ_TIP') %>
+      ConditionTest: AnyFalse
+      Conditions:
+        - $: GcMissionConditionLocation
+          MissionPlayerLocation: InShipInPlanetOrbit
+      Stages:
+        - $: GcMissionSequenceWait
+          Time: 1
+
+        - $: GcMissionSequenceShowMissionUpdateMessage
+          MissionUpdateMessage: Start
+          SetMissionSelected: false
+          WaitForMessageOver: false
+
+        # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
+        # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId, i) => { %>
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyFalse
+          Conditions:
+            - $: GcMissionConditionStatLevel
+              Stat: <%= Atlas.Mod.Stat('FLYBY_ID') %>
+              Level: <%= Atlas.Config.SearchGroups[groupKey].FlybyId %>
+              Test: Equal
+          Stages:
+            # <% if (i === 0) { %>
+            - $: GcMissionSequenceWait
+              Time: 1
+            - $: GcMissionSequenceReward
+              Reward: <%= Atlas.Mod.Reward(`${eventId}_N`) %>
+            # <% } else { %>
+            - $: GcMissionSequenceWait
+              Time: '<%= i === 1 ? 11 : 5 %>'
+            - $: GcMissionSequenceReward
+              Reward: <%= Atlas.Mod.Reward(`${eventId}_S`) %>
+            # <% } %>
+        # <% }); // for each event in group%>
+        # <% }); // for each group %>
+        - $: GcMissionSequenceWait
+          Time: 5
+        - $: GcMissionSequenceShowMissionUpdateMessage
+          MissionUpdateMessage: End
+          SetMissionSelected: false
+          WaitForMessageOver: true

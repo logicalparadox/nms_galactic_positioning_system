@@ -1,0 +1,46 @@
+# <% const ScanMeta = Atlas.Config.PlanetQuery.Complex.find((s) => s.MissionID === Atlas.Metadata.Name); %>
+
+ScanEvents:
+  - Name: <%= Atlas.ScanEvent('QRY') %>
+    EventStartType: Special
+
+    # UI
+    MessageAudio: VO_TUT_COORDSRECEIVED
+    MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
+    OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+    MarkerLabel: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+    # Search Params
+    BuildingLocation: PlanetSearch
+    # ForceWideRandom: true
+    SolarSystemLocation: LocalOrNear
+    SolarSystemAttributes:
+      AllowUnsafeMatches: false
+      RequireUndiscovered: true
+      NeverAllowExtremeSentinelPlanet: true
+      NeverAllowEmpty: true
+      NeverAllowAbandoned: true
+      NeedsBiome: true
+      NeedsBiomeType: Lush
+      UseBiomeSubType: HugeLush
+      # NeedsWaterPlanet: true
+      SuitableForCreatureDiscovery: true
+      #UseWealth: true
+      #WealthClass: Wealthy
+
+Mission:
+  MissionID: <%= Atlas.Metadata.Name %>
+
+  MissionTitles:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+  MissionDescriptions:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_DESC`) %>
+
+  Stages:
+    - _import: ../stages/00_StageWrapper.yml
+      Metadata:
+        Name: WRAP
+        ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>

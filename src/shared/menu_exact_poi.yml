@@ -1,0 +1,90 @@
+Dialog:
+  - Id: <%= Atlas.Dialog('SBS_P1') %>
+    # <% if (Atlas.Config.WideRandom) { %>
+    Text: <%= Atlas.Mod.LocKey('SCAN_EXACT_DESC') %>
+    # <% } else { %>
+    TextAlien: <%= Atlas.Mod.LocKey('SCAN_EXACT_DESC') %>
+    # <% } %>
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('GRP_SVG_MENU') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('SVG_P1') %>
+      - Name: <%= Atlas.Mod.LocKey('GRP_BLD_MENU') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('BLD_P1') %>
+      - Name: <%= Atlas.Mod.LocKey('GRP_ANC_MENU') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('ANC_P1') %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('SBS_P2') %>
+        SelectedOnBackOut: true
+
+  - Id: <%= Atlas.Dialog('SBS_P2') %>
+    # <% if (Atlas.Config.WideRandom) { %>
+    Text: <%= Atlas.Mod.LocKey('SCAN_EXACT_DESC') %>
+    # <% } else { %>
+    TextAlien: <%= Atlas.Mod.LocKey('SCAN_EXACT_DESC') %>
+    # <% } %>
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('GRP_SIG_MENU') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('SIG_P1') %>
+      - Name: <%= Atlas.Mod.LocKey('GRP_UW_MENU') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('UW_P1') %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        MarkInteractionComplete: true
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
+        SelectedOnBackOut: true
+
+  # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey, i) => { %>
+  # <% const pageCount = Math.ceil(Atlas.Config.SearchGroups[groupKey].Events.length / 3); %>
+  # <% for (let i = 1; i <= pageCount; i++) { %>
+  - Id: <%= Atlas.Dialog(`${groupKey}_P${i}`) %>
+    Text: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_DESC`) %>
+    Options:
+      # <% let eventIdx = (i - 1) * 3; %>
+      # <% for (let e = 0; e < 3; e++) { %>
+      # <% let eventId = Atlas.Config.SearchGroups[groupKey].Events[eventIdx]; %>
+      # <% if (!eventId) continue; %>
+      # <% let event = Atlas.Config.ScanEventTable.find((se) => se.ID === eventId); %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: '<%= event.Menu || `BUILDING_${event.Name}_L` %>'
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Mod.Cost(event.Cost || 'SM') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - "<%= Atlas.Mod.Reward(`${event.ID}_${Atlas.Config.WideRandom ? 'F' : 'N'}`) %>"
+      # <% }); // use Cost %>
+      # <% eventIdx++; %>
+      # <% } // event loop%>
+      #
+      # <% if (i === pageCount) { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        # <% } else { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog(`${groupKey}_P${i + 1}`) %>
+        # <% } %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+  # <% } %>
+  # <% }); %>

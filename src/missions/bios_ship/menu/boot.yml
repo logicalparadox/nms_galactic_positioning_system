@@ -1,0 +1,48 @@
+Dialog:
+  - Id: <%= Atlas.Dialog('BOOT') %>
+    $Text:
+      - Ship Scanner BIOS <IMG>SLASH<> Configuration Required <IMG>SLASH<> Starting configuration wizard...
+      - <STELLAR>IMMERSIVE MODE<> <IMG>SLASH<> Scans require resources <IMG>SLASH<> Exact target scan requires Ship Tech <IMG>SLASH<> Enable immersive mode?
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Immersive mode ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        Rewards:
+          - <%= Atlas.Reward('REBOOT') %>
+          - Id: <%= Atlas.Reward('CFG_A') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_DONE') %>
+                ModifyType: Set
+                Amount: 1
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 1
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                ModifyType: Set
+                Amount: 1
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Immersive mode DISABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        Rewards:
+          - <%= Atlas.Reward('REBOOT') %>
+          - Id: <%= Atlas.Reward('CFG_B') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_DONE') %>
+                ModifyType: Set
+                Amount: 1
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 0
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                ModifyType: Set
+                Amount: 0

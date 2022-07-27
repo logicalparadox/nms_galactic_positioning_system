@@ -1,0 +1,9 @@
+MissionClass: Secondary
+PrefixTitle: true
+
+$MissionSubtitles:
+  - Active Deep Space Scan
+
+MissionIcon: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.PIN.ON.DDS
+MissionIconSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.PIN.ON.DDS
+MissionIconNotSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.PIN.OFF.DDS

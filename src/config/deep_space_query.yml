@@ -1,0 +1,176 @@
+DeepSpaceQuery:
+  #
+  # Biome Patterns
+  #
+
+  - MissionID: ALCH_SCAN_QA
+    ID: QA
+    Title: Lush
+    Description: Lush Biome
+    PlanetTitle: Lush Variant
+    Cost: MD
+    BiomeType: Lush
+
+  - MissionID: ALCH_SCAN_QB
+    ID: QB
+    Title: Toxic
+    Description: Toxic Biome
+    PlanetTitle: Toxic Variant
+    Cost: SM
+    BiomeType: Toxic
+
+  - MissionID: ALCH_SCAN_QC
+    ID: QC
+    Title: Scorched
+    Description: Scorched Biome
+    PlanetTitle: Scorched Variant
+    Cost: SM
+    BiomeType: Scorched
+
+  - MissionID: ALCH_SCAN_QD
+    ID: QD
+    Title: Radioactive
+    Description: Radioactive Biome
+    PlanetTitle: Radioactive Variant
+    Cost: SM
+    BiomeType: Radioactive
+
+  - MissionID: ALCH_SCAN_QE
+    ID: QE
+    Title: Frozen
+    Description: Frozen Biome
+    PlanetTitle: Frozen Variant
+    Cost: SM
+    BiomeType: Frozen
+
+  - MissionID: ALCH_SCAN_QF
+    ID: QF
+    Title: Barren
+    Description: Barren Biome
+    PlanetTitle: Barren Variant
+    Cost: MD
+    BiomeType: Barren
+
+  - MissionID: ALCH_SCAN_QG
+    ID: QG
+    Title: Red
+    Description: Red Biome
+    PlanetTitle: Red Variant
+    Cost: MD
+    BiomeType: Red
+
+  - MissionID: ALCH_SCAN_QH
+    ID: QH
+    Title: Green
+    Description: Green Biome
+    PlanetTitle: Green Variant
+    Cost: MD
+    BiomeType: Green
+
+  - MissionID: ALCH_SCAN_QI
+    ID: QI
+    Title: Blue
+    Description: Blue Biome
+    PlanetTitle: Blue Variant
+    Cost: LG
+    BiomeType: Blue
+
+  - MissionID: ALCH_SCAN_QJ
+    ID: QJ
+    Title: Swamp
+    Description: Swamp Biome
+    PlanetTitle: Swamp Variant
+    Cost: MD
+    BiomeType: Swamp
+
+  - MissionID: ALCH_SCAN_QK
+    ID: QK
+    Title: Lava
+    Description: Lava Biome
+    PlanetTitle: Lava Variant
+    Cost: MD
+    BiomeType: Lava
+
+  - MissionID: ALCH_SCAN_QL
+    ID: QL
+    Title: Dead
+    Description: Dead Biome
+    PlanetTitle: Dead Variant
+    Cost: SM
+    BiomeType: Dead
+
+  #
+  # Resource
+  #
+
+  - MissionID: ALCH_SCAN_RA
+    ID: RA
+    Title: Ancient Bones
+    Description: Ancient Bones
+    PlanetTitle: Ancient Bones Detected
+    Cost: LG
+    ResourceHint: UI_BONES_HINT
+
+  - MissionID: ALCH_SCAN_RB
+    ID: RB
+    Title: Salvageable Scrap
+    Description: Salvageable Scrap
+    PlanetTitle: Salvageable Scrap Detected
+    Cost: LG
+    ResourceHint: UI_SCRAP_HINT
+
+  - MissionID: ALCH_SCAN_RD
+    ID: RD
+    Title: Black Market
+    Description: Pirate Controlled System ~ Black Market Economy ~ Undiscovered Planets ~ Biome Not Wierd or Dead ~ Low Sentinel Presence
+    PlanetTitle: Black Market Detected
+    Cost: LG
+    IsSystemTarget: true
+
+  - MissionID: ALCH_SCAN_RC
+    ID: RC
+    Title: Wealthy Economy
+    Description: Populated Wealthy System ~ Undiscovered Planets ~ Biome Not Wierd or Dead ~ Low Sentinel Presence
+    PlanetTitle: Wealthy Economy Detected
+    Cost: LG
+    IsSystemTarget: true
+
+  #
+  # Complex Patterns
+  #
+#  Complex:
+#    []
+# - MissionID: ALCH_SCAN_ZD
+#   ID: ZD
+#   Title: Wealthy
+#   Description: 'Wealthy ~ Low Conflict (?) ~ Power Generation (?)'
+#   PlanetTitle: Wealthy Planet A
+#   Cost: CX
+
+# - MissionID: ALCH_SCAN_ZE
+#   ID: ZE
+#   Title: Wealthy ~ Active Indium
+#   Description: 'Wealthy ~ Low Conflict (?) ~ Power Generation (?) ~ Activated Indium'
+#   PlanetTitle: Wealthy Planet B
+#   Cost: CX
+
+# - MissionID: ALCH_SCAN_ZA
+#   ID: ZA
+#   Title: Debutante
+#   Description: Lush Biome ~ Large Flora ~ Abundunt Fauna ~ Water ~ Low Sentinels
+#   PlanetTitle: Paradise Variant
+#   Cost: CX
+
+# - MissionID: ALCH_SCAN_ZB
+#   ID: ZB
+#   Title: Reckoner
+#   Description: Volcanic Eruptions ~ Extreme Pyroclastic Storms ~ Abandoned ~ Ancient Bones
+#   PlanetTitle: Mists of the Apocalypse
+#   Cost: CX
+
+# - MissionID: ALCH_SCAN_ZC
+#   ID: ZC
+#   Title: Voices
+#   Description: '???kZ? ~ [ERR DIV ZERO]'
+#   PlanetTitle: '[????] : [????] : [????] : [????]'
+#   Cost: CX

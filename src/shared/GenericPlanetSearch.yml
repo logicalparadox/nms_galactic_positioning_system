@@ -1,0 +1,54 @@
+Dialog:
+  - Id: <%= Atlas.Dialog('RAND_P1') %>
+    TextAlien: <%= Atlas.Mod.LocKey('SCAN_RAND_DESC') %>
+    Options:
+      # <% ;['SVG', 'BLD', 'ANC'].forEach((groupKey) => { %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_NAME`) %>
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Mod.Cost(Atlas.Config.SearchGroups[groupKey].Cost || 'SM') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - "<%= Atlas.Mod.Reward(`${groupKey}_G${Atlas.Config.WideRandom ? 'F' : 'N'}`) %>"
+      # <% }); %>
+      # <% }); %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog('RAND_P2') %>
+        SelectedOnBackOut: true
+        KeepOpen: true
+
+  - Id: <%= Atlas.Dialog('RAND_P2') %>
+    TextAlien: <%= Atlas.Mod.LocKey('SCAN_RAND_DESC') %>
+    Options:
+      # <% ;['SIG', 'UW'].forEach((groupKey) => { %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_NAME`) %>
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Mod.Cost(Atlas.Config.SearchGroups[groupKey].Cost || 'SM') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - "<%= Atlas.Mod.Reward(`${groupKey}_G${Atlas.Config.WideRandom ? 'F' : 'N'}`) %>"
+      # <% }); %>
+      # <% }); %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
+        SelectedOnBackOut: true
+        KeepOpen: true

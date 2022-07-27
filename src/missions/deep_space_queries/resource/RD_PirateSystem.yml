@@ -1,0 +1,44 @@
+# <% const ScanMeta = Atlas.Config.DeepSpaceQuery.find((s) => s.MissionID === Atlas.Metadata.Name); %>
+
+ScanEvents:
+  - Name: <%= Atlas.ScanEvent('QRY') %>
+    EventStartType: Special
+
+    # UI
+    MessageAudio: VO_TUT_COORDSRECEIVED
+    MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
+    OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+    MarkerLabel: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+    # Search Params
+    BuildingLocation: PlanetSearch
+    SolarSystemLocation: Near
+    SolarSystemAttributes:
+      AllowUnsafeMatches: false
+      RequireUndiscovered: true
+      UseConflict: Pirate
+      UseWealth: true
+      WealthClass: Pirate
+      AnyBiomeNotWeirdOrDead: true
+      NeverAllowExtremeSentinelPlanet: true
+      NeverAllowEmpty: true
+      NeverAllowAbandoned: true
+
+Mission:
+  $Table: NPCMISSIONTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+
+  MissionTitles:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+  MissionDescriptions:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_DESC`) %>
+
+  Stages:
+    - $: GxMissionSequenceImport
+      Source: ../stage_system_query.yml
+      Metadata:
+        Name: WRAP
+        ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>

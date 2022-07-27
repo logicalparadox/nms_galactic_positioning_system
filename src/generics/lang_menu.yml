@@ -1,0 +1,39 @@
+LanguageKeys:
+  <%= Atlas.Mod.LocKey('GPS_INTRO_OSD') %>: GALACTIC POSITIONING SYSTEM
+
+  <%= Atlas.Mod.LocKey('MENU_OPT_INIT') %>: Initialize...
+  <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>: Return...
+  <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>: Back...
+  <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>: More Options...
+  <%= Atlas.Mod.LocKey('MENU_OPT_CONFIG') %>: Settings...
+  <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>: Yes
+  <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>: No
+
+  <%= Atlas.Mod.LocKey('MENU_SCAN_RAND') %>: Quick Scan...
+  <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>: Focused Scan...
+  <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>: Planetary Sweep...
+  <%= Atlas.Mod.LocKey('MENU_SHIP_DESC') %>:
+    - <SPECIAL>Planetary Sweep<> <IMG>SLASH<> Select signal analysis focus...
+  # $Text: <FUEL>ERROR<> <IMG>SLASH<> Planetary sweep unavailable <IMG>SLASH<> Atmospheric flight required
+  <%= Atlas.Mod.LocKey('MENU_SHIP_RECON_ERR') %>:
+    - Planetary Sweep <IMG>SLASH<> UNAVAILABLE <IMG>SLASH<> Atmospheric flight required
+
+  <%= Atlas.Mod.LocKey('MENU_FLEET_RECON') %>: Frigate Reconnaissance...
+  <%= Atlas.Mod.LocKey('MENU_FLEET_RECON_ERR') %>: Fleet signal not present in current system or blocked by competing operation.
+
+  <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE') %>: Deep Space Scanning...
+  <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE_DESC') %>:
+    - <SPECIAL>Planetary Sweep<> <IMG>SLASH<> Select signal analysis focus...
+  <%= Atlas.Mod.LocKey('MENU_SHIP_RANGE_ERR') %>:
+    - Deep Space Scanning <IMG>SLASH<> UNAVAILABLE <IMG>SLASH<> Interference detected
+
+  <%= Atlas.Mod.LocKey('MENU_DEBUG') %>: Debug
+
+  <%= Atlas.Mod.LocKey('SCAN_RAND_DESC') %>:
+    - Scan by POI type.
+
+  <%= Atlas.Mod.LocKey('SCAN_EXACT_DESC') %>:
+    - Select category for further options.
+
+  <%= Atlas.Mod.LocKey('ERR_PS_ACTIVE') %>: Search Active
+  <%= Atlas.Mod.LocKey('ERR_PS_ACTIVE_OSD') %>: ERROR <IMG>SLASH<> SEARCH ACTIVE <IMG>SLASH<> Abandon mission from log

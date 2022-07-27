@@ -1,0 +1,55 @@
+SearchGroups:
+  SVG:
+    FlybyId: 1
+    Cost: LG
+    Events:
+      - DPOD
+      - DPOT
+      - DIST
+      - CRFR
+      - FACT
+      - HARV
+
+  BLD:
+    FlybyId: 2
+    Cost: SM
+    Events:
+      - SHLT
+      - TERM
+      - SHOP
+      - BASE
+      - OUTP
+      - LBRY
+      - SETL
+
+  ANC:
+    FlybyId: 3
+    Cost: MD
+    Events:
+      - PLAQ
+      - MONO
+      - PORT
+      - ABAN
+      - RUIN
+      - TREA
+      - GRV
+
+  SIG:
+    FlybyId: 4
+    Cost: SM
+    Events:
+      # - BEAC
+      - DRHV
+      - RDIO
+      - OBSV
+      - DNPC
+      - MTOW
+
+  UW:
+    FlybyId: 5
+    Cost: SM
+    Events:
+      - UWAB
+      - UWDS
+      - UWCF
+      - UWTR

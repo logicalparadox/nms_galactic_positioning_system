@@ -1,0 +1,8 @@
+Include:
+  - ./costs.yml
+  - ./rewards.yml
+  - ./scan_events.yml
+  - ./lang_menu.yml
+  - ./lang_planet_search.yml
+  - ./lang_poi_groups.yml
+  - ./lang_poi_missing.yml

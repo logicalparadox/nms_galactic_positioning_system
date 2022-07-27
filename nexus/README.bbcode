@@ -1,0 +1,184 @@
+[size=5]Galactic Positioning System (GPS)[/size]
+
+Overhaul to Ship and Signal Scanner capabilities. Find nearest building by type or planet by biome. Configurable costs and tech requirements. Supports all modes and VR.
+
+[size=4]Features[/size]
+
+[list]
+[*] Scan for POIs from your [i][b]Ship[/b][/i] or the [i][b]Deployable Signal Scanner[/b][/i] by category, exact match, or planetary biome
+[*] [i]Locational relevance[/i] matches nearest POIs when in planetary atmosphere or on surface
+[*] Mark all POIs from a category using frigate “Beachhead” reconnaissance flyby or ship signal sweep mode
+[*] Immersive resource costs and technology requirements with in-game configuration per save slot
+[*] Supports all game modes and VR
+[/list]
+[b]Recommended Mods[/b]
+
+[list]
+[*] [url=https://www.nexusmods.com/nomanssky/mods/1677]Instant Text Display[/url] - [i]Highly recommended![/i] Scanning selection uses the game’s dialog interface and this mod makes it animate at a sane speed.
+[/list]
+[b]Quick Start - TLDR[/b]
+
+[list]
+[*] Install mod using the standard methods
+[*] [i](Optional)[/i] Install flyby override configuration of your choice
+[*] For [b]Ship[/b] scanning:
+[list]
+[*] Ensure the [b]Ship Scanning Interface[/b] mission is selected in your [i]Mission Log[/i]. The interface will only activate when it is.
+[*] Ensure you are in free flight
+[*] Press the [i]Quick Scan[/i] button on your input device of choice
+[*] The scanning dialog will open for configuration and scanning selection
+[/list][*] For the [b]Deployable Signal Scanner[/b]:
+[list]
+[*] Nothing special, deploy and activate as per standard operating instructions
+[/list][/list]
+[b]Rules and Caveats - TLDR[/b]
+
+[list]
+[*] The ship scanning interface will only activate WHEN:
+[list]
+[*] the [b]Ship Scanning Interface[/b] mission is selected in the [i]Mission Log[/i] AND
+[*] your ship is in space or atmospheric free flight AND
+[*] NOT in combat or pulsing
+[/list][*] [b]Planetary Biome Scanning[/b] is NOT available during Nexus Missions and “while on the other side of a portal”
+[*][b]Deployable Signal Scanner[/b] will temporarily revert to its default behavior for that one story mission and some multiplayer missions
+[/list]
+[b]Language Support[/b]
+
+This mod contains over [b]130[/b] new language entries available in English only. The community has provided support for the following languages:
+
+[list]
+[*] None available yet, check back soon...
+[*] Language not available? Consider translating, documentation further below.
+[/list]
+[i]Thank you to these community mod authors willing to provide translations.[/i]
+
+[size=4]Core Scanning Mechanics[/size]
+
+Both your Ship and the Signal Scanner provide a Quick Search and a Focused Search scan mechanic. [u]Quick Search[/u] will scan for a POI randomly selected from the query group. [u]Focused Search[/u] enables scanning for an exact POI type, with the menus organized by query group.
+
+[u]Quick Search[/u] is primarily for immersive mode, as it has lower costs and no technology requirements.
+
+[b]Locational Relevance[/b]
+
+When scanning from a planet’s surface (via Signal Scanner) or from within it’s atmosphere (via Ship), the following differences can be observed when compared to charts.
+
+[list]
+[*] Scans will not fail if a building type has already been marked; instead, the marker will be moved if the new result is closer.
+[*] Scans favor nearby buildings, while charts select randomly within the system. The engine has a fluid definition of "nearby" so while this is usually the closest POI, it is not a guarantee. Scans from the ground or atmosphere are likely to yield more desirable results than from space.
+[*] Where applicable, buildings which have been [i]override or resolved[/i] will not be marked by subsequent scans. Note that some building types which can be "resolved" ignore this filter (such as [i]Crashed Freighters[/i]), so this is not a guarantee.
+[/list]
+[b]Costs and Technology Requirements[/b]
+
+For those of us who want a more immersive experience, I wanted to provide a way to maintain balance with the convenience of finding exactly what you need at any moment. All scanning methods and targets can have costs and technology requirements associated with them. If this is not something that you want, toggle them off through the in-game menus. It’s your game, balance to your liking.
+
+[list]
+[*] Costs and technology requirements can be toggled separately
+[*] Ship Scanner and Signal Scanner have separate configurations
+[*] Configuration is per save-slot, without the need to toggle different versions of the mod
+[/list]
+For those interested in how this works, I have created variables in the save file using the game’s own “stat” system. HG uses the same methodology for many of their missions and weekly resets, but it’s not really been used in the mods before. Luckily, HG designed it in such a way that I could add new variables without interfering with any of their own.
+
+[size=4]Ship Scanning[/size]
+
+While the [b]Ship Scanning Interface[/b] mission is selected in the [i]Mission Log[/i] during flight, use the ships scanner to initiate complex signal analysis. [u]Atmospheric flight[/u] may reveal closer sources and enables [i]Signal Sweep[/i] mode to reveal all targets of a given frequency type. [u]Space flight[/u] enables [i]deep space scanning[/i] allowing the user to locate planets in remote systems that match the given query parameters.
+
+For the purpose of technology requirements, the [i]Conflict Scanner[/i] is used for short range tasks and the [i]Economy Scanner[/i] is used for long range tasks. Ship technology requirements are not enforced for Living Ships as those technologies cannot be installed without additional mods.
+
+[list]
+[*] [b]Quick Search[/b] ~ Mark randomly selected POI from group ~ [i]Navigation Data[/i]
+[*] [b]Focused Search[/b] ~ Mark exact POI ~ [i]Navigation Data[/i] ~ [i]Conflict Scanner[/i]
+[*] [b]Planetary Sweep[/b] ~ Mark all POIs from group ~ [i]Anomaly Detector[/i] ~ [i]Conflict Scanner[/i] ~ Atmospheric Flight
+[*] [b]Deep Space Scan[/b] ~ Search for planets ~ [i]Anomaly Detector[/i] ~ [i]Economy Scanner[/i] ~ Space Flight
+[/list]
+[b]Planetary Signal Sweep ~ Overview[/b]
+
+The Planetary Signal Sweep utility takes a few seconds per each POI in the category. Landing or leaving the atmosphere will cancel any further markers from appearing.
+
+[b]Deep Space Scanning ~ Overview[/b]
+
+The Deep Space Scanning utility allows the user to locate planets in remote systems by biome, rare resource, or complex pattern. This feature is only available during space flight, requires the Economy Scanner, and each scan costs [i]Anomaly Detectors[/i].
+
+[list]
+[*] [i]Biome[/i] and [i]Resource[/i] planetary scans will always search outside the current system.
+[*] [i]Complex Pattern[/i] planetary scans will limit the result set to "undiscovered" planets.
+[*] Upon initiating a search, an entry will be added the [i]Mission Log[/i] for tracking the query’s progress. The search can be abandoned through the [i]Mission Log[/i], or will complete upon entering the atmosphere of the target planet.
+[*] In the event that the search pattern cannot be found in a “nearby” system, the mission will go into stasis until you are in space in a different system, when it will awaken and try again.
+[*] Furthermore, new searches cannot be created and ongoing searches will not reawaken during Nexus missions and Portal interference to prevent a bunch of weird travel scenarios.
+[/list]
+For those who are asking what “nearby system” means, I can’t give you answer. [i]Nearby[/i] is the broadest multi-system ScanEvent distance specifier available. It is up to the game engine to decide.
+
+[b]Deep Space Scanning ~ Complex Patterns[/b]
+
+[i]This feature is still in development.[/i]
+
+[size=4]Deployable Signal Scanner[/size]
+
+Upon building and deploying the Portable Signal Scanner, the user can initialize ground based scanning activities by interacting with the device. During certain narrative and multiplayer missions, the Signal Scanner will revert to its original behavior. Complete your assigned task to restore advanced functionality.
+
+[list]
+[*] [b]Quick Search[/b] ~ Mark randomly selected POI from group ~ [i]Navigation Data[/i]
+[*] [b]Focused Search[/b] ~ Mark exact POI ~ [i]Navigation Data[/i] ~ [i]Atlas Pass[/i]
+[*] [b]Frigate Reconnaissance[/b] ~ Mark all POIs from group ~ [i]50 Frigate Fuel[/i]
+[/list]
+[b]Frigate Reconnaissance[/b]
+
+I was looking for a way that Travelers in immersive mode could generate [i]Navigation Data[/i] as the game doesn't give quite enough once you factor in the costs added by this mod. Furthermore, the "Beachhead" flyby mechanic is severely underutilized and supremely cool. How could that fit into normal gameplay?
+
+[i]Result:[/i] An on-demand frigate flyby system that marks locations, gives you resources, and provides unique screenshot opportunities.
+
+[list]
+[*] Requires your Fleet to be in the current system
+[*] Costs [i]Frigate Fuel x50[/i]
+[*] Marks all POI from a given category over 2.5 minutes
+[*] After flyby is complete, gather "overflow" signal data from scanner or ship
+[*] Can fly formation with frigates, but leaving atmosphere will cancel scanning
+[/list]
+[i]Note:[/i] Since this mechanic uses the "Beachhead" Normandy flyby event, the frigate will be the Normandy whether you own it or not. At this time the engine does not allow for runtime selection from different flyby patterns. If you want different Frigate(s) you will have to install one of the flyby customization [i].pak[/i]s or use the provided AMUMSS script for your own configuration.
+
+[size=4]Technical Topics[/size]
+
+[b]Planning for NMS Updates[/b]
+
+This mod adds tons of new entries to certain mission files, which are almost always updated for every MAJOR new release, and many minor releases. Only use the [i].pak[/i] version with it’s corresponding NMS release.
+
+In all my development and testing, this mod caused no save-breaking issues when being uninstalled mid-game. However, do the responsible thing and backup your save! Modding is a dangerous business, and I take no responsibility for lost things.
+
+[b]Building with AMUMSS[/b]
+
+The main [i].lua[/i] file for this mod is massive. I created a bespoke tool for this mod that creates the required XML and AMUMSS is only used to inject that into the proper files. Because of how large it is, it could take [b]several minutes[/b] to run.
+
+If you are someone who rebuilds your mods from AMUMSS frequently, I highly recommend you use AMUMSS patch method to resolve conflicts instead of a direct build.
+
+[b]Translation Support[/b]
+
+The new language entries used by this mod are provided separately from the mods core functionality to (hopefully) make it easy for community supported translations. The only technical skills required are a basic understanding of Lua and the ability to build AMUMSS script-based mods.
+
+[i]To create a translation:
+[/i]
+[list]
+[*] Download the [b][i]AMUMSS Source[/i][/b] from the download section
+[*] Create a copy of [i][u]alchemist_GPS_Lang_English.lua[/u][/i] file, rename accordingly
+[*] Follow the in-file instructions for setup, then translate each language key
+[*] Build and test, then publish to the Nexus. When creating a Nexus page, be sure to flag it as a translation.
+[*] Send me a link so I can include it in the list above
+[/list]
+Please only publish the language [i].pak[/i], send your users to this Nexus page for the core functionality. When I update the mod, I’ll publish a list of changed language keys, but you will be responsible for keeping your translation up to date.
+
+[b]Further Development Priorities[/b]
+
+Keep an eye for updates, my goals for the near-ish future are:
+
+[list]
+[*] [i]High[/i] ~ Balance pass for immersive costs and requirements
+[*] [i]Mid[/i] ~ Revisit potential ability to "clear all" markers in current system
+[*] [i]Mid[/i] ~ Deep Space Scanning - Complex Patterns
+[*] [i]Low[/i] ~ Generalize bespoke tool for other mods and mod authors to use
+[/list]
+[size=4]Thanks...[/size]
+
+[list]
+[*] Hello Games for galaxies, stars, and all the worlds and life within.
+[*] monkeyman192 and team for MBinCompiler so we can see behind the curtain.
+[*] Mjjstral for AMUMSS, making it easier to tug on the threads.
+[*] GeckoGT for testing, feedback, and braving this contraption while the wiring was still exposed.
+[/list]

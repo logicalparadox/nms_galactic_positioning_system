@@ -1,0 +1,91 @@
+Dialog:
+  - Id: <%= Atlas.Dialog('CONFIG') %>
+    $TextAlien:
+      - 'Signal Scanner BIOS <IMG>SLASH<> Select configuration task...'
+    Options:
+      - $Name: Enable Scan Costs
+        $Text: Signal Scanner BIOS <IMG>SLASH<> Scan costs set to ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CST_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 1
+
+      - $Name: Disable Scan Costs
+        $Text: Signal Scanner BIOS <IMG>SLASH<> Scan costs set to DISABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CST_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 0
+
+      - $Name: Enable Atlas Pass Requirement
+        $Text: Signal Scanner BIOS <IMG>SLASH<> <COMMODITY>Atlas Pass<> requirement set to ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('AP_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                ModifyType: Set
+                Amount: 1
+
+      - $Name: Disable Atlas Pass Requirement
+        $Text: Signal Scanner BIOS <IMG>SLASH<> <COMMODITY>Atlas Pass<> requirement set to DISABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('AP_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                ModifyType: Set
+                Amount: 0
+
+      - $Name: Play Title Card
+        MarkInteractionComplete: true
+        KeepOpen: false
+        Rewards:
+          - <%= Atlas.Mod.Reward('GPS_HI') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+        SelectedOnBackOut: true
+        KeepOpen: true

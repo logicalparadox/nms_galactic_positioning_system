@@ -1,0 +1,89 @@
+Dialog:
+  - Id: <%= Atlas.Dialog('CONFIG') %>
+    $TextAlien:
+      - 'Ship Scanner BIOS <IMG>SLASH<> Select configuration task...'
+    Options:
+      - $Name: Enable Scan Costs
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Scan costs set to ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CST_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 1
+          - <%= Atlas.Reward('REBOOT') %>
+
+      - $Name: Disable Scan Costs
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Scan costs set to DISABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CST_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_COST') %>
+                ModifyType: Set
+                Amount: 0
+          - <%= Atlas.Reward('REBOOT') %>
+
+      - $Name: Enable Tech Requirements
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Tech Requirements set to ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('TCH_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                ModifyType: Set
+                Amount: 1
+          - <%= Atlas.Reward('REBOOT') %>
+
+      - $Name: Disable Tech Requirements
+        $Text: Ship Scanner BIOS <IMG>SLASH<> Tech Requirements set to ENABLED <IMG>SLASH<> Rebooting...
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('TCH_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
+                ModifyType: Set
+                Amount: 0
+          - <%= Atlas.Reward('REBOOT') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+        SelectedOnBackOut: true
+        KeepOpen: true

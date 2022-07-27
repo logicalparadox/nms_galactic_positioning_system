@@ -1,0 +1,264 @@
+Rewards:
+  - Id: <%= Atlas.Reward('FLYBY_E') %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardFrigateFlyby
+        FlybyType: SingleShip
+        AppearanceDelay: 3
+  - Id: <%= Atlas.Reward('FLYBY_S') %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardModifyStat
+        Stat: <%= Atlas.Mod.Stat('FLYBY_PR') %>
+        ModifyType: Set
+        Amount: 1
+  - Id: <%= Atlas.Reward('FLYBY_R') %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardModifyStat
+        Stat: <%= Atlas.Mod.Stat('FLYBY_PR') %>
+        ModifyType: Set
+        Amount: 0
+      - $: GcRewardSpecificProduct
+        ID: NAV_DATA
+        AmountMin: 8
+        AmountMax: 12
+      - $: GcRewardSpecificProduct
+        ID: POI_LOCATOR
+        AmountMin: 1
+        AmountMax: 3
+
+StatDefinitions:
+  - Id: <%= Atlas.Mod.Stat('FLYBY_ID') %>
+    TrackType: Set
+  - Id: <%= Atlas.Mod.Stat('FLYBY_PR') %>
+    TrackType: Set
+  - Id: <%= Atlas.Mod.Stat('FLYBY_SE') %>
+    TrackType: Add
+
+LanguageKeys:
+  <%= Atlas.LocKey('FLYBY_OBJ') %>: Maintain Datalink
+  <%= Atlas.LocKey('FLYBY_OBJ_TIP') %>:
+    - A frigate detachment has been deployed to your location.
+    - Remain in atmosphere on current planet to prevent datalink disruption.
+  <%= Atlas.LocKey('FLYBY_R_OBJ') %>: Download Data Cache
+  <%= Atlas.LocKey('FLYBY_R_OBJ_TIP') %>:
+    - Frigate detachment has has completed their expedition and returned to the fleet.
+    - Collect cache of signal fragments from <STELLAR>Signal Scanner<> or <STELLAR>Ship Comms<>.
+  <%= Atlas.LocKey('FLYBY_START') %>: Frigate Recon Expedition Active <IMG>SLASH<> Detachment Inbound...
+  <%= Atlas.LocKey('FLYBY_WAIT') %>: |
+    Competing frigate planetary operation in progress...
+    Frigate detachment on hold according to <TECHNOLOGY>clear skies<> protocol.
+  <%= Atlas.LocKey('FLYBY_DONE') %>: Frigate Recon Expedition Complete
+  <%= Atlas.LocKey('SHIP_COMM') %>: Incoming Fleet Message
+  <%= Atlas.LocKey('FLYBY_CHAT_START') %>: '%NAME% has deployed a Frigate Recon Expedition to %PLANET%'
+
+Dialog:
+  - Id: <%= Atlas.Dialog('SHIP_R') %>
+    $Text: Frigate Recon Expedition <IMG>SLASH<> <TRADEABLE>SUCCESS<> <IMG>SLASH<> <TECHNOLOGY>Navigation Data<> cache available
+    Options:
+      - $Name: Download
+        MarkInteractionComplete: true
+        KeepOpen: false
+        Rewards:
+          - Id: <%= Atlas.Reward('EVT_R') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardMissionMessage
+                MessageID: <%= Atlas.Mod.Message('PFLY_R') %>
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  MissionClass: Secondary
+  PrefixTitle: true
+
+  $MissionTitles:
+    - Frigate Recon Expedition
+
+  $MissionSubtitles:
+    - Planetary Scanning Operation
+
+  MissionIcon: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.FREIGHTER.ON.DDS
+  MissionIconSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.FREIGHTER.ON.DDS
+  MissionIconNotSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.FREIGHTER.OFF.DDS
+
+  CancelConditionTest: AnyTrue
+  CancelingConditions:
+    - $: GcMissionConditionMissionMessage
+      Message: <%= Atlas.Message('ERR') %>
+
+  Stages:
+    - $: GcMissionSequenceGroup
+      ObjectiveID: <%= Atlas.LocKey('FLYBY_OBJ') %>
+      ObjectiveTipID: <%= Atlas.LocKey('FLYBY_OBJ_TIP') %>
+      ConditionTest: AnyTrue
+      Conditions:
+        - $: GcMissionConditionMissionMessage
+          Message: <%= Atlas.Message('END') %>
+      Stages:
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyTrue
+          Conditions:
+            - $: GcMissionConditionMissionMessageWarp
+            - $: GcMissionConditionLocation
+              MissionPlayerLocation: InShipInSpace
+          Stages:
+            - $: GcMissionSequenceShowMissionUpdateMessage
+              MissionUpdateMessage: Start
+              SetMissionSelected: true
+              WaitForMessageOver: false
+
+            # wait for clear skies
+            - $: GcMissionSequenceWaitForConditions
+              Message: FLIGHT_PATH_INTERFERENCE
+              ConditionTest: AllFalse
+              Conditions:
+                - $: GcMissionConditionIsFrigateFlybyActive
+
+            # start flyby and continue once active
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionIsFrigateFlybyActive
+              Stages:
+                - $: GcMissionSequenceReward
+                  Reward: <%= Atlas.Reward('FLYBY_E') %>
+                - $: GcMissionSequenceStop
+
+            # - $: GcMissionSequenceSendChatMessage
+            #   StatusMessageId: INTERACT_DONE
+            #   CustomText: <%= Atlas.LocKey('FLYBY_CHAT_START') %>
+
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AllFalse
+              Conditions:
+                - $: GcMissionConditionIsFrigateFlybyActive
+              Stages:
+                - $: GcMissionSequenceShowMessage
+                  OSDMessage: <%= Atlas.LocKey('FLYBY_START') %>
+                  OSDUseMissionIcon: true
+                - $: GcMissionSequenceGroup
+                  Silent: true
+                  RepeatLogic: Loop
+                  Stages:
+                    # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
+                    # <% const size = Atlas.Config.SearchGroups[groupKey].Events.length; %>
+                    # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId) => { %>
+                    - $: GcMissionSequenceGroup
+                      Silent: true
+                      ConditionTest: AnyFalse
+                      Conditions:
+                        - $: GcMissionConditionStatLevel
+                          Stat: <%= Atlas.Mod.Stat('FLYBY_ID') %>
+                          Level: <%= Atlas.Config.SearchGroups[groupKey].FlybyId %>
+                          Test: Equal
+
+                      Stages:
+                        - $: GcMissionSequenceWait
+                          Time: <%= Math.floor(Atlas.Config.FlybyTime / size) %>
+                        - $: GcMissionSequenceReward
+                          Reward: <%= Atlas.Mod.Reward(`${eventId}_S`) %>
+                    # <% }); // for each event in group%>
+                    # <% }); // for each group %>
+
+                    # prevent rapid spin if most skipped
+                    - $: GcMissionSequenceWait
+                      Time: 15
+
+                - $: GcMissionSequenceStop
+
+            # if you got here the flyby ended successfully
+            - $: GcMissionSequenceBroadcastMessage
+              MessageID: <%= Atlas.Message('END') %>
+              Seeded: true
+
+        # if you got here you errored out
+        - $: GcMissionSequenceShowMessage
+          Time: 1
+          ODSTime: 6
+          OSDMessage: FLYBY_ERROR
+
+        - $: GcMissionSequenceBroadcastMessage
+          MessageID: <%= Atlas.Message('ERR') %>
+          Seeded: true
+
+        - $: GcMissionSequenceWait
+          Time: 3
+
+    - $: GcMissionSequenceGroup
+      ObjectiveID: <%= Atlas.LocKey('FLYBY_R_OBJ') %>
+      ObjectiveTipID: <%= Atlas.LocKey('FLYBY_R_OBJ_TIP') %>
+      Stages:
+        - $: GcMissionSequenceShowMissionUpdateMessage
+          MissionUpdateMessage: Start
+          SetMissionSelected: true
+          WaitForMessageOver: false
+
+        # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyFalse
+          Conditions:
+            - $: GcMissionConditionStatLevel
+              Stat: <%= Atlas.Mod.Stat('FLYBY_ID') %>
+              Level: <%= Atlas.Config.SearchGroups[groupKey].FlybyId %>
+              Test: Equal
+          Stages:
+            - $: GcMissionSequenceShowMessage
+              Time: 1
+              ODSTime: 6
+              AudioEvent: MUS_STATUS_UPDATE
+              OSDMessage: <%= Atlas.LocKey('FLYBY_DONE') %>
+              OSDMessageSubtitle: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_FLYBY_DONE`) %>
+              OSDUseMissionIcon: true
+              OSDMessageStyle: Stats
+        # <% }); // for each group %>
+
+        - $: GcMissionSequenceReward
+          Reward: <%= Atlas.Reward('FLYBY_S') %>
+
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyTrue
+          Conditions:
+            - $: GcMissionConditionMissionMessage
+              Message: <%= Atlas.Mod.Message('PFLY_R') %>
+          Stages:
+            - $: GcMissionSequenceWaitForConditions
+              Message: <%= Atlas.LocKey('FLYBY_R_OBJ_TIP') %>
+              ConditionTest: AllFalse
+              Conditions:
+                - $: GcMissionConditionMissionMessageWarp
+                - $: GcMissionConditionShipEngineStatus
+                  EngineStatus: Pulsing
+                - $: GcMissionConditionInCombat
+                  CombatType: SpaceCombat
+                - $: GcMissionConditionGroup
+                  ConditionTest: AnyTrue
+                  Conditions:
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInPlanetOrbit
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInSpace
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipLanded
+
+            - $: GcMissionSequenceWait
+              Time: 1.0
+
+            - $: GcMissionSequenceCommunicator
+              Message: <%= Atlas.LocKey('SHIP_COMM') %>
+              # OSTMessage: <%= Atlas.LocKey('COMM_CARGO_OSD') %>
+              AutoOpen: true
+              Comms:
+                Dialog: <%= Atlas.Dialog('SHIP_R') %>
+
+            - $: GcMissionSequenceWait
+              Time: 0.5
+
+    - $: GcMissionSequenceReward
+      Reward: <%= Atlas.Reward('FLYBY_R') %>
