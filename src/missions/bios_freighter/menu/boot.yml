@@ -3,7 +3,7 @@ Dialog:
     $TextAlien:
       - Commander, this freighter's <TECHNOLOGY>DEEP SPACE SCANNING<> system is now available but it requires configuration.
       - If <STELLAR>IMMERSIVE MODE<> is enabled then an <TECHNOLOGY>Interstellar Scanner<> must be installed in this freighter and all scans will require <FUEL>Anomaly Detectors<>. Enable <STELLAR>IMMERSIVE MODE<>?
-    ShowTranslationBrackets: true
+    TranslationBrackets: true
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
         $Text:

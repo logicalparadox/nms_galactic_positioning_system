@@ -20,6 +20,7 @@ ConfigSources:
   - ./src/config/poi_quick_groups.yml
   - ./src/config/poi_search_groups.yml
   - ./src/config/deep_space_query.yml
+  - ./src/config/freighter_navigator_dialog.yml
 
 Config:
   FlybyMission: ALCH_FLYBY_PORT
@@ -56,7 +57,7 @@ Missions:
       Bios:
         Type: SignalScanner
         IsAlienText: true
-        ShowTranslationBrackets: false
+        TranslationBrackets: false
 
   # Drone Friend Dialog Override
   # - Source: ./src/PortableBios/index.yml
@@ -73,7 +74,7 @@ Missions:
   #     Bios:
   #       Type: SentryBot # wrong
   #       IsAlienText: true
-  #       ShowTranslationBrackets: true
+  #       TranslationBrackets: true
 
   # Ship Mission
   - Source: ./src/missions/bios_ship/index.yml
@@ -108,13 +109,13 @@ Missions:
       ID: ALSCFB
     Config:
       HomeInteractionType: FleetNavigator # NPC_Freighter_Captain_Secondary
-      HomeDialogId: FLEET_NAVIGATOR
+      HomeDialogId: D_ALSCFB_HOME
       HomeDialogText: ALCH_BIOS_FREI_SCAN_INTRO # NPC_FREIGHTER_CAP_SEC_DESC_1
-      DeepSpaceBackDialogId: FLEET_NAVIGATOR
+      DeepSpaceBackDialogId: D_ALSCFB_HOME
       ShowTechCost: false
       Bios:
         IsAlienText: true
-        ShowTranslationBrackets: true
+        TranslationBrackets: true
 
   #
   # COMMON PLANETARY QUERIES

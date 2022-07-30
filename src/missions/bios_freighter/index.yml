@@ -5,7 +5,7 @@ Include:
   - ./menu/settings.yml
 
 LanguageKeys:
-  <%= Atlas.LocKey('SCAN_INTRO') %>: Which route do you feel is most promising?
+  <%= Atlas.LocKey('SCAN_INTRO') %>: What do you think we will find out there?
 
 StatDefinitions:
   - Id: <%= Atlas.Stat('CFG_DONE') %>

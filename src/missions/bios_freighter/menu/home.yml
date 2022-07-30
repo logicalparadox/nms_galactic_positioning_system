@@ -1,3 +1,8 @@
+LanguageKeys:
+  <%= Atlas.LocKey('QRY_CFG') %>: Configure Deep Space Scanning...
+  <%= Atlas.LocKey('QRY_OFF') %>: Deep Space Query Blocked
+  <%= Atlas.LocKey('QRY_ON') %>: View Scanning Opportunities...
+
 Costs:
   - Id: <%= Atlas.Cost('CONDA') %>
     DisplayCost: false
@@ -8,20 +13,14 @@ Costs:
       Cost: <%= Atlas.Metadata.Name %>
 
 Dialog:
-  - Id: <%= Atlas.Config.HomeDialogId %>
+  - Id: <%= Atlas.Dialog('HOME') %>
     Type: <%= Atlas.Config.HomeInteractionType %>
-    TextAlien: <%= Atlas.Config.HomeDialogText %>
-    ShowTranslationBrackets: true
+    TextAlien: <%= Atlas.LocKey('SCAN_INTRO') %>
+    TranslationBrackets: true
+    ProgressiveDialogue: true
     Options:
-      - Name: NPC_NAVIGATOR_OPT_A
-        KeepOpen: true
-        DisplayCost: true
-        MarkInteractionComplete: true
-        Rewards:
-          - 'SHOW_ROUTES'
-
       # Disable all functionality in MP / Portal
-      - $Name: Deep Space Query Blocked
+      - Name: <%= Atlas.LocKey('QRY_OFF') %>
         Cost: <%= Atlas.Cost('CONDA') %>
         DisplayCost: false
         EnablingConditionTest: AllFalse
@@ -30,7 +29,7 @@ Dialog:
           - $: GcMissionConditionOnOtherSideOfPortal
 
       # Not MP and not configured
-      - $Name: Configure Deep Space Scanning...
+      - Name: <%= Atlas.LocKey('QRY_CFG') %>
         NextInteraction: <%= Atlas.Dialog('BOOT') %>
         EnablingConditionTest: AnyTrue
         EnablingConditions:
@@ -42,7 +41,7 @@ Dialog:
           - $: GcMissionConditionOnOtherSideOfPortal
 
       # Configured w/ tech costs enabled
-      - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
+      - Name: <%= Atlas.LocKey('QRY_ON') %>
         NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
         Cost: <%= Atlas.Cost('TECH') %>
         DisplayCost: <%= Atlas.Config.ShowTechCost %>
@@ -60,7 +59,7 @@ Dialog:
           - $: GcMissionConditionOnOtherSideOfPortal
 
       # Configured w/ tech costs disabled
-      - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
+      - Name: <%= Atlas.LocKey('QRY_ON') %>
         NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
         EnablingConditionTest: AnyTrue
         EnablingConditions:
@@ -75,24 +74,6 @@ Dialog:
           - $: GcMissionConditionOnMultiplayerMission
           - $: GcMissionConditionOnOtherSideOfPortal
 
-      # - Name: UI_MEGAWARP_LABEL
-      #   Cost: C_MEGAWARP
-      #   DisplayCost: true
-      #   MarkInteractionComplete: true
-      #   KeepOpen: false
-      #   Rewards:
-      #     - R_MEGAWARP
-
-      # - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
-      #   NextInteraction: <%= Atlas.Dialog('UTIL') %>
-      #   KeepOpen: true
-      #   EnablingConditionTest: AnyFalse
-      #   EnablingConditions:
-      #     - $: GcMissionConditionStatLevel
-      #       Stat: <%= Atlas.Stat('CFG_DONE') %>
-      #       Level: 1
-      #       Test: Equal
-
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_CONFIG') %>
         NextInteraction: <%= Atlas.Dialog('CONFIG') %>
         MarkInteractionComplete: true
@@ -101,13 +82,3 @@ Dialog:
       - Name: ALL_REQUEST_LEAVE
         MarkInteractionComplete: true
         SelectedOnBackOut: true
-
-  # - Id: <%= Atlas.Dialog('UTIL') %>
-  #   TextAlien: <%= Atlas.Config.HomeDialogText %>
-  #   ShowTranslationBrackets: true
-  #   Options:
-  #     - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
-  #       NextInteraction: <%= Atlas.Config.HomeDialogId %>
-  #       MarkInteractionComplete: true
-  #       SelectedOnBackOut: true
-  #       KeepOpen: true

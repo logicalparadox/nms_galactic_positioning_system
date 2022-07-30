@@ -1,0 +1,27 @@
+FreighterNavigatorDialog:
+  FLEET_NAVIGATOR_NEW:
+    Explorers:
+      - EXP_NAVIGATOR_LANG_NEW
+    Traders:
+      - TRA_NAVIGATOR_LANG_NEW
+    Warriors:
+      - WAR_NAVIGATOR_LANG_NEW
+  FLEET_NAVIGATOR:
+    Explorers:
+      - EXP_NAVIGATOR_LANG_1
+      - EXP_NAVIGATOR_LANG_2
+      - EXP_NAVIGATOR_LANG_3
+      - EXP_NAVIGATOR_LANG_4
+      - EXP_NAVIGATOR_LANG_5
+    Traders:
+      - TRA_NAVIGATOR_LANG_1
+      - TRA_NAVIGATOR_LANG_2
+      - TRA_NAVIGATOR_LANG_3
+      - TRA_NAVIGATOR_LANG_4
+      - TRA_NAVIGATOR_LANG_5
+    Warriors:
+      - WAR_NAVIGATOR_LANG_1
+      - WAR_NAVIGATOR_LANG_2
+      - WAR_NAVIGATOR_LANG_3
+      - WAR_NAVIGATOR_LANG_4
+      - WAR_NAVIGATOR_LANG_5
