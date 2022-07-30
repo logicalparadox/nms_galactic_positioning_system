@@ -12,12 +12,16 @@ ScanEvents:
 
     # Search Params
     BuildingLocation: PlanetSearch
-    ForceWideRandom: true
     SolarSystemLocation: Near
     SolarSystemAttributes:
-      # AllowUnsafeMatches: true
-      NeedsBiome: true
-      NeedsBiomeType: <%= ScanMeta.BiomeType %>
+      AllowUnsafeMatches: false
+      RequireUndiscovered: false
+      UseWealth: false
+      WealthClass: Wealthy
+      UseTrading: true
+      TradingClass: <%= ScanMeta.TradingClass %>
+      NeverAllowEmpty: true
+      NeverAllowAbandoned: true
 
 Mission:
   $Table: NPCMISSIONTABLE
@@ -39,7 +43,7 @@ Mission:
         ScanEvent: <%= Atlas.ScanEvent('QRY') %>
 
     - $: GxMissionSequenceImport
-      Source: ./stage_planet_query.yml
+      Source: ./stage_system_query.yml
       Metadata:
         Name: FIND
         ID: '01'

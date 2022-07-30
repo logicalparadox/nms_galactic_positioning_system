@@ -1,6 +1,6 @@
 ScanEvents:
   # <% Atlas.Config.ScanEventTable.forEach((se) => { %>
-  - Name: '<%= Atlas.Mod.ScanEvent(`${se.ID}_N`) %>'
+  - Name: '<%= Atlas.Mod.ScanEvent(`${se.ID}`) %>'
     $Table: Planet
     ForceInteractionType: <%= se.ScanEvent.ForceInteractionType || 'None' %>
     EventStartType: ObjectScan

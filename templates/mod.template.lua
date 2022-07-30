@@ -24,7 +24,20 @@ NMS_MOD_DEFINITION_CONTAINER = {
   -- Dialog Removals
   {["MBIN_FILE_SOURCE"] = "METADATA\\REALITY\\TABLES\\NMS_DIALOG_GCALIENPUZZLETABLE.MBIN",
   ["EXML_CHANGE_TABLE"] = {
-    {["SPECIAL_KEY_WORDS"] = {"Id", "SIGNALSCANNER"}, ["REMOVE"] = "SECTION"},
+    {
+      ["SPECIAL_KEY_WORDS"] = {"Id", "SIGNALSCANNER"},
+      ["REMOVE"] = "SECTION",
+    },
+    {
+      ["SPECIAL_KEY_WORDS"] = {"Id", "FLEET_NAVIGATOR"}, 
+      ["REMOVE"] = "SECTION",
+      ["REPLACE_TYPE"] = "ALL"
+    },
+    {
+      ["SPECIAL_KEY_WORDS"] = {"Id", "FLEET_NAVIGATOR_NEW"}, 
+      ["REMOVE"] = "SECTION",
+      ["REPLACE_TYPE"] = "ALL"
+    },
   }},
 
   -- Injected Tables<% env.tables.forEach((table) => { %>

@@ -1,10 +1,10 @@
 Dialog:
   - Id: <%= Atlas.Dialog('CONFIG') %>
     $TextAlien:
-      - 'Ship Scanner BIOS <IMG>SLASH<> Select configuration task...'
+      - 'Ship Scanner BIOS <HIGHLIGHT>//<> Select configuration task...'
     Options:
-      - $Name: Enable Scan Costs
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Scan costs set to ENABLED <IMG>SLASH<> Rebooting...
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_E') %>
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -23,8 +23,8 @@ Dialog:
                 Amount: 1
           - <%= Atlas.Reward('REBOOT') %>
 
-      - $Name: Disable Scan Costs
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Scan costs set to DISABLED <IMG>SLASH<> Rebooting...
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -43,8 +43,8 @@ Dialog:
                 Amount: 0
           - <%= Atlas.Reward('REBOOT') %>
 
-      - $Name: Enable Tech Requirements
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Tech Requirements set to ENABLED <IMG>SLASH<> Rebooting...
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -63,8 +63,8 @@ Dialog:
                 Amount: 1
           - <%= Atlas.Reward('REBOOT') %>
 
-      - $Name: Disable Tech Requirements
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Tech Requirements set to ENABLED <IMG>SLASH<> Rebooting...
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse

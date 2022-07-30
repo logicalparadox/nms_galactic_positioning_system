@@ -3,7 +3,8 @@ DeepSpaceQuery:
   # Biome Patterns
   #
 
-  - MissionID: ALCH_SCAN_QA
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QA
     ID: QA
     Title: Lush
     Description: Lush Biome
@@ -11,7 +12,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Lush
 
-  - MissionID: ALCH_SCAN_QB
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QB
     ID: QB
     Title: Toxic
     Description: Toxic Biome
@@ -19,7 +21,8 @@ DeepSpaceQuery:
     Cost: SM
     BiomeType: Toxic
 
-  - MissionID: ALCH_SCAN_QC
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QC
     ID: QC
     Title: Scorched
     Description: Scorched Biome
@@ -27,7 +30,8 @@ DeepSpaceQuery:
     Cost: SM
     BiomeType: Scorched
 
-  - MissionID: ALCH_SCAN_QD
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QD
     ID: QD
     Title: Radioactive
     Description: Radioactive Biome
@@ -35,7 +39,8 @@ DeepSpaceQuery:
     Cost: SM
     BiomeType: Radioactive
 
-  - MissionID: ALCH_SCAN_QE
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QE
     ID: QE
     Title: Frozen
     Description: Frozen Biome
@@ -43,7 +48,8 @@ DeepSpaceQuery:
     Cost: SM
     BiomeType: Frozen
 
-  - MissionID: ALCH_SCAN_QF
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QF
     ID: QF
     Title: Barren
     Description: Barren Biome
@@ -51,7 +57,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Barren
 
-  - MissionID: ALCH_SCAN_QG
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QG
     ID: QG
     Title: Red
     Description: Red Biome
@@ -59,7 +66,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Red
 
-  - MissionID: ALCH_SCAN_QH
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QH
     ID: QH
     Title: Green
     Description: Green Biome
@@ -67,7 +75,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Green
 
-  - MissionID: ALCH_SCAN_QI
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QI
     ID: QI
     Title: Blue
     Description: Blue Biome
@@ -75,7 +84,8 @@ DeepSpaceQuery:
     Cost: LG
     BiomeType: Blue
 
-  - MissionID: ALCH_SCAN_QJ
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QJ
     ID: QJ
     Title: Swamp
     Description: Swamp Biome
@@ -83,7 +93,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Swamp
 
-  - MissionID: ALCH_SCAN_QK
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QK
     ID: QK
     Title: Lava
     Description: Lava Biome
@@ -91,7 +102,8 @@ DeepSpaceQuery:
     Cost: MD
     BiomeType: Lava
 
-  - MissionID: ALCH_SCAN_QL
+  - $: PlanetBiomeQuery
+    MissionID: ALCH_SCAN_QL
     ID: QL
     Title: Dead
     Description: Dead Biome
@@ -103,37 +115,79 @@ DeepSpaceQuery:
   # Resource
   #
 
-  - MissionID: ALCH_SCAN_RA
+  - $: PlanetResourceQuery
+    MissionID: ALCH_SCAN_RA
     ID: RA
     Title: Ancient Bones
     Description: Ancient Bones
     PlanetTitle: Ancient Bones Detected
-    Cost: LG
+    Cost: MD
     ResourceHint: UI_BONES_HINT
 
-  - MissionID: ALCH_SCAN_RB
+  - $: PlanetResourceQuery
+    MissionID: ALCH_SCAN_RB
     ID: RB
     Title: Salvageable Scrap
     Description: Salvageable Scrap
     PlanetTitle: Salvageable Scrap Detected
-    Cost: LG
+    Cost: MD
     ResourceHint: UI_SCRAP_HINT
 
-  - MissionID: ALCH_SCAN_RD
-    ID: RD
+  - $: PlanetResourceQuery
+    MissionID: ALCH_SCAN_RC
+    ID: RC
+    Title: Abundant Fauna
+    Description: Any Biome Not Wierd or Dead ~ Abundant Fauna ~ Low Sentinels
+    PlanetTitle: Abundant Fauna Detected
+    Cost: SM
+
+  #
+  # Outliers
+  #
+
+  - $: PlanetOutlierQuery
+    MissionID: ALCH_SCAN_OA
+    ID: OA
+    Title: Prime Infested
+    Description: Any Infested Biome ~ Prime Variant
+    PlanetTitle: Prime Infestation Detected
+    Cost: MD
+
+  #
+  # System Generic
+  #
+
+  - $: SystemGenericQuery
+    MissionID: ALCH_SCAN_GA
+    ID: GA
     Title: Black Market
-    Description: Pirate Controlled System ~ Black Market Economy ~ Undiscovered Planets ~ Biome Not Wierd or Dead ~ Low Sentinel Presence
+    Description: Pirate Controlled System ~ Black Market Economy ~ Undiscovered Planets
     PlanetTitle: Black Market Detected
     Cost: LG
     IsSystemTarget: true
 
-  - MissionID: ALCH_SCAN_RC
-    ID: RC
+  - $: SystemGenericQuery
+    MissionID: ALCH_SCAN_GB
+    ID: GB
     Title: Wealthy Economy
     Description: Populated Wealthy System ~ Undiscovered Planets ~ Biome Not Wierd or Dead ~ Low Sentinel Presence
     PlanetTitle: Wealthy Economy Detected
     Cost: LG
     IsSystemTarget: true
+
+  #
+  # System Trade
+  #
+
+  # - $: SystemTradeQuery
+  #   MissionID: ALCH_SCAN_TA
+  #   ID: TA
+  #   Title: Mining Economy
+  #   Description: Wealthy ~ Mining
+  #   PlanetTitle: Wealthy Mining
+  #   Cost: SM
+  #   IsSystemTarget: true
+  #   TradingClass: Mining
 
   #
   # Complex Patterns

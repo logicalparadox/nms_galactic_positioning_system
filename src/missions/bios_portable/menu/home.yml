@@ -1,0 +1,196 @@
+Dialog:
+  - Id: <%= Atlas.Config.HomeDialogId %>
+    Type: SignalScanner
+    TextAlien: <%= Atlas.LocKey('MENU_HOME_DESC') %>
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_INIT') %>
+        NextInteraction: <%= Atlas.Dialog('BOOT') %>
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 0
+            Test: Equal
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_FAST') %>
+        NextInteraction: <%= Atlas.Dialog('FAST_P1') %>
+        DisplayCost: true
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionIsMissionInProgress
+                MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+
+      # exact scan, costs enabled, no pass
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        Cost: <%= Atlas.Cost('PASS') %>
+        DisplayCost: true
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionIsMissionInProgress
+                MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue # if any true, will return false
+            Conditions:
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS1
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS2
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS3
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Level: 1
+            Test: Equal
+
+      # exact scan, costs enabled, HAS PASS
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionIsMissionInProgress
+                MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionGroup
+            ConditionTest: AllFalse # if all false, will return false
+            Conditions:
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS1
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS2
+              - $: GcMissionConditionHasProduct
+                Product: ACCESS3
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Level: 1
+            Test: Equal
+
+      # Exact scan, no tech requirements
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionIsMissionInProgress
+                MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Level: 0
+            Test: Equal
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+        DisplayCost: true
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionIsMissionInProgress
+                MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+
+      - $Name: Frigate Recon Status...
+        $Text:
+          - Frigate planetary sweep in progress <HIGHLIGHT>//<> Relaying locations to suit <HIGHLIGHT>//<> Awaiting finalized frigate data cache.
+        # NextInteraction: SIGNALSCANNER
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionIsMissionInProgress
+            MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('FLYBY_PR') %>
+            Level: 0
+            Test: Equal
+
+      - $Name: '[ ! ] Download Frigate Data Cache'
+        MarkInteractionComplete: true
+        NextInteraction: SIGNALSCANNER
+        KeepOpen: false
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionIsMissionInProgress
+            MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('FLYBY_PR') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('FLYBY_R') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardMissionMessage
+                MessageID: <%= Atlas.Mod.Message('PFLY_R') %>
+
+      - Name: ALL_REQUEST_LEAVE
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+
+  - Id: <%= Atlas.Dialog('UTIL') %>
+    TextAlien: <%= Atlas.LocKey('MENU_HOME_DESC') %>
+    Options:
+      - Name: <%= Atlas.Mod.LocKey('MENU_FLEET_RECON') %>
+        $Text: Connecting to Fleet...
+        MarkInteractionComplete: true
+        NextInteraction: <%= Atlas.Dialog('FLYBY_REQ1') %>
+        KeepOpen: true
+        EnablingConditionTest: AnyTrue
+        EnablingConditions:
+          - $: GcMissionConditionIsMissionInProgress
+            MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionIsFrigateFlybyActive
+          - $: GcMissionConditionHasFreighter
+            FreighterInCurrentSystem: No
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_FLEET_RECON') %>
+        Cost: <%= Atlas.Cost('NOOP_A') %>
+        DisplayCost: false
+        KeepOpen: true
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionIsMissionInProgress
+            MissionID: <%= Atlas.Config.FlybyMission %>
+          - $: GcMissionConditionIsFrigateFlybyActive
+          - $: GcMissionConditionHasFreighter
+            FreighterInCurrentSystem: No
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_CONFIG') %>
+        NextInteraction: <%= Atlas.Dialog('CONFIG') %>
+        KeepOpen: true
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: SIGNALSCANNER
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true

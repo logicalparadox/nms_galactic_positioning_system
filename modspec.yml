@@ -2,11 +2,11 @@ Mod:
   Name: GPS
   Author: alchemist
   Description: |
-    Overhaul to Ship and Signal Scanner capabilities. Find nearest 
+    Overhaul to Freighter, Ship, and Signal Scanner capabilities. Find nearest 
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 1.3.0
+  Version: 2.0.0
   GameVersion: 3.97
   Language: English
   Metadata:
@@ -17,6 +17,7 @@ Mod:
 
 ConfigSources:
   - ./src/config/poi_scan_events.yml
+  - ./src/config/poi_quick_groups.yml
   - ./src/config/poi_search_groups.yml
   - ./src/config/deep_space_query.yml
 
@@ -49,8 +50,9 @@ Missions:
       Name: ALCH_BIOS_PORT
       ID: ALSCPB
     Config:
-      WideRandom: false
       HomeDialogId: SIGNALSCANNER
+      QuickScanGroup: Portable
+      QuickDoAerialScan: true
       Bios:
         Type: SignalScanner
         IsAlienText: true
@@ -79,8 +81,12 @@ Missions:
       Name: ALCH_BIOS_SHIP
       ID: ALSCSB
     Config:
-      WideRandom: false
       HomeDialogId: D_ALSASB_HOME
+      QuickScanGroup: Ship
+      QuickDoAerialScan: false
+      DeepSpaceBackDialogId: D_ALSCSB_UTIL
+      Bios:
+        IsAlienText: false
 
   # Ship Signal Sweep
   - Source: ./src/missions/planet_sweep_ship/index.yml
@@ -94,7 +100,21 @@ Missions:
       Name: ALCH_FLYBY_PORT
       ID: ALSCFP
     Config:
-      FlybyTime: 120
+      FrigateFlybyType: AmbientGroup
+
+  - Source: ./src/missions/bios_freighter/index.yml
+    Metadata:
+      Name: ALCH_BIOS_FREI
+      ID: ALSCFB
+    Config:
+      HomeInteractionType: FleetNavigator # NPC_Freighter_Captain_Secondary
+      HomeDialogId: FLEET_NAVIGATOR
+      HomeDialogText: ALCH_BIOS_FREI_SCAN_INTRO # NPC_FREIGHTER_CAP_SEC_DESC_1
+      DeepSpaceBackDialogId: FLEET_NAVIGATOR
+      ShowTechCost: false
+      Bios:
+        IsAlienText: true
+        ShowTranslationBrackets: true
 
   #
   # COMMON PLANETARY QUERIES
@@ -202,22 +222,52 @@ Missions:
       Name: ALCH_SCAN_RB
       ID: ALSCRB
 
-  - Source: ./src/missions/deep_space_queries/resource/RC_WealthySystem.yml
+  - Source: ./src/missions/deep_space_queries/bespoke/planet_abundant_fauna.yml
     Archetypes:
       - PlanetaryExpedition
     Metadata:
       Name: ALCH_SCAN_RC
       ID: ALSCRC
 
-  - Source: ./src/missions/deep_space_queries/resource/RD_PirateSystem.yml
+  #
+  # PLANET OUTLIERS
+  #
+
+  - Source: ./src/missions/deep_space_queries/planet_outlier/prime_infested.yml
     Archetypes:
       - PlanetaryExpedition
     Metadata:
-      Name: ALCH_SCAN_RD
-      ID: ALSCRD
+      Name: ALCH_SCAN_OA
+      ID: ALSCOA
+
   #
-  # RARE PLANETARY QUERIES
+  # GENERIC SYSTEM
   #
+
+  - Source: ./src/missions/deep_space_queries/bespoke/system_pirate.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_GA
+      ID: ALSCGA
+
+  - Source: ./src/missions/deep_space_queries/bespoke/system_wealthy.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_GB
+      ID: ALSCGB
+
+  #
+  # SYSTEM TRADE CLASS (not working in game)
+  #
+
+  # - Source: ./src/Missions/deep_space_queries/mission_system_trade_class.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   Metadata:
+  #     Name: ALCH_SCAN_TA
+  #     ID: ALSCTA
 
   # - Source: ./src/PlanetQuery/complex/Debutante.yml
   #   Archetypes:

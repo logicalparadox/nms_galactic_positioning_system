@@ -6,3 +6,9 @@ Include:
   - ./lang_planet_search.yml
   - ./lang_poi_groups.yml
   - ./lang_poi_missing.yml
+  - ./deep_space_query.yml
+
+StatusMessageDefinitions:
+  - Id: <%= Atlas.Mod.Prefix('CHAT') %>
+    DisplayDurationMultiplier: 0.2
+    # MissionMarkup: Discover

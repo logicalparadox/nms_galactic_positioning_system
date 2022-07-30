@@ -12,17 +12,15 @@ ScanEvents:
 
     # Search Params
     BuildingLocation: PlanetSearch
+    ForceWideRandom: true
     SolarSystemLocation: Near
     SolarSystemAttributes:
-      AllowUnsafeMatches: false
+      # AllowUnsafeMatches: true
+      NeedsPrimePlanet: true
+      AnyInfestedBiome: true
       RequireUndiscovered: true
-      UseConflict: Pirate
-      UseWealth: true
-      WealthClass: Pirate
-      AnyBiomeNotWeirdOrDead: true
-      NeverAllowExtremeSentinelPlanet: true
-      NeverAllowEmpty: true
-      NeverAllowAbandoned: true
+      # NeverAllowAbandoned: true
+      # NeverAllowEmpty: true
 
 Mission:
   $Table: NPCMISSIONTABLE
@@ -36,9 +34,17 @@ Mission:
 
   Stages:
     - $: GxMissionSequenceImport
-      Source: ../stage_system_query.yml
+      Source: ../stage_scan_retry_loop.yml
       Metadata:
-        Name: WRAP
+        Name: LOOP
         ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>
+
+    - $: GxMissionSequenceImport
+      Source: ../stage_planet_query.yml
+      Metadata:
+        Name: FIND
+        ID: '01'
       Config:
         ScanEvent: <%= Atlas.ScanEvent('QRY') %>

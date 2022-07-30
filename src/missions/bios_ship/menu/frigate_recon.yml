@@ -15,7 +15,7 @@ Rewards:
 Dialog:
   - Id: <%= Atlas.Dialog('RECON_REQ1') %>
     TranslationBrackets: true
-    Text: <%= Atlas.Mod.LocKey('MENU_SHIP_DESC') %>
+    Text: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON_DESC') %>
     Options:
       # <% ;['SVG', 'BLD', 'ANC'].forEach((groupKey) => { %>
       # <% ;[true, false].forEach((useCost) => { %>
@@ -45,7 +45,7 @@ Dialog:
 
   - Id: <%= Atlas.Dialog('RECON_REQ2') %>
     TranslationBrackets: true
-    Text: <%= Atlas.Mod.LocKey('MENU_SHIP_DESC') %>
+    Text: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON_DESC') %>
     Options:
       # <% ;['SIG', 'UW'].forEach((groupKey) => { %>
       # <% ;[true, false].forEach((useCost) => { %>

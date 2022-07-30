@@ -1,11 +1,11 @@
 Dialog:
   - Id: <%= Atlas.Dialog('BOOT') %>
     $Text:
-      - Ship Scanner BIOS <IMG>SLASH<> Configuration Required <IMG>SLASH<> Starting configuration wizard...
-      - <STELLAR>IMMERSIVE MODE<> <IMG>SLASH<> Scans require resources <IMG>SLASH<> Exact target scan requires Ship Tech <IMG>SLASH<> Enable immersive mode?
+      - Ship Scanner BIOS <HIGHLIGHT>//<> Configuration Required <HIGHLIGHT>//<> Starting configuration wizard...
+      - <STELLAR>IMMERSIVE MODE<> <HIGHLIGHT>//<> Scans require resources <HIGHLIGHT>//<> Exact target scan requires Ship Tech <HIGHLIGHT>//<> Enable immersive mode?
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Immersive mode ENABLED <IMG>SLASH<> Rebooting...
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         Rewards:
@@ -26,7 +26,7 @@ Dialog:
                 ModifyType: Set
                 Amount: 1
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
-        $Text: Ship Scanner BIOS <IMG>SLASH<> Immersive mode DISABLED <IMG>SLASH<> Rebooting...
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         Rewards:

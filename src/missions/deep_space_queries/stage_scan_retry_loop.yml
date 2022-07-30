@@ -1,0 +1,80 @@
+Stage:
+  $: GcMissionSequenceGroup
+  Silent: true
+  Stages:
+    - $: GcMissionSequenceShowMissionUpdateMessage
+      MissionUpdateMessage: Start
+      SetMissionSelected: true
+      PlayMusicSting: Start
+      WaitForMessageOver: false
+
+    - $: GcMissionSequenceGroup
+      Silent: true
+      RepeatLogic: Loop
+      ConditionTest: AnyTrue
+      Conditions:
+        - $: GcMissionConditionIsScanEventActive
+          Event: <%= Atlas.Stage.Config.ScanEvent %>
+          MustMatchThisMissionSeed: true
+      Stages:
+        # stabalize env
+        - $: GcMissionSequenceWait
+          Time: 2
+
+        - $: GcMissionSequenceGroup
+          ObjectiveID: <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ') %>
+          ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ_TIP') %>
+          ConditionTest: AllFalse
+          Conditions:
+            - $: GcMissionConditionOnMultiplayerMission
+            - $: GcMissionConditionOnOtherSideOfPortal
+          Stages:
+            - $: GcMissionSequenceStop
+
+        - $: GcMissionSequenceGroup
+          ConditionTest: AnyTrue
+          ObjectiveID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ') %>
+          ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ_TIP') %>
+          Conditions:
+            - $: GcMissionConditionOnMultiplayerMission
+            - $: GcMissionConditionOnOtherSideOfPortal
+          Stages:
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AllFalse
+              Conditions:
+                - $: GcMissionConditionLocation
+                  MissionPlayerLocation: InShipInSpace
+                - $: GcMissionConditionLocation
+                  MissionPlayerLocation: InYourFreighter
+              Stages:
+                # do search
+                - $: GcMissionSequenceStartScanEvent
+                  Participant: Secondary2
+                  Event: <%= Atlas.Stage.Config.ScanEvent %>
+
+                # give it a second to bail if found
+                - $: GcMissionSequenceWait
+                  Time: 2
+
+            - $: GcMissionSequenceGroup
+              Silent: true
+              ConditionTest: AnyTrue
+              Conditions:
+                - $: GcMissionConditionMissionMessageWarp
+              Stages:
+                - $: GcMissionSequenceWaitForConditions
+                  ConditionTest: AllFalse
+                  Conditions:
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInSpace
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InYourFreighter
+
+                - $: GcMissionSequenceWaitForConditions
+                  ConditionTest: AnyTrue
+                  Conditions:
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InShipInSpace
+                    - $: GcMissionConditionLocation
+                      MissionPlayerLocation: InYourFreighter

@@ -1,0 +1,15 @@
+QuickScanGroups:
+  Portable:
+    - SHLT
+    - TERM
+    - DPOD
+    - BASE
+    - ABAN
+    - DIST
+  Ship:
+    - SHOP
+    - OUTP
+    - DIST
+    - FACT
+    - CRFR
+    - LBRY

@@ -1,43 +1,54 @@
 LanguageKeys:
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>: Deep Space Scanning...
+  <%= Atlas.Mod.LocKey('MENU_PQ_DESC') %>:
+    - Deep Space Scanning <TRADEABLE>AVAILABLE<> ~ Select query archetype...
+  <%= Atlas.Mod.LocKey('MENU_PQ_DESC_P') %>:
+    - Planetary Deep Space Scanning <TRADEABLE>AVAILABLE<> ~ Select query pattern...
+  <%= Atlas.Mod.LocKey('MENU_PQ_DESC_S') %>:
+    - System Deep Space Scanning <TRADEABLE>AVAILABLE<> ~ Select query pattern...
+
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME_P') %>: Planet Query...
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME_S') %>: System Query...
+
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME_PB') %>: Biome Pattern Query...
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME_PR') %>: Resource Pattern Query...
+  <%= Atlas.Mod.LocKey('MENU_PQ_NAME_PO') %>: Outlier Pattern Query...
+
   <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ') %>: Search Registered with Navigation Computer
   <%= Atlas.Mod.LocKey('PQ_SEARCH_OBJ_TIP') %>: |
     This planetary query has been registered with the ship's navigation computer and will proceed during normal <SPECIAL>space flight<>.
-
     <STELLAR>ADVISORY<> ~ Portal travel and Nexus missions cause <FUEL>interdimension interference<>. All active queries will be paused for the duration of these activities.
 
   <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ') %>: Query Active
   <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ_TIP') %>: |
     Planetary Query subroutines are currently <TRADEABLE>ACTIVE<> and will be invoked during <STELLAR>space flight<>.
-
     Increase search coverage through warp travel. Use <IMG>QUICK_MENU<> to open <COMMODITY>Galactic Map<>.
 
   <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ') %>: Travel to System
   <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ_TIP') %>: |
     A planet matching the given <SPECIAL>query parameters<> has been identified in a <TECHNOLOGY>remote system<>.
-
-    Use <IMG>QUICK_MENU<> to open <STELLAR>Galactic Map<> and travel to the marked system.
+    Use ship or freighter's <STELLAR>Galactic Map<> and travel to the marked system.
   <%= Atlas.Mod.LocKey('PQ_SYSTEM_OBJ_WAIT') %>:
     - <TITLE>Query result located in<> <TECHNOLOGY>remote system<>
-    - Use <IMG>QUICK_MENU<> to open <STELLAR>Galactic Map<>
+    - Use ship or freighter's <STELLAR>Galactic Map<> to initiate warp travel
 
   <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ') %>: Travel to Planet
   <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ_TIP') %>: |
     A planet matching the given <SPECIAL>query parameters<> has been identified in the <TRADEABLE>current system<>. Enter the planet's atmosphere to complete the mission.
-
     Hold <IMG>ROLLLEFT<> and <IMG>ROLLRIGHT<> together to engage Pulse Jump.
   <%= Atlas.Mod.LocKey('PQ_PLANET_OBJ_WAIT') %>:
     - <TITLE>Query result located in<> <TRADEABLE>current system<>
     - Enter the planet's atmosphere to complete the mission
 
   <%= Atlas.Mod.LocKey('PQ_DESC') %>:
-    - <TECHNOLOGY>Biome<> Pattern Query <IMG>SLASH<> Immediate results expected <IMG>SLASH<> Consult <STELLAR>Mission Log<> for details
+    - <TECHNOLOGY>Biome<> Pattern Query <HIGHLIGHT>//<> Immediate results expected <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
   <%= Atlas.Mod.LocKey('PR_DESC') %>:
-    - <TECHNOLOGY>Resource<> Pattern Query <IMG>SLASH<> Immediate results expected <IMG>SLASH<> Consult <STELLAR>Mission Log<> for details
-  <%= Atlas.Mod.LocKey('PZ_DESC') %>:
-    - <SPECIAL>Complex<> Pattern Query <IMG>SLASH<> <FUEL>ADVISORY<> ~ Immediate results unlikely <IMG>SLASH<> Consult <STELLAR>Mission Log<> for details
+    - <TECHNOLOGY>Resource<> Pattern Query <HIGHLIGHT>//<> Immediate results expected <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
+  # <%= Atlas.Mod.LocKey('PZ_DESC') %>:
+  #   - <SPECIAL>Complex<> Pattern Query <HIGHLIGHT>//<> <FUEL>ADVISORY<> ~ Immediate results unlikely <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
 
   # <% Atlas.Config.DeepSpaceQuery.forEach((mission) => { %>
   <%= Atlas.Mod.LocKey(`PQ_${mission.ID}_MENU`) %>: '<%~ mission.Title %>'
   <%= Atlas.Mod.LocKey(`PQ_${mission.ID}_TITLE`) %>: '<%= (mission.IsSystemTarget ? "System Query" : "Planet Query") %> ~ <%~ mission.Title %>'
-  <%= Atlas.Mod.LocKey(`PQ_${mission.ID}_DESC`) %>: '<SPECIAL>QUERY PARAMETERS<> <IMG>SLASH<> <%~ mission.Description %>'
+  <%= Atlas.Mod.LocKey(`PQ_${mission.ID}_DESC`) %>: '<SPECIAL>QUERY PARAMETERS<> <HIGHLIGHT>//<> <%~ mission.Description %>'
   # <% }); %>

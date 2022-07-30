@@ -1,0 +1,48 @@
+Dialog:
+  # <% const scanKeys = Atlas.Config.QuickScanGroups[Atlas.Config.QuickScanGroup]; %>
+  # <% const pageCount = Math.ceil(scanKeys.length / 3); %>
+  # <% for (let i = 1; i <= pageCount; i++) { %>
+  - Id: <%= Atlas.Dialog(`FAST_P${i}`) %>
+    # <% if (Atlas.Config.Bios.IsAlienText) { %>
+    TextAlien: <%= Atlas.Mod.LocKey('SCAN_FAST_DESC') %>
+    # <% } else { %>
+    Text: <%= Atlas.Mod.LocKey('SCAN_FAST_DESC') %>
+    # <% } %>
+
+    Options:
+      # <% let eventIdx = (i - 1) * 3; %>
+      # <% for (let e = 0; e < 3; e++) { %>
+      # <% let eventId = scanKeys[eventIdx]; %>
+      # <% if (!eventId) continue; %>
+      # <% let event = Atlas.Config.ScanEventTable.find((se) => se.ID === eventId); %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: '<%= event.Menu || `BUILDING_${event.Name}_L` %>'
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Mod.Cost(event.Cost || 'SM') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - "<%= Atlas.Mod.Reward(`${event.ID}_${Atlas.Config.QuickDoAerialScan ? 'N' : 'S'}`) %>"
+        # <% }); // use Cost %>
+        # <% eventIdx++; %>
+        # <% } // event loop %>
+        #
+        # <% if (i === pageCount) { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
+        # <% } else { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog(`FAST_P${i + 1}`) %>
+        # <% } %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+  # <% } // end for pageCount %>

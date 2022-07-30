@@ -1,0 +1,24 @@
+# <% let allQueries = Atlas.Config.DeepSpaceQuery; %>
+
+Costs:
+  # <% allQueries.forEach((m) => { %>
+  - Id: <%= Atlas.Mod.Cost(`PM${m.ID}`) %>
+    DisplayCost: true
+    MustAffordInCreative: true
+    CannotAffordOSDMsg: <%= Atlas.Mod.LocKey('ERR_PS_ACTIVE_OSD') %>
+    Cost:
+      $: GcCostMissionComplete
+      Cost: <%= m.MissionID %>
+      TextOverride: <%= Atlas.Mod.LocKey('ERR_PS_ACTIVE') %>
+  # <% }); %>
+
+Rewards:
+  # <% allQueries.forEach((m) => { %>
+  - Id: <%= Atlas.Mod.Reward(`PM${m.ID}`) %>
+    RewardChoice: GiveAll
+    List:
+      - $: GcRewardMission
+        Mission: <%= m.MissionID %>
+        SetAsSelected: true
+        FailRewardIfMissionActive: true
+  # <% }); %>

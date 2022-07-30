@@ -1,27 +1,11 @@
 Rewards:
-  # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
-  - Id: '<%= Atlas.Mod.Reward(`${groupKey}_GN`) %>'
-    # RewardChoice: SelectAlwaysSilent
-    RewardChoice: SelectFromSuccessSilent
-    List:
-      # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId) => { %>
-      # <% const event = Atlas.Config.ScanEventTable.find((se) => se.ID == eventId); %>
-      # <% if (event.OmitFromQuickSearch !== true) { %>
-      - $: GcRewardScanEvent
-        Event: '<%= Atlas.Mod.ScanEvent(`${eventId}_N`) %>'
-        DoAerialScan: true
-        ScanEventTable: Planet
-      # <% } %>
-      # <% }); %>
-  # <% }); %>
-
   # <% Atlas.Config.ScanEventTable.forEach((event) => { %>
   - Id: <%= Atlas.Mod.Reward(`${event.ID}_N`) %>
     # RewardChoice: SelectAlwaysSilent
     RewardChoice: SelectFromSuccessSilent
     List:
       - $: GcRewardScanEvent
-        Event: <%= Atlas.Mod.ScanEvent(`${event.ID}_N`) %>
+        Event: <%= Atlas.Mod.ScanEvent(`${event.ID}`) %>
         DoAerialScan: true
         ScanEventTable: Planet
 
@@ -29,7 +13,7 @@ Rewards:
     RewardChoice: SelectFromSuccessSilent
     List:
       - $: GcRewardScanEvent
-        Event: <%= Atlas.Mod.ScanEvent(`${event.ID}_N`) %>
+        Event: <%= Atlas.Mod.ScanEvent(`${event.ID}`) %>
         DoAerialScan: false
         ScanEventTable: Planet
   # <% }); %>

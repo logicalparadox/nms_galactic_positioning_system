@@ -1,11 +1,14 @@
 Dialog:
   - Id: <%= Atlas.Dialog('BOOT') %>
     $TextAlien:
-      - Signal Scanner BIOS <HIGHLIGHT>//<> Configuration Required <HIGHLIGHT>//<> Starting configuration wizard...
-      - <STELLAR>IMMERSIVE MODE<> <HIGHLIGHT>//<> Scans require Navigation Data <HIGHLIGHT>//<> Exact target scan requires Atlas Pass <HIGHLIGHT>//<> Enable immersive mode?
+      - Commander, this freighter's <TECHNOLOGY>DEEP SPACE SCANNING<> system is now available but it requires configuration.
+      - If <STELLAR>IMMERSIVE MODE<> is enabled then an <TECHNOLOGY>Interstellar Scanner<> must be installed in this freighter and all scans will require <FUEL>Anomaly Detectors<>. Enable <STELLAR>IMMERSIVE MODE<>?
+    ShowTranslationBrackets: true
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Rebooting...
+        $Text:
+          - Confirmed, immersive mode ENABLED for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system.
+          - Come see me when you would like to begin a <TECHNOLOGY>DEEP SPACE QUERY<> or want to modify the configuration in greater detail.
         MarkInteractionComplete: true
         KeepOpen: false
         Rewards:
@@ -21,11 +24,13 @@ Dialog:
                 ModifyType: Set
                 Amount: 1
               - $: GcRewardModifyStat
-                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 1
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Rebooting...
+        $Text:
+          - Confirmed, immersive mode <FUEL>DISABLED<> for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system.
+          - Come see me when you would like to begin a <TECHNOLOGY>DEEP SPACE QUERY<> or want to modify the configuration in greater detail.
         MarkInteractionComplete: true
         KeepOpen: false
         Rewards:
@@ -41,6 +46,6 @@ Dialog:
                 ModifyType: Set
                 Amount: 0
               - $: GcRewardModifyStat
-                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 0

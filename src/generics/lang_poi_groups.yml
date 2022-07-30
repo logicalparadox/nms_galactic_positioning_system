@@ -5,7 +5,7 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('GRP_SVG_FLYBY') %>:
     - Confirmed. Focusing on salvage opportunities and private networks. Deploying friggate detachment.
   <%= Atlas.Mod.LocKey('GRP_SVG_FLYBY_DONE') %>:
-    - Salvage locations marked. Data cache available.
+    - '<VISOR>Frigate Recon<>: -{{ Salvage locations marked. Data cache available. }}-'
 
   <%= Atlas.Mod.LocKey('GRP_BLD_NAME') %>: Population Centres
   <%= Atlas.Mod.LocKey('GRP_BLD_MENU') %>: Population Centres...
@@ -13,7 +13,7 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('GRP_BLD_FLYBY') %>:
     - Confirmed. Focusing on trade and public networks. Deploying frigate detachment.
   <%= Atlas.Mod.LocKey('GRP_BLD_FLYBY_DONE') %>:
-    - Building locations marked. Data cache available.
+    - '<VISOR>Frigate Recon<>: -{{ Building locations marked. Data cache available. }}-'
 
   <%= Atlas.Mod.LocKey('GRP_ANC_NAME') %>: Ancient Sites
   <%= Atlas.Mod.LocKey('GRP_ANC_MENU') %>: Ancient Sites...
@@ -21,7 +21,7 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('GRP_ANC_FLYBY') %>:
     - Confirmed. Focusing on relics of the past. Deploying frigate detachment.
   <%= Atlas.Mod.LocKey('GRP_ANC_FLYBY_DONE') %>:
-    - Ancient Sites marked. Data cache available.
+    - '<VISOR>Frigate Recon<>: -{{ Ancient Sites marked. Data cache available. }}-'
 
   <%= Atlas.Mod.LocKey('GRP_SIG_NAME') %>: Public Broadcasts
   <%= Atlas.Mod.LocKey('GRP_SIG_MENU') %>: Public Broadcasts...
@@ -29,7 +29,7 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('GRP_SIG_FLYBY') %>:
     - Confirmed. Focusing on assistance requests and public networks. Deploying frigate detachment.
   <%= Atlas.Mod.LocKey('GRP_SIG_FLYBY_DONE') %>:
-    - Signal Sources marked. Data cache available.
+    - '<VISOR>Frigate Recon<>: -{{ Signal Sources marked. Data cache available. }}-'
 
   <%= Atlas.Mod.LocKey('GRP_UW_NAME') %>: Underwater
   <%= Atlas.Mod.LocKey('GRP_UW_MENU') %>: Underwater...
@@ -37,7 +37,7 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('GRP_UW_FLYBY') %>:
     - Confirmed. Focusing on signals with aquatic interference. Deploying frigate detachment.
   <%= Atlas.Mod.LocKey('GRP_UW_FLYBY_DONE') %>:
-    - Underwater signals marked. Data cache available.
+    - '<VISOR>Frigate Recon<>: -{{ Underwater signals marked. Data cache available. }}-'
 
   <%= Atlas.Mod.LocKey('FLYBY_COMM_DESC') %>:
     - Request received Commander. What type of frequencies should we focus on?

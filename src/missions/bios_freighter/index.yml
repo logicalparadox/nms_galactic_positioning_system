@@ -1,0 +1,33 @@
+Include:
+  - ../../shared/menu_deep_space_query.yml
+  - ./menu/home.yml
+  - ./menu/boot.yml
+  - ./menu/settings.yml
+
+LanguageKeys:
+  <%= Atlas.LocKey('SCAN_INTRO') %>: Which route do you feel is most promising?
+
+StatDefinitions:
+  - Id: <%= Atlas.Stat('CFG_DONE') %>
+    TrackType: Set
+  - Id: <%= Atlas.Stat('CFG_COST') %>
+    TrackType: Set
+  - Id: <%= Atlas.Stat('CFG_TECH') %>
+    TrackType: Set
+
+Costs:
+  - Id: <%= Atlas.Cost('TECH') %>
+    MustAffordInCreative: true
+    Cost:
+      $: GcCostInstalledTech
+      Id: F_SCANNER
+      InventoryToCheck: Freighter
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  AutoStart: AllModes
+  MissionClass: Guide
+
+  Stages:
+    - $: GcMissionSequenceStop

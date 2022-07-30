@@ -34,7 +34,6 @@ Mission:
           WaitForMessageOver: false
 
         # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey) => { %>
-        # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId, i) => { %>
         - $: GcMissionSequenceGroup
           Silent: true
           ConditionTest: AnyFalse
@@ -44,6 +43,7 @@ Mission:
               Level: <%= Atlas.Config.SearchGroups[groupKey].FlybyId %>
               Test: Equal
           Stages:
+            # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId, i) => { %>
             # <% if (i === 0) { %>
             - $: GcMissionSequenceWait
               Time: 1
@@ -55,7 +55,7 @@ Mission:
             - $: GcMissionSequenceReward
               Reward: <%= Atlas.Mod.Reward(`${eventId}_S`) %>
             # <% } %>
-        # <% }); // for each event in group%>
+            # <% }); // for each event in group%>
         # <% }); // for each group %>
         - $: GcMissionSequenceWait
           Time: 5

@@ -16,6 +16,7 @@ ScanEvents:
     SolarSystemAttributes:
       AllowUnsafeMatches: false
       RequireUndiscovered: true
+      UseRace: <%= ScanMeta.Race || 'None' %>
       UseWealth: true
       WealthClass: Wealthy
       AnyBiomeNotWeirdOrDead: true
@@ -35,9 +36,17 @@ Mission:
 
   Stages:
     - $: GxMissionSequenceImport
+      Source: ../stage_scan_retry_loop.yml
+      Metadata:
+        Name: LOOP
+        ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>
+
+    - $: GxMissionSequenceImport
       Source: ../stage_system_query.yml
       Metadata:
-        Name: WRAP
-        ID: '00'
+        Name: FIND
+        ID: '01'
       Config:
         ScanEvent: <%= Atlas.ScanEvent('QRY') %>

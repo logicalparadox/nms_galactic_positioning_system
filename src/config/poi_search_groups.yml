@@ -20,7 +20,7 @@ SearchGroups:
       - BASE
       - OUTP
       - LBRY
-      - SETL
+      # - SETL
 
   ANC:
     FlybyId: 3

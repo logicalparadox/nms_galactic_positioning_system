@@ -1,10 +1,10 @@
 Dialog:
   - Id: <%= Atlas.Dialog('CONFIG') %>
     $TextAlien:
-      - 'Signal Scanner BIOS <HIGHLIGHT>//<> Select configuration task...'
+      - 'Freighter BIOS <HIGHLIGHT>//<> Select configuration task...'
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_E') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Freighter BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -21,9 +21,10 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 1
+          - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Freighter BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -40,52 +41,49 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 0
+          - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> <COMMODITY>Atlas Pass<> requirement set to ENABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Freighter BIOS <HIGHLIGHT>//<> Tech Requirements set to ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
-            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
             Level: 0
             Test: Equal
         Rewards:
-          - Id: <%= Atlas.Reward('AP_ON') %>
+          - Id: <%= Atlas.Reward('TCH_ON') %>
             RewardChoice: GiveAll
             List:
               - $: GcRewardModifyStat
-                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 1
+          - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>
-        $Text: Signal Scanner BIOS <HIGHLIGHT>//<> <COMMODITY>Atlas Pass<> requirement set to DISABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Freighter BIOS <HIGHLIGHT>//<> Tech Requirements set to DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
-            Stat: <%= Atlas.Stat('CFG_PASS') %>
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
             Level: 1
             Test: Equal
         Rewards:
-          - Id: <%= Atlas.Reward('AP_OFF') %>
+          - Id: <%= Atlas.Reward('TCH_OFF') %>
             RewardChoice: GiveAll
             List:
               - $: GcRewardModifyStat
-                Stat: <%= Atlas.Stat('CFG_PASS') %>
+                Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 0
+          - <%= Atlas.Reward('REBOOT') %>
 
-      - $Name: Play Title Card
-        MarkInteractionComplete: true
-        KeepOpen: false
-        Rewards:
-          - <%= Atlas.Mod.Reward('GPS_HI') %>
-
-      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
-        NextInteraction: <%= Atlas.Dialog('UTIL') %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         SelectedOnBackOut: true
         KeepOpen: true
