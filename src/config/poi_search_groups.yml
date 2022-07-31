@@ -20,7 +20,7 @@ SearchGroups:
       - BASE
       - OUTP
       - LBRY
-      # - SETL
+      - SETL
 
   ANC:
     FlybyId: 3
@@ -33,6 +33,7 @@ SearchGroups:
       - RUIN
       - TREA
       - GRV
+      - GLCH
 
   SIG:
     FlybyId: 4

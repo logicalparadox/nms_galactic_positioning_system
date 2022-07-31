@@ -6,6 +6,7 @@ Include:
 
 LanguageKeys:
   <%= Atlas.LocKey('SCAN_INTRO') %>: What do you think we will find out there?
+  <%= Atlas.LocKey('TECH_ERR') %>: Feature Unavailable <HIGHLIGHT>//<> Technology Requirement Unfulfilled <HIGHLIGHT>//<> Interstellar Scanner
 
 StatDefinitions:
   - Id: <%= Atlas.Stat('CFG_DONE') %>
@@ -18,6 +19,8 @@ StatDefinitions:
 Costs:
   - Id: <%= Atlas.Cost('TECH') %>
     MustAffordInCreative: true
+    HideCostStringIfCanAfford: true
+    CannotAffordOSDMsg: <%= Atlas.LocKey('TECH_ERR') %>
     Cost:
       $: GcCostInstalledTech
       Id: F_SCANNER

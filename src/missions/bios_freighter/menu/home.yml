@@ -1,6 +1,6 @@
 LanguageKeys:
   <%= Atlas.LocKey('QRY_CFG') %>: Configure Deep Space Scanning...
-  <%= Atlas.LocKey('QRY_OFF') %>: Deep Space Query Blocked
+  <%= Atlas.LocKey('QRY_OFF') %>: Deep Space Scanning Blocked
   <%= Atlas.LocKey('QRY_ON') %>: View Scanning Opportunities...
 
 Costs:
@@ -78,6 +78,14 @@ Dialog:
         NextInteraction: <%= Atlas.Dialog('CONFIG') %>
         MarkInteractionComplete: true
         KeepOpen: true
+        EnablingConditionTest: AnyTrue
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 0
+            Test: Equal
+          - $: GcMissionConditionOnMultiplayerMission
+          - $: GcMissionConditionOnOtherSideOfPortal
 
       - Name: ALL_REQUEST_LEAVE
         MarkInteractionComplete: true

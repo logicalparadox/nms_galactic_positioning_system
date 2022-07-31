@@ -194,6 +194,7 @@ Mission:
                       Test: Equal
                   Stages:
                     # <% Atlas.Config.SearchGroups[groupKey].Events.forEach((eventId) => { %>
+                    # <% if (Atlas.Config.ScanEventTable.find(e => e.ID === eventId).OmitFromSignalSweep) return; %>
                     - $: GcMissionSequenceWait
                       Time: 5
                     - $: GcMissionSequenceReward

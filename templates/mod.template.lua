@@ -18,7 +18,7 @@ local navigatorDialog = [[        <Property value="GcAlienPuzzleOption.xml">
           <Property name="Cost" value=""/>
           <Property name="Rewards"/>
           <Property name="Mood" value="GcAlienMood.xml">
-            <Property name="Mood" value="Positive"/>
+            <Property name="Mood" value="Neutral"/>
           </Property>
           <Property name="Prop" value="GcNPCPropTypes.xml">
             <Property name="NPCProp" value="HoloSolarSystem"/>

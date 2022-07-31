@@ -139,6 +139,7 @@ ScanEventTable:
   - Name: MISSIONTOWER
     ID: MTOW
     Cost: XS
+    OmitFromSignalSweep: true
     ScanEvent:
       BuildingClass: MissionTower
       AllowOverriddenBuildings: true
@@ -147,6 +148,7 @@ ScanEventTable:
     ID: SETL
     Cost: LG
     OmitFromQuickSearch: true
+    OmitFromSignalSweep: true
     Menu: UI_SETTLEMENT_LABEL
     ScanEvent:
       BuildingType: UnownedSettlement
@@ -192,7 +194,17 @@ ScanEventTable:
       OSDMessage: UI_DRONEHIVE_LOCATED_OSD
       TooltipMessage: UI_DRONEHIVE_LOCATED
 
-  # WaterCrashedFreighter, WaterTreasureRuins, WaterAbandoned, WaterDistressSignal
+  - Name: GLITCHYSTORYBOX
+    ID: GLCH
+    Cost: MD
+    OmitFromSignalSweep: true
+    Menu: BUILDING_GLITCHYSTORYBOX
+    ScanEvent:
+      BuildingClass: StoryGlitch
+      OSDMessage: NPC_COMM_WEEK_04_GLITCH_OSD
+      TooltipMessage: NPC_COMM_WEEK_04_GLITCH_RES_A
+      MarkerLabel: BUILDING_GLITCHYSTORYBOX
+
   - Name: CRASHED_FREIGHTER
     ID: UWCF
     Cost: MD
@@ -206,7 +218,6 @@ ScanEventTable:
   - Name: TREASURERUIN
     ID: UWTR
     Cost: LG
-    OmitFromQuickSearch: false
     Menu: <%= Atlas.Mod.LocKey('POI_TREA_MENU') %>
     ScanEvent:
       BuildingClass: WaterTreasureRuins

@@ -6,7 +6,7 @@ Mod:
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 2.0.0
+  Version: 2.0.1
   GameVersion: 3.97
   Language: English
   Metadata:
@@ -59,23 +59,6 @@ Missions:
         IsAlienText: true
         TranslationBrackets: false
 
-  # Drone Friend Dialog Override
-  # - Source: ./src/PortableBios/index.yml
-  #   Metadata:
-  #     Name: ALCH_BIOS_ROBT
-  #     ID: ALSCRB
-  #     Table: ENABLINGCONDITIONSTABLE
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Config:
-  #     WideRandom: false
-  #     HomeDialogId: DRONESCANNER # wong
-  #     FlybyMission: ALCH_FLYBY_PORT
-  #     Bios:
-  #       Type: SentryBot # wrong
-  #       IsAlienText: true
-  #       TranslationBrackets: true
-
   # Ship Mission
   - Source: ./src/missions/bios_ship/index.yml
     Metadata:
@@ -103,6 +86,7 @@ Missions:
     Config:
       FrigateFlybyType: AmbientGroup
 
+  # freighter navigator deep space scanning
   - Source: ./src/missions/bios_freighter/index.yml
     Metadata:
       Name: ALCH_BIOS_FREI
@@ -112,7 +96,7 @@ Missions:
       HomeDialogId: D_ALSCFB_HOME
       HomeDialogText: ALCH_BIOS_FREI_SCAN_INTRO # NPC_FREIGHTER_CAP_SEC_DESC_1
       DeepSpaceBackDialogId: D_ALSCFB_HOME
-      ShowTechCost: false
+      ShowTechCost: true
       Bios:
         IsAlienText: true
         TranslationBrackets: true

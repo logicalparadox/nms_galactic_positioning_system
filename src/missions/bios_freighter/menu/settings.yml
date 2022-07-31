@@ -1,10 +1,13 @@
 Dialog:
   - Id: <%= Atlas.Dialog('CONFIG') %>
+    Prop: IPad
+    TranslationBrackets: true
     $TextAlien:
-      - 'Freighter BIOS <HIGHLIGHT>//<> Select configuration task...'
+      - Commander, this freighter's <TECHNOLOGY>DEEP SPACE SCANNING<> system can now be reconfigured. What should be changed?
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_E') %>
-        $Text: Freighter BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Confirmed, scan costs set to ENABLED. Just a moment while the system reboots...
+        IsAlien: true
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -24,7 +27,8 @@ Dialog:
           - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>
-        $Text: Freighter BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Confirmed, scan costs set to DISABLED. Just a moment while the system reboots...
+        IsAlien: true
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -44,7 +48,8 @@ Dialog:
           - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>
-        $Text: Freighter BIOS <HIGHLIGHT>//<> Tech Requirements set to ENABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Confirmed, technology requirements set to ENABLED. Just a moment while the system reboots...
+        IsAlien: true
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
@@ -64,7 +69,8 @@ Dialog:
           - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>
-        $Text: Freighter BIOS <HIGHLIGHT>//<> Tech Requirements set to DISABLED <HIGHLIGHT>//<> Rebooting...
+        $Text: Confirmed, technology requirements set to DISABLED. Just a moment while the system reboots...
+        IsAlien: true
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AllFalse
