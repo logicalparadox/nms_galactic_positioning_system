@@ -1,10 +1,10 @@
 Include:
+  - ./menu/home.yml
+  - ./menu/boot.yml
+  - ./menu/settings.yml
   - ../../shared/menu_quick_poi.yml
   - ../../shared/menu_exact_poi.yml
-  - ./menu/boot.yml
-  - ./menu/home.yml
   - ./menu/flyby.yml
-  - ./menu/settings.yml
 
 StatDefinitions:
   - Id: <%= Atlas.Stat('CFG_DONE') %>
@@ -29,6 +29,7 @@ Costs:
   - Id: <%= Atlas.Cost('PASS') %>
     DontCharge: true
     MustAffordInCreative: true
+    HideCostStringIfCanAfford: true
     CannotAffordOSDMsg: <%= Atlas.LocKey('ERR_NEED_PASS') %>
     Cost:
       $: GcCostProduct

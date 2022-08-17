@@ -5,11 +5,12 @@ Dialog:
       - <STELLAR>IMMERSIVE MODE<> <HIGHLIGHT>//<> Scans require resources <HIGHLIGHT>//<> Exact target scan requires Ship Tech <HIGHLIGHT>//<> Enable immersive mode?
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Enhanced scanning interface... <TRADE>ONLINE<>
+        MarkInteractionComplete: false
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         Rewards:
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
           - Id: <%= Atlas.Reward('CFG_A') %>
             RewardChoice: GiveAll
             List:
@@ -26,11 +27,12 @@ Dialog:
                 ModifyType: Set
                 Amount: 1
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Enhanced scanning interface... <TRADE>ONLINE<>
+        MarkInteractionComplete: false
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         Rewards:
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
           - Id: <%= Atlas.Reward('CFG_B') %>
             RewardChoice: GiveAll
             List:

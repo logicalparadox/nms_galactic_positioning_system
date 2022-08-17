@@ -1,0 +1,45 @@
+LanguageKeys:
+  <%= Atlas.LocKey('NOTIF') %>: '<TECHNOLOGY>[ System Notification ]<>: <SPECIAL>Deep Space Query<> <HIGHLIGHT>//<> <TITLE>Nearby systems scanned, some queries still<> {{ PENDING MATCH }} <HIGHLIGHT>//<> <TITLE>Hybernating...<>'
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  MissionClass: Guide
+  AutoStart: AllModes
+
+  StartIsCancel: true
+  StartConditionTest: AnyFalse # if any false, this mission will NOT be active
+  StartingConditions:
+    - $: GcMissionConditionStatLevel
+      Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+      Level: 0
+      Test: Equal
+
+  Stages:
+    - $: GcMissionSequenceGroup
+      Silent: true
+      RepeatLogic: Loop
+      Stages:
+        # wait for message
+        - $: GcMissionSequenceWaitForConditions
+          ConditionTest: AnyTrue
+          Conditions:
+            - $: GcMissionConditionMissionMessage
+              Message: <%= Atlas.Mod.Message('PQ_LOOP') %>
+
+        # send chat message
+        - $: GcMissionSequenceSendChatMessage
+          StatusMessageId: <%= Atlas.Mod.Prefix('CHAT') %>
+          CustomText: <%= Atlas.LocKey('NOTIF') %>
+
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyTrue
+          Conditions:
+            - $: GcMissionConditionMissionMessageWarp
+            - $: GcMissionConditionMissionMessage
+              Message: <%= Atlas.Mod.Message('PQ_BOOT') %>
+          Stages:
+            # debounce
+            - $: GcMissionSequenceWait
+              Time: <%= (10 * 60) %>

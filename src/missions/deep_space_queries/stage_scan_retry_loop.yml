@@ -2,6 +2,10 @@ Stage:
   $: GcMissionSequenceGroup
   Silent: true
   Stages:
+    # broadcast we started a new mission
+    - $: GcMissionSequenceBroadcastMessage
+      MessageID: <%= Atlas.Mod.Message('PQ_BOOT') %>
+
     - $: GcMissionSequenceShowMissionUpdateMessage
       MissionUpdateMessage: Start
       SetMissionSelected: true
@@ -55,7 +59,11 @@ Stage:
 
                 # give it a second to bail if found
                 - $: GcMissionSequenceWait
-                  Time: 2
+                  Time: 3
+
+                # broadcast if we didn't break the loop
+                - $: GcMissionSequenceBroadcastMessage
+                  MessageID: <%= Atlas.Mod.Message('PQ_LOOP') %>
 
             - $: GcMissionSequenceGroup
               Silent: true

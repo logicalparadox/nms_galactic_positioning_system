@@ -20,7 +20,7 @@ ScanEvents:
       UseWealth: true
       WealthClass: Wealthy
       AnyBiomeNotWeirdOrDead: true
-      NeverAllowExtremeSentinelPlanet: true
+      # NeverAllowExtremeSentinelPlanet: true
       NeverAllowEmpty: true
       NeverAllowAbandoned: true
 

@@ -13,8 +13,8 @@ LanguageKeys:
     Frigate detachment on hold according to <TECHNOLOGY>clear skies<> protocol.
   <%= Atlas.LocKey('FLYBY_DONE') %>: Frigate Recon Expedition Complete
   <%= Atlas.LocKey('SHIP_COMM') %>: Incoming Fleet Message
-  <%= Atlas.LocKey('CHAT_START_1') %>: '<VISOR>Frigate Recon<>: -{{ Planetary approach complete. Starting scan sequence. }}-'
-  <%= Atlas.LocKey('CHAT_END_1') %>: '<VISOR>Frigate Recon<>: -{{ All scans complete. Returning to fleet. }}-'
+  <%= Atlas.LocKey('CHAT_START_1') %>: '<VISOR>[ Frigate Recon ]<>: -{{ Planetary approach complete. Starting scan sequence. }}-'
+  <%= Atlas.LocKey('CHAT_END_1') %>: '<VISOR>[ Frigate Recon ]<>: -{{ All scans complete. Returning to fleet. }}-'
 
 Rewards:
   - Id: <%= Atlas.Reward('FLYBY_E') %>
@@ -265,14 +265,6 @@ Mission:
       ObjectiveID: <%= Atlas.LocKey('FLYBY_R_OBJ') %>
       ObjectiveTipID: <%= Atlas.LocKey('FLYBY_R_OBJ_TIP') %>
       Stages:
-        - $: GcMissionSequenceReward
-          Reward: <%= Atlas.Reward('FLYBY_S') %>
-
-        - $: GcMissionSequenceShowMissionUpdateMessage
-          MissionUpdateMessage: Start
-          SetMissionSelected: true
-          WaitForMessageOver: true
-
         - $: GcMissionSequenceGroup
           Silent: true
           ConditionTest: AnyTrue
@@ -280,6 +272,14 @@ Mission:
             - $: GcMissionConditionMissionMessage
               Message: <%= Atlas.Mod.Message('PFLY_R') %>
           Stages:
+            - $: GcMissionSequenceReward
+              Reward: <%= Atlas.Reward('FLYBY_S') %>
+
+            - $: GcMissionSequenceShowMissionUpdateMessage
+              MissionUpdateMessage: Start
+              SetMissionSelected: true
+              WaitForMessageOver: true
+
             - $: GcMissionSequenceWaitForConditions
               Message: <%= Atlas.LocKey('FLYBY_R_OBJ_TIP') %>
               ConditionTest: AllFalse

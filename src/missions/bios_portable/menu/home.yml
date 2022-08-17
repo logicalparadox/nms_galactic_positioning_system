@@ -122,7 +122,7 @@ Dialog:
       - $Name: Frigate Recon Status...
         $Text:
           - Frigate planetary sweep in progress <HIGHLIGHT>//<> Relaying locations to suit <HIGHLIGHT>//<> Awaiting finalized frigate data cache.
-        # NextInteraction: SIGNALSCANNER
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         MarkInteractionComplete: true
         KeepOpen: false
         EnablingConditionTest: AnyFalse
@@ -136,7 +136,6 @@ Dialog:
 
       - $Name: '[ ! ] Download Frigate Data Cache'
         MarkInteractionComplete: true
-        NextInteraction: SIGNALSCANNER
         KeepOpen: false
         EnablingConditionTest: AnyFalse
         EnablingConditions:
@@ -162,9 +161,7 @@ Dialog:
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_FLEET_RECON') %>
         $Text: Connecting to Fleet...
-        MarkInteractionComplete: true
         NextInteraction: <%= Atlas.Dialog('FLYBY_REQ1') %>
-        KeepOpen: true
         EnablingConditionTest: AnyTrue
         EnablingConditions:
           - $: GcMissionConditionIsMissionInProgress
@@ -190,7 +187,6 @@ Dialog:
         KeepOpen: true
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
-        NextInteraction: SIGNALSCANNER
-        MarkInteractionComplete: true
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         SelectedOnBackOut: true
         KeepOpen: true

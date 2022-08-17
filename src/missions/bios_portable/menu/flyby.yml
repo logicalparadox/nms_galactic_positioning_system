@@ -26,7 +26,7 @@ Dialog:
         Cost: <%= Atlas.Cost('FRIG') %>
         DisplayCost: true
         # <% } %>
-        MarkInteractionComplete: true
+        MarkInteractionComplete: false
         EnablingConditionTest: AnyFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -40,7 +40,7 @@ Dialog:
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
         NextInteraction: <%= Atlas.Dialog('FLYBY_REQ2') %>
-        MarkInteractionComplete: true
+        MarkInteractionComplete: false
         SelectedOnBackOut: true
         KeepOpen: true
 
@@ -57,7 +57,7 @@ Dialog:
         Cost: <%= Atlas.Cost('FRIG') %>
         DisplayCost: true
         # <% } %>
-        MarkInteractionComplete: true
+        MarkInteractionComplete: false
         EnablingConditionTest: AnyFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -71,6 +71,6 @@ Dialog:
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
         NextInteraction: <%= Atlas.Dialog('UTIL') %>
-        MarkInteractionComplete: true
+        MarkInteractionComplete: false
         SelectedOnBackOut: true
         KeepOpen: true

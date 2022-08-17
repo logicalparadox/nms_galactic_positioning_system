@@ -22,6 +22,7 @@ Dialog:
             Level: 1
             Test: Equal
 
+      # tech enabled, normal ship
       - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
         NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
         Cost: <%= Atlas.Cost('TECHA') %>
@@ -32,16 +33,35 @@ Dialog:
             Stat: <%= Atlas.Stat('CFG_DONE') %>
             Level: 1
             Test: Equal
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
           - $: GcMissionConditionGroup
             ConditionTest: AnyTrue
             Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
               - $: GcMissionConditionHasShip
                 ShipType: Alien
 
+      # tech enabled, living ship
+      - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
+        NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
+        Cost: <%= Atlas.Cost('TECHC') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_DONE') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionHasShip
+            ShipType: Alien
+
+      # tech disabled
       - Name: <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>
         NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
         EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
@@ -50,15 +70,10 @@ Dialog:
             Stat: <%= Atlas.Stat('CFG_DONE') %>
             Level: 1
             Test: Equal
-          - $: GcMissionConditionGroup
-            ConditionTest: AllFalse
-            Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
-              - $: GcMissionConditionHasShip
-                ShipType: Alien
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 0
+            Test: Equal
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
         NextInteraction: <%= Atlas.Dialog('UTIL') %>
@@ -81,7 +96,7 @@ Dialog:
       # PLANETARY SWEEP
       #
 
-      # planetary sweep costs enabled in space
+      # planetary sweep tech costs enabled in atmo, normal ship
       - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
         NextInteraction: <%= Atlas.Dialog('RECON_REQ1') %>
         Cost: <%= Atlas.Cost('TECHA') %>
@@ -90,33 +105,45 @@ Dialog:
         EnablingConditions:
           - $: GcMissionConditionLocation
             MissionPlayerLocation: InShipInPlanetOrbit
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
           - $: GcMissionConditionGroup
             ConditionTest: AnyTrue
             Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
               - $: GcMissionConditionHasShip
                 ShipType: Alien
 
-      # planetary sweep costs disabled in space
+      # planetary sweep tech costs enabled in atmo, living ship
+      - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
+        NextInteraction: <%= Atlas.Dialog('RECON_REQ1') %>
+        Cost: <%= Atlas.Cost('TECHC') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInPlanetOrbit
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionHasShip
+            ShipType: Alien
+
+      # planetary sweep tech costs disabled in atmo
       - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
         NextInteraction: <%= Atlas.Dialog('RECON_REQ1') %>
         EnablingConditionTest: AnyFalse
         EnablingConditions:
           - $: GcMissionConditionLocation
             MissionPlayerLocation: InShipInPlanetOrbit
-          - $: GcMissionConditionGroup
-            ConditionTest: AllFalse
-            Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
-              - $: GcMissionConditionHasShip
-                ShipType: Alien
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 0
+            Test: Equal
 
+      # plantary sweep disable, not in atmo
       - Name: <%= Atlas.Mod.LocKey('MENU_SHIP_RECON') %>
         Cost: <%= Atlas.Cost('CONDA') %>
         DisplayCost: false
@@ -129,47 +156,64 @@ Dialog:
       # INTERSTELLAR SEARCH
       #
 
-      #
+      # tech costs enabled, normal ship
       - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
         NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
-        Cost: <%= Atlas.Cost('TECHA') %>
+        Cost: <%= Atlas.Cost('TECHB') %>
         DisplayCost: <%= Atlas.Config.ShowTechCost %>
         EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
         EnablingConditions:
           - $: GcMissionConditionLocation
             MissionPlayerLocation: InShipInSpace
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
           - $: GcMissionConditionGroup
             ConditionTest: AnyTrue
             Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
               - $: GcMissionConditionHasShip
                 ShipType: Alien
               - $: GcMissionConditionOnMultiplayerMission
               - $: GcMissionConditionOnOtherSideOfPortal
 
+      # tech costs enabled, alien ship
+      - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
+        NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
+        Cost: <%= Atlas.Cost('TECHC') %>
+        DisplayCost: <%= Atlas.Config.ShowTechCost %>
+        EnablingConditionTest: AnyFalse # if any false, this option will NOT be shown
+        EnablingConditions:
+          - $: GcMissionConditionLocation
+            MissionPlayerLocation: InShipInSpace
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 1
+            Test: Equal
+          - $: GcMissionConditionHasShip
+            ShipType: Alien
+          - $: GcMissionConditionGroup
+            ConditionTest: AnyTrue
+            Conditions:
+              - $: GcMissionConditionOnMultiplayerMission
+              - $: GcMissionConditionOnOtherSideOfPortal
+
+      # tech costs disabled, all ships
       - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
         NextInteraction: <%= Atlas.Dialog('PL_SCAN') %>
         EnablingConditionTest: AnyFalse
         EnablingConditions:
           - $: GcMissionConditionLocation
             MissionPlayerLocation: InShipInSpace
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_TECH') %>
+            Level: 0
+            Test: Equal
           - $: GcMissionConditionGroup
             ConditionTest: AnyTrue
             Conditions:
               - $: GcMissionConditionOnMultiplayerMission
               - $: GcMissionConditionOnOtherSideOfPortal
-          - $: GcMissionConditionGroup
-            ConditionTest: AllFalse
-            Conditions:
-              - $: GcMissionConditionStatLevel
-                Stat: <%= Atlas.Stat('CFG_TECH') %>
-                Level: 0
-                Test: Equal
-              - $: GcMissionConditionHasShip
-                ShipType: Alien
 
       - Name: <%= Atlas.Mod.LocKey('MENU_PQ_NAME') %>
         Cost: <%= Atlas.Cost('CONDB') %>

@@ -1,5 +1,5 @@
 LanguageKeys:
-  <%= Atlas.Mod.LocKey('GPS_INTRO_OSD') %>: GALACTIC POSITIONING SYSTEM
+  <%= Atlas.Mod.LocKey('GPS_INTRO_OSD') %>: GALACTIC POSITIONING SYSTEM <HIGHLIGHT>//<> <TRADE>ONLINE<>
 
   <%= Atlas.Mod.LocKey('MENU_OPT_INIT') %>: Initialize...
   <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>: Return...
@@ -13,6 +13,8 @@ LanguageKeys:
   <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>: Disable Scan Costs
   <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>: Enable Tech Requirements
   <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>: Disable Tech Requirements
+  <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_E') %>: Enable Chat Notifications
+  <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_D') %>: Disable Chat Notifications
 
   <%= Atlas.Mod.LocKey('MENU_SCAN_FAST') %>: Quick Scan...
   <%= Atlas.Mod.LocKey('MENU_SCAN_EXACT') %>: Focused Scan...

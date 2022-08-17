@@ -5,6 +5,7 @@ ScanEvents:
     EventStartType: Special
 
     # UI
+    AlwaysShow: true
     MessageAudio: VO_TUT_COORDSRECEIVED
     MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
     OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
@@ -12,13 +13,12 @@ ScanEvents:
 
     # Search Params
     BuildingLocation: PlanetSearch
-    ForceWideRandom: true
-    SolarSystemLocation: Near
+    SolarSystemLocation: LocalOrNear
     SolarSystemAttributes:
       # AllowUnsafeMatches: true
+      RequireUndiscovered: true
       NeedsPrimePlanet: true
       AnyInfestedBiome: true
-      RequireUndiscovered: true
       # NeverAllowAbandoned: true
       # NeverAllowEmpty: true
 

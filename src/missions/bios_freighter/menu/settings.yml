@@ -6,10 +6,10 @@ Dialog:
       - Commander, this freighter's <TECHNOLOGY>DEEP SPACE SCANNING<> system can now be reconfigured. What should be changed?
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_E') %>
-        $Text: Confirmed, scan costs set to ENABLED. Just a moment while the system reboots...
+        $Text: Confirmed, scan costs set to ENABLED. Anything else, Commander?
         IsAlien: true
-        MarkInteractionComplete: true
-        KeepOpen: false
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -24,13 +24,13 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 1
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>
-        $Text: Confirmed, scan costs set to DISABLED. Just a moment while the system reboots...
+        $Text: Confirmed, scan costs set to DISABLED. Anything else, Commander?
         IsAlien: true
-        MarkInteractionComplete: true
-        KeepOpen: false
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -45,13 +45,13 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 0
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>
-        $Text: Confirmed, technology requirements set to ENABLED. Just a moment while the system reboots...
+        $Text: Confirmed, technology requirements set to ENABLED. Anything else, Commander?
         IsAlien: true
-        MarkInteractionComplete: true
-        KeepOpen: false
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -66,13 +66,13 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 1
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>
-        $Text: Confirmed, technology requirements set to DISABLED. Just a moment while the system reboots...
+        $Text: Confirmed, technology requirements set to DISABLED. Anything else, Commander?
         IsAlien: true
-        MarkInteractionComplete: true
-        KeepOpen: false
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -87,7 +87,49 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 0
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_E') %>
+        $Text: Confirmed, chat notifications set to ENABLED. Anything else, Commander?
+        IsAlien: true
+        MarkInteractionComplete: false
+        KeepOpen: true
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CHT_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+                ModifyType: Set
+                Amount: 0
+          # - <%= Atlas.Reward('REBOOT') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_D') %>
+        $Text: Confirmed, chat notifications set to DISABLED. Anything else, Commander?
+        IsAlien: true
+        MarkInteractionComplete: false
+        KeepOpen: true
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CHT_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+                ModifyType: Set
+                Amount: 1
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
         NextInteraction: <%= Atlas.Config.HomeDialogId %>

@@ -44,8 +44,8 @@ LanguageKeys:
     - <TECHNOLOGY>Biome<> Pattern Query <HIGHLIGHT>//<> Immediate results expected <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
   <%= Atlas.Mod.LocKey('PR_DESC') %>:
     - <TECHNOLOGY>Resource<> Pattern Query <HIGHLIGHT>//<> Immediate results expected <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
-  # <%= Atlas.Mod.LocKey('PZ_DESC') %>:
-  #   - <SPECIAL>Complex<> Pattern Query <HIGHLIGHT>//<> <FUEL>ADVISORY<> ~ Immediate results unlikely <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
+  <%= Atlas.Mod.LocKey('PO_DESC') %>:
+    - <SPECIAL>Outlier<> Pattern Query <HIGHLIGHT>//<> <FUEL>ADVISORY<> ~ Immediate results unlikely <HIGHLIGHT>//<> Consult <STELLAR>Mission Log<> for details
 
   # <% Atlas.Config.DeepSpaceQuery.forEach((mission) => { %>
   <%= Atlas.Mod.LocKey(`PQ_${mission.ID}_MENU`) %>: '<%~ mission.Title %>'

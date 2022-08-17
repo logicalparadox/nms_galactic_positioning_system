@@ -76,7 +76,7 @@ Dialog:
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_CONFIG') %>
         NextInteraction: <%= Atlas.Dialog('CONFIG') %>
-        MarkInteractionComplete: true
+        MarkInteractionComplete: false
         KeepOpen: true
         EnablingConditionTest: AnyTrue
         EnablingConditions:

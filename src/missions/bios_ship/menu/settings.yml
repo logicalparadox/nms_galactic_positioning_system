@@ -4,9 +4,9 @@ Dialog:
       - 'Ship Scanner BIOS <HIGHLIGHT>//<> Select configuration task...'
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_E') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to ENABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -21,12 +21,12 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 1
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_COST_D') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Scan costs set to DISABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -41,12 +41,12 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_COST') %>
                 ModifyType: Set
                 Amount: 0
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_E') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to ENABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to ENABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -61,12 +61,12 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 1
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_TECH_D') %>
-        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to DISABLED <HIGHLIGHT>//<> Rebooting...
-        MarkInteractionComplete: true
-        KeepOpen: false
+        $Text: Ship Scanner BIOS <HIGHLIGHT>//<> Tech Requirements set to DISABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
         EnablingConditionTest: AllFalse
         EnablingConditions:
           - $: GcMissionConditionStatLevel
@@ -81,7 +81,47 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_TECH') %>
                 ModifyType: Set
                 Amount: 0
-          - <%= Atlas.Reward('REBOOT') %>
+          # - <%= Atlas.Reward('REBOOT') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_E') %>
+        $Text: Deep Space Scanning <HIGHLIGHT>//<> Chat notifications set to ENABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+            Level: 1
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CHT_ON') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+                ModifyType: Set
+                Amount: 0
+          # - <%= Atlas.Reward('REBOOT') %>
+
+      - Name: <%= Atlas.Mod.LocKey('MENU_CONFIG_CHAT_D') %>
+        $Text: Deep Space Scanning <HIGHLIGHT>//<> Chat notifications set to DISABLED
+        MarkInteractionComplete: false
+        KeepOpen: true
+        EnablingConditionTest: AllFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+            Level: 0
+            Test: Equal
+        Rewards:
+          - Id: <%= Atlas.Reward('CHT_OFF') %>
+            RewardChoice: GiveAll
+            List:
+              - $: GcRewardModifyStat
+                Stat: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+                ModifyType: Set
+                Amount: 1
+          # - <%= Atlas.Reward('REBOOT') %>
 
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
         NextInteraction: <%= Atlas.Dialog('UTIL') %>

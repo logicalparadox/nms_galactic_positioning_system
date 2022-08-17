@@ -117,17 +117,11 @@ Dialog:
   # <% Object.keys(queryTypes).forEach((typeKey) => { %>
   # <% let menuKey = queryTypes[typeKey]; %>
   # <% let queryList = Atlas.Config.DeepSpaceQuery.filter((r) => r.$ === typeKey); %>
-  # <% if (queryList.length === 0) return; // exit forEach %>
-  # <% let pageCount = Math.ceil(queryList.length / 3); %>
-
-  # <% for (let p = 1; p <= pageCount; p++) { %>
-  - Id: <%= Atlas.Dialog(`P${menuKey}_P${p}`) %>
+  # <% Atlas.Tools.Paginate(queryList, 3, (items, page, totalPages) => { %>
+  - Id: <%= Atlas.Dialog(`P${menuKey}_P${page}`) %>
     Text: <%= Atlas.Mod.LocKey(`P${menuKey}_DESC`) %>
     Options:
-      # <% let idx = (p - 1) * 3; %>
-      # <% for (let i = 0; i < 3; i++) { %>
-      # <% if (idx >= queryList.length) break; %>
-      # <% const meta = queryList[idx]; %>
+      # <% items.forEach((meta) => { %>
 
       # cost not active
       - Name: <%= Atlas.Mod.LocKey(`PQ_${meta.ID}_MENU`) %>
@@ -172,18 +166,17 @@ Dialog:
           - $: GcMissionConditionIsMissionInProgress
             MissionID: <%= meta.MissionID %>
 
-      # <% idx++; %>
-      # <% } // end for i (idx of page) %>
+      # <% }); // end items for each %>
       #
-      # <% if (p === pageCount) { %>
+      # <% if (page === totalPages) { %>
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
         NextInteraction: <%= Atlas.Dialog(queryHome[menuKey]) %>
         # <% } else { %>
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
-        NextInteraction: <%= Atlas.Dialog(`P${menuKey}_P${p + 1}`) %>
+        NextInteraction: <%= Atlas.Dialog(`P${menuKey}_P${page + 1}`) %>
         # <% } %>
         MarkInteractionComplete: true
         SelectedOnBackOut: true
         KeepOpen: true
-  # <% } // end for pageCount %>
+  # <% }); // end paginate %>
   # <% }); // end forEach queryType %>

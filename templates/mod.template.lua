@@ -83,7 +83,8 @@ NMS_MOD_DEFINITION_CONTAINER = {
   -- Injected Tables<% env.tables.forEach((table) => { %>
   {["MBIN_FILE_SOURCE"] = "<%= table.MBIN_FILE_SOURCE %>",
   ["EXML_CHANGE_TABLE"] = {
-    {["LINE_OFFSET"] = 0,
+    {["LINE_OFFSET"] = -1,
+    ["REPLACE_TYPE"] = "ADDafterSECTION",
     --<% if (table.SPECIAL_KEY_WORDS.length) { %>
     ["SPECIAL_KEY_WORDS"] = {
       --<% table.SPECIAL_KEY_WORDS.forEach((key) => { %>

@@ -6,8 +6,8 @@ Mod:
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 2.0.1
-  GameVersion: 3.97
+  Version: 2.1.0
+  GameVersion: 3.99
   Language: English
   Metadata:
     Name: ALCH_SCAN
@@ -51,7 +51,7 @@ Missions:
       Name: ALCH_BIOS_PORT
       ID: ALSCPB
     Config:
-      HomeDialogId: SIGNALSCANNER
+      HomeDialogId: D_ALSCPB_HOME
       QuickScanGroup: Portable
       QuickDoAerialScan: true
       Bios:
@@ -100,6 +100,11 @@ Missions:
       Bios:
         IsAlienText: true
         TranslationBrackets: true
+
+  - Source: ./src/missions/deep_space_queries/retry_notification_guide.yml
+    Metadata:
+      Name: ALCH_SCAN_TASK
+      ID: ALSCTK
 
   #
   # COMMON PLANETARY QUERIES
@@ -218,12 +223,26 @@ Missions:
   # PLANET OUTLIERS
   #
 
-  - Source: ./src/missions/deep_space_queries/planet_outlier/prime_infested.yml
+  - Source: ./src/missions/deep_space_queries/planet_outlier/debutante.yml
     Archetypes:
       - PlanetaryExpedition
     Metadata:
       Name: ALCH_SCAN_OA
       ID: ALSCOA
+
+  - Source: ./src/missions/deep_space_queries/planet_outlier/reckoner.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_OB
+      ID: ALSCOB
+
+  - Source: ./src/missions/deep_space_queries/planet_outlier/voices.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_OC
+      ID: ALSCOC
 
   #
   # GENERIC SYSTEM

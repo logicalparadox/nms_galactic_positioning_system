@@ -51,14 +51,27 @@ Costs:
 
   # UI Elements
   - Id: <%= Atlas.Cost('TECHA') %>
+    MustAffordInCreative: true
+    HideCostStringIfCanAfford: true
     Cost:
       $: GcCostInstalledTech
       Id: SHIPSCAN_COMBAT
       InventoryToCheck: Ship
+
   - Id: <%= Atlas.Cost('TECHB') %>
+    MustAffordInCreative: true
+    HideCostStringIfCanAfford: true
     Cost:
       $: GcCostInstalledTech
       Id: SHIPSCAN_ECON
+      InventoryToCheck: Ship
+
+  - Id: <%= Atlas.Cost('TECHC') %>
+    MustAffordInCreative: true
+    HideCostStringIfCanAfford: true
+    Cost:
+      $: GcCostInstalledTech
+      Id: SHIPSCAN_ALIEN
       InventoryToCheck: Ship
 
   # Mission Conditions

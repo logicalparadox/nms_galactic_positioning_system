@@ -8,6 +8,7 @@ Dialog:
         $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         Rewards:
           - Id: <%= Atlas.Reward('CFG_A') %>
             RewardChoice: GiveAll
@@ -24,10 +25,12 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_PASS') %>
                 ModifyType: Set
                 Amount: 1
+          - <%= Atlas.Mod.Reward('GPS_HI') %>
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
         $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
         Rewards:
           - Id: <%= Atlas.Reward('CFG_B') %>
             RewardChoice: GiveAll
@@ -44,3 +47,4 @@ Dialog:
                 Stat: <%= Atlas.Stat('CFG_PASS') %>
                 ModifyType: Set
                 Amount: 0
+          - <%= Atlas.Mod.Reward('GPS_HI') %>

@@ -148,9 +148,25 @@ DeepSpaceQuery:
   - $: PlanetOutlierQuery
     MissionID: ALCH_SCAN_OA
     ID: OA
-    Title: Prime Infested
+    Title: Prime Lush
+    Description: Lush Biome ~ Prime Variant ~ Overgrown Flora ~ Abundant Fauna ~ Passive Sentinels
+    PlanetTitle: Prime Lush ~ Debutante
+    Cost: LG
+
+  - $: PlanetOutlierQuery
+    MissionID: ALCH_SCAN_OB
+    ID: OB
+    Title: Prime Volcanic
+    Description: Volcanic Biome ~ Prime Variant ~ Extreme Weather Patterns
+    PlanetTitle: Prime Volcanic ~ Reckoner
+    Cost: MD
+
+  - $: PlanetOutlierQuery
+    MissionID: ALCH_SCAN_OC
+    ID: OC
+    Title: Prime Infestation
     Description: Any Infested Biome ~ Prime Variant
-    PlanetTitle: Prime Infestation Detected
+    PlanetTitle: Prime Infestation ~ Voices
     Cost: MD
 
   #
@@ -170,7 +186,7 @@ DeepSpaceQuery:
     MissionID: ALCH_SCAN_GB
     ID: GB
     Title: Wealthy Economy
-    Description: Populated Wealthy System ~ Undiscovered Planets ~ Biome Not Wierd or Dead ~ Low Sentinel Presence
+    Description: Populated Wealthy System ~ Undiscovered Planets
     PlanetTitle: Wealthy Economy Detected
     Cost: LG
     IsSystemTarget: true

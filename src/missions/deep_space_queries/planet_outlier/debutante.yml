@@ -1,11 +1,11 @@
-# <% const ScanMeta = Atlas.Config.PlanetQuery.Complex.find((s) => s.MissionID === Atlas.Metadata.Name); %>
+# <% const ScanMeta = Atlas.Config.DeepSpaceQuery.find((s) => s.MissionID === Atlas.Metadata.Name); %>
 
 ScanEvents:
   - Name: <%= Atlas.ScanEvent('QRY') %>
     EventStartType: Special
-    EventEndType: Proximity
 
     # UI
+    AlwaysShow: true
     MessageAudio: VO_TUT_COORDSRECEIVED
     MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
     OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
@@ -13,15 +13,23 @@ ScanEvents:
 
     # Search Params
     BuildingLocation: PlanetSearch
-    # ForceWideRandom: true
     SolarSystemLocation: LocalOrNear
     SolarSystemAttributes:
-      AllowUnsafeMatches: true
       RequireUndiscovered: true
+      NeverAllowExtremeSentinelPlanet: true
+      NeverAllowEmpty: true
+      NeverAllowAbandoned: true
+      NeedsPrimePlanet: true
       NeedsBiome: true
-      NeedsBiomeType: Weird
+      NeedsBiomeType: Lush
+      UseBiomeSubType: HugeLush
+      # NeedsWaterPlanet: true
+      SuitableForCreatureDiscovery: true
+      #UseWealth: true
+      #WealthClass: Wealthy
 
 Mission:
+  $Table: NPCMISSIONTABLE
   MissionID: <%= Atlas.Metadata.Name %>
 
   MissionTitles:
@@ -31,9 +39,18 @@ Mission:
     Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_DESC`) %>
 
   Stages:
-    - _import: ../stages/00_StageWrapper.yml
+    - $: GxMissionSequenceImport
+      Source: ../stage_scan_retry_loop.yml
       Metadata:
-        Name: WRAP
+        Name: LOOP
         ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>
+
+    - $: GxMissionSequenceImport
+      Source: ../stage_planet_query.yml
+      Metadata:
+        Name: FIND
+        ID: '01'
       Config:
         ScanEvent: <%= Atlas.ScanEvent('QRY') %>

@@ -1,3 +1,7 @@
+StatDefinitions:
+  - Id: <%= Atlas.Mod.Stat('CFG_CHAT') %>
+    TrackType: Set
+
 Rewards:
   # <% Atlas.Config.ScanEventTable.forEach((event) => { %>
   - Id: <%= Atlas.Mod.Reward(`${event.ID}_N`) %>

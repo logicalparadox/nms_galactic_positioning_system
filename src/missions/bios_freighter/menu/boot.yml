@@ -7,10 +7,11 @@ Dialog:
     Options:
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
         $Text:
-          - Confirmed, immersive mode ENABLED for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system.
-          - Come see me when you would like to begin a <TECHNOLOGY>DEEP SPACE QUERY<> or want to modify the configuration in greater detail.
-        MarkInteractionComplete: true
-        KeepOpen: false
+          - Confirmed, immersive mode <TRADE>ENABLED<> for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system. The enhanced scanning interface is now <TRADE>ONLINE<>.
+        IsAlien: true
+        MarkInteractionComplete: false
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('HOME') %>
         Rewards:
           - Id: <%= Atlas.Reward('CFG_A') %>
             RewardChoice: GiveAll
@@ -29,10 +30,11 @@ Dialog:
                 Amount: 1
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
         $Text:
-          - Confirmed, immersive mode <FUEL>DISABLED<> for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system.
-          - Come see me when you would like to begin a <TECHNOLOGY>DEEP SPACE QUERY<> or want to modify the configuration in greater detail.
-        MarkInteractionComplete: true
-        KeepOpen: false
+          - Confirmed, immersive mode <FUEL>DISABLED<> for freighter <TECHNOLOGY>DEEP SPACE SCANNING<> system. The enhanced scanning interface is now <TRADE>ONLINE<>.
+        IsAlien: true
+        MarkInteractionComplete: false
+        KeepOpen: true
+        NextInteraction: <%= Atlas.Dialog('HOME') %>
         Rewards:
           - Id: <%= Atlas.Reward('CFG_B') %>
             RewardChoice: GiveAll

@@ -10,5 +10,5 @@ Include:
 
 StatusMessageDefinitions:
   - Id: <%= Atlas.Mod.Prefix('CHAT') %>
-    DisplayDurationMultiplier: 0.2
+    DisplayDurationMultiplier: 0.15
     # MissionMarkup: Discover
