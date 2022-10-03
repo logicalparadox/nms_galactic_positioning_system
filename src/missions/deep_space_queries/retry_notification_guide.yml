@@ -1,5 +1,5 @@
 LanguageKeys:
-  <%= Atlas.LocKey('NOTIF') %>: '<TECHNOLOGY>[ System Notification ]<>: <SPECIAL>Deep Space Query<> <HIGHLIGHT>//<> <TITLE>Nearby systems scanned, some queries still<> {{ PENDING MATCH }} <HIGHLIGHT>//<> <TITLE>Hybernating...<>'
+  <%= Atlas.LocKey('NOTIF') %>: '<TECHNOLOGY>[ System Notification ]<>: <SPECIAL>Deep Space Query<> <HIGHLIGHT>//<> <TITLE>Nearby systems scanned, some queries still<> {{ PENDING MATCH }} <HIGHLIGHT>//<> <TITLE>Hibernating...<>'
 
 Mission:
   $Table: ENABLINGCONDITIONSTABLE

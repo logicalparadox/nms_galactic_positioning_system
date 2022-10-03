@@ -134,6 +134,14 @@ DeepSpaceQuery:
     ResourceHint: UI_SCRAP_HINT
 
   - $: PlanetResourceQuery
+    MissionID: ALCH_SCAN_RD
+    ID: RD
+    Title: Storm Crystals
+    Description: Storm Crystals
+    PlanetTitle: Storm Crystals Detected
+    Cost: SM
+
+  - $: PlanetResourceQuery
     MissionID: ALCH_SCAN_RC
     ID: RC
     Title: Abundant Fauna

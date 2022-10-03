@@ -219,6 +219,12 @@ Missions:
       Name: ALCH_SCAN_RC
       ID: ALSCRC
 
+  - Source: ./src/missions/deep_space_queries/bespoke/planet_extreme_weather.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RD
+      ID: ALSCRD
   #
   # PLANET OUTLIERS
   #

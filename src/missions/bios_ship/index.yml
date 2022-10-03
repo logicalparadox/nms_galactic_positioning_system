@@ -117,6 +117,13 @@ Mission:
   MissionIconSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.ON.DDS
   MissionIconNotSelected: TEXTURES/UI/FRONTEND/ICONS/MISSIONS/MISSION.SHIP.OFF.DDS
 
+  StartConditionTest: AllFalse
+  StartingConditions:
+    - $: GcMissionConditionLocation
+      MissionPlayerLocation: InShipInPlanetOrbit
+    - $: GcMissionConditionLocation
+      MissionPlayerLocation: InShipInSpace
+
   Stages:
     - $: GcMissionSequenceGroup
       Silent: true
