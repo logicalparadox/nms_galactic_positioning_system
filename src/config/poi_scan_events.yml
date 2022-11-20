@@ -13,7 +13,7 @@ ScanEventTable:
 
   - Name: DAMAGEDMACHINE
     ID: DPOD
-    Cost: DP
+    Cost: SM
     ScanEvent:
       BuildingClass: DamagedMachine
 

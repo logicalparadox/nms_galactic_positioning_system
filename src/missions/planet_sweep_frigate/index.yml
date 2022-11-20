@@ -29,7 +29,7 @@ Rewards:
     List:
       - $: GcRewardSendChatMessage
         $PercentageChance: 100
-        StatusMessageID: <%= Atlas.Mod.Prefix('CHAT') %>
+        StatusMessageId: <%= Atlas.Mod.Prefix('CHAT') %>
         CustomText: <%= Atlas.LocKey('CHAT_START_1') %>
 
   - Id: <%= Atlas.Reward('FLY_CE') %>
@@ -37,7 +37,7 @@ Rewards:
     List:
       - $: GcRewardSendChatMessage
         $PercentageChance: 100
-        StatusMessageID: <%= Atlas.Mod.Prefix('CHAT') %>
+        StatusMessageId: <%= Atlas.Mod.Prefix('CHAT') %>
         CustomText: <%= Atlas.LocKey('CHAT_END_1') %>
 
   # end the flyby before the timer has completed

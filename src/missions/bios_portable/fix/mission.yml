@@ -1,0 +1,42 @@
+StatDefinitions:
+  - Id: <%= Atlas.Mod.Stat('PORT_FIX') %>
+    TrackType: Set
+
+Mission:
+  $Table: ENABLINGCONDITIONSTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+  AutoStart: None
+  MissionClass: Guide
+
+  Stages:
+    # give a few ticks for menu to start close animation and stat to change
+    - $: GcMissionSequenceWait
+      Time: 0.25
+
+    - $: GcMissionSequenceGroup
+      Silent: true
+      ConditionTest: AnyTrue
+      Conditions:
+        - $: GcMissionConditionMissionMessage
+          Message: <%= Atlas.Message('END') %>
+      Stages:
+        # <% Atlas.Config.ScanEventTable.forEach((event, i) => { %>
+        - $: GcMissionSequenceGroup
+          Silent: true
+          ConditionTest: AnyFalse # if any false, skip this group
+          Conditions:
+            - $: GcMissionConditionStatLevel
+              Stat: <%= Atlas.Mod.Stat('PORT_FIX') %>
+              Level: <%= i %>
+              Test: Equal
+          Stages:
+            - $: GcMissionSequenceReward
+              Reward: <%= Atlas.Mod.Reward(`${event.ID}_S`) %>
+              Silent: true
+
+            - $: GcMissionSequenceBroadcastMessage
+              MessageID: <%= Atlas.Message('END') %>
+
+            - $: GcMissionSequenceWait
+              Time: 1
+        # <% }); %>

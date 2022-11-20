@@ -1,0 +1,11 @@
+Rewards:
+  # <% Atlas.Config.ScanEventTable.forEach((event, i) => { %>
+  - Id: <%= Atlas.Reward(`FIX_${i}`) %>
+    List:
+      - $: GcRewardModifyStat
+        Stat: <%= Atlas.Mod.Stat('PORT_FIX') %>
+        ModifyType: Set
+        Amount: <%= i %>
+      - $: GcRewardMissionSeeded
+        Mission: <%= Atlas.Config.BiosPortFixRef %>
+  # <% }); %>

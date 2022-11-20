@@ -6,8 +6,8 @@ Mod:
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 2.1.0
-  GameVersion: 3.99
+  Version: 2.3.0
+  GameVersion: 4.06
   Language: English
   Metadata:
     Name: ALCH_SCAN
@@ -15,6 +15,9 @@ Mod:
   Templates:
     ModLua: ./templates/mod.template.lua
 
+# 1 ~ Load all config files
+# Files are loaded and deeply merged in the order specified.
+# NOTE: arrays are concatenated, not replaced
 ConfigSources:
   - ./src/config/poi_scan_events.yml
   - ./src/config/poi_quick_groups.yml
@@ -22,11 +25,18 @@ ConfigSources:
   - ./src/config/deep_space_query.yml
   - ./src/config/freighter_navigator_dialog.yml
 
+# 2 ~ A few local config overwrites, merged after ConfigSources
 Config:
   FlybyMission: ALCH_FLYBY_PORT
   ReconMissionFrig: ALCH_FLYBY_PORT
   ReconMissionShip: ALCH_RECON_SHIP
+  BiosPortFixRef: ALCH_PORT_FIX
 
+# 3 ~ Mission Archetypes
+# Reusable foundation layers for mission instructions.
+# Values are used as defaults when applied to a mission.
+# Primarily used when missions share prose (title, desc, icons, etc)
+# Archetypes cannot include rewards, costs, stages, scan events.
 MissionArchetypes:
   PlanetaryExpedition:
     Source: ./src/archetypes/deep_space_query.yml
@@ -34,19 +44,16 @@ MissionArchetypes:
       Name: ALCH_PLANET_EXP
       ID: ALSCPE
 
-GenericTables:
-  - Source: ./src/generics/index.yml
+Build:
+  - $: IncludeGeneric
+    Source: ./src/generics/index.yml
     Metadata:
       Name: ALCH_SCAN
       ID: ALSCAN
 
-Missions:
-  #
-  # Core Features
-  #
-
   # Signal Scanner Dialog Override
-  - Source: ./src/missions/bios_portable/index.yml
+  - $: IncludeMission
+    Source: ./src/missions/bios_portable/index.yml
     Metadata:
       Name: ALCH_BIOS_PORT
       ID: ALSCPB
@@ -60,7 +67,8 @@ Missions:
         TranslationBrackets: false
 
   # Ship Mission
-  - Source: ./src/missions/bios_ship/index.yml
+  - $: IncludeMission
+    Source: ./src/missions/bios_ship/index.yml
     Metadata:
       Name: ALCH_BIOS_SHIP
       ID: ALSCSB
@@ -73,21 +81,30 @@ Missions:
         IsAlienText: false
 
   # Ship Signal Sweep
-  - Source: ./src/missions/planet_sweep_ship/index.yml
+  - $: IncludeMission
+    Source: ./src/missions/planet_sweep_ship/index.yml
     Metadata:
       Name: ALCH_RECON_SHIP
       ID: ALSCFS
 
   # Frigate Deployment Mission
-  - Source: ./src/missions/planet_sweep_frigate/index.yml
+  - $: IncludeMission
+    Source: ./src/missions/planet_sweep_frigate/index.yml
     Metadata:
       Name: ALCH_FLYBY_PORT
       ID: ALSCFP
     Config:
       FrigateFlybyType: AmbientGroup
 
+  - $: IncludeMission
+    Source: ./src/missions/bios_portable/fix/mission.yml
+    Metadata:
+      Name: ALCH_PORT_FIX
+      ID: ALPBFX
+
   # freighter navigator deep space scanning
-  - Source: ./src/missions/bios_freighter/index.yml
+  - $: IncludeMission
+    Source: ./src/missions/bios_freighter/index.yml
     Metadata:
       Name: ALCH_BIOS_FREI
       ID: ALSCFB
@@ -101,11 +118,13 @@ Missions:
         IsAlienText: true
         TranslationBrackets: true
 
-  - Source: ./src/missions/deep_space_queries/retry_notification_guide.yml
+  - $: IncludeMission
+    Source: ./src/missions/deep_space_queries/retry_notification_guide.yml
     Metadata:
       Name: ALCH_SCAN_TASK
       ID: ALSCTK
 
+Missions:
   #
   # COMMON PLANETARY QUERIES
   #
@@ -225,6 +244,7 @@ Missions:
     Metadata:
       Name: ALCH_SCAN_RD
       ID: ALSCRD
+
   #
   # PLANET OUTLIERS
   #
@@ -249,6 +269,13 @@ Missions:
     Metadata:
       Name: ALCH_SCAN_OC
       ID: ALSCOC
+
+  - Source: ./src/missions/deep_space_queries/planet_outlier/citizens.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_OD
+      ID: ALSCOD
 
   #
   # GENERIC SYSTEM
@@ -278,53 +305,3 @@ Missions:
   #   Metadata:
   #     Name: ALCH_SCAN_TA
   #     ID: ALSCTA
-
-  # - Source: ./src/PlanetQuery/complex/Debutante.yml
-  #   Archetypes:
-  #     - PlanetaryExpedition
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Metadata:
-  #     Name: ALCH_SCAN_ZA
-  #     ID: ALSCZA
-  #     Table: NPCMISSIONTABLE
-
-  # - Source: ./src/PlanetQuery/complex/Reckoner.yml
-  #   Archetypes:
-  #     - PlanetaryExpedition
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Metadata:
-  #     Name: ALCH_SCAN_ZB
-  #     ID: ALSCZB
-  #     Table: NPCMISSIONTABLE
-
-  # - Source: ./src/PlanetQuery/complex/Voices.yml
-  #   Archetypes:
-  #     - PlanetaryExpedition
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Metadata:
-  #     Name: ALCH_SCAN_ZC
-  #     ID: ALSCZC
-  #     Table: NPCMISSIONTABLE
-
-  # - Source: ./src/PlanetQuery/complex/TradeTestA.yml
-  #   Archetypes:
-  #     - PlanetaryExpedition
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Metadata:
-  #     Name: ALCH_SCAN_ZD
-  #     ID: ALSCZD
-  #     Table: NPCMISSIONTABLE
-
-  # - Source: ./src/PlanetQuery/complex/TradeTestB.yml
-  #   Archetypes:
-  #     - PlanetaryExpedition
-  #   ConfigSources:
-  #     - ./src/global/ScanEventsConfig.yml
-  #   Metadata:
-  #     Name: ALCH_SCAN_ZE
-  #     ID: ALSCZE
-  #     Table: NPCMISSIONTABLE

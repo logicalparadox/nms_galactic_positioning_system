@@ -2,8 +2,11 @@ Include:
   - ./menu/home.yml
   - ./menu/boot.yml
   - ./menu/settings.yml
-  - ../../shared/menu_quick_poi.yml
-  - ../../shared/menu_exact_poi.yml
+  - ./fix/rewards.yml
+  - ./fix/menu_quick_poi.yml
+  - ./fix/menu_exact_poi.yml
+  # - ../../shared/menu_quick_poi.yml
+  # - ../../shared/menu_exact_poi.yml
   - ./menu/flyby.yml
 
 StatDefinitions:

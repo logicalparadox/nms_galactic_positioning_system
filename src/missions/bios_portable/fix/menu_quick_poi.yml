@@ -1,0 +1,38 @@
+Dialog:
+  # <% const scanKeys = Atlas.Config.QuickScanGroups[Atlas.Config.QuickScanGroup]; %>
+  # <% Atlas.Tools.Paginate(scanKeys, 3, (items, p, t) => { %>
+  - Id: <%= Atlas.Dialog(`FAST_P${p}`) %>
+    Text: <%= Atlas.Mod.LocKey('SCAN_FAST_DESC') %>
+    Options:
+      # <% items.forEach((item) => { %>
+      # <% const event = Atlas.Config.ScanEventTable.find((se) => se.ID === item); %>
+      # <% const idx = Atlas.Config.ScanEventTable.indexOf(event); %>
+      # <% ;[true, false].forEach((useCost) => { %>
+      - Name: '<%= event.Menu || `BUILDING_${event.Name}_L` %>'
+        # <% if (useCost) { %>
+        Cost: <%= Atlas.Mod.Cost(event.Cost || 'SM') %>
+        DisplayCost: true
+        # <% } %>
+        MarkInteractionComplete: true
+        KeepOpen: false
+        EnablingConditionTest: AnyFalse
+        EnablingConditions:
+          - $: GcMissionConditionStatLevel
+            Stat: <%= Atlas.Stat('CFG_COST') %>
+            Level: '<%= (useCost ? 1 : 0) %>'
+            Test: Equal
+        Rewards:
+          - <%= Atlas.Reward(`FIX_${idx}`) %>
+      # <% }); // end useCost %>
+      # <% }); // end item loop %>
+      # <% if (p === t) { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>
+        # <% } else { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog(`FAST_P${p + 1}`) %>
+        # <% } %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+  # <% }); %>

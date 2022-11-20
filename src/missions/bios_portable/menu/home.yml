@@ -159,6 +159,16 @@ Dialog:
   - Id: <%= Atlas.Dialog('UTIL') %>
     TextAlien: <%= Atlas.LocKey('MENU_HOME_DESC') %>
     Options:
+      - Name: UI_SIGNAL_NEAREST_OPT
+        Text: UI_SIGNAL_NEAREST_RES
+        Cost: C_ALLOWSCAN
+        DisplayCost: true
+        MarkInteractionComplete: true
+        KeepOpen: false
+        Rewards:
+          - NEAR_SCAN
+          - R_MSG_NEAR_SCAN
+
       - Name: <%= Atlas.Mod.LocKey('MENU_FLEET_RECON') %>
         $Text: Connecting to Fleet...
         NextInteraction: <%= Atlas.Dialog('FLYBY_REQ1') %>

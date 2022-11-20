@@ -20,9 +20,11 @@ local navigatorDialog = [[        <Property value="GcAlienPuzzleOption.xml">
           <Property name="Mood" value="GcAlienMood.xml">
             <Property name="Mood" value="Neutral"/>
           </Property>
-          <Property name="Prop" value="GcNPCPropTypes.xml">
+          <Property name="Prop" value="GcNPCPropType.xml">
             <Property name="NPCProp" value="HoloSolarSystem"/>
           </Property>
+          <Property name="OverrideWithAlienWord" value="False" />
+          <Property name="ReseedInteractionOnUse" value="False" />
           <Property name="KeepOpen" value="True"/>
           <Property name="DisplayCost" value="True"/>
           <Property name="TruncateCost" value="False"/>
@@ -39,7 +41,7 @@ local navigatorDialog = [[        <Property value="GcAlienPuzzleOption.xml">
           <Property name="EnablingConditions"/>
           <Property name="EnablingConditionId" value=""/>
           <Property name="WordCategory" value="GcWordCategoryTableEnum.xml">
-            <Property name="gcwordcategorytableEnum" value="MISC"/>
+            <Property name="wordcategorytableEnum" value="MISC"/>
           </Property>
         </Property>]]
 

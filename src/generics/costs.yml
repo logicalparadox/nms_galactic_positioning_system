@@ -1,9 +1,4 @@
 Costs:
-  - Id: <%= Atlas.Mod.Cost('DP') %>
-    Cost:
-      $: GcCostProduct
-      Id: NAV_DATA_DROP
-      Amount: 1
   - Id: <%= Atlas.Mod.Cost('XS') %>
     Cost:
       $: GcCostProduct
@@ -13,36 +8,36 @@ Costs:
     Cost:
       $: GcCostProduct
       Id: NAV_DATA
-      Amount: 2
+      Amount: 1
   - Id: <%= Atlas.Mod.Cost('MD') %>
     Cost:
       $: GcCostProduct
       Id: NAV_DATA
-      Amount: 3
+      Amount: 2
   - Id: <%= Atlas.Mod.Cost('LG') %>
     Cost:
       $: GcCostProduct
       Id: NAV_DATA
-      Amount: 4
+      Amount: 3
 
   # Planet Query
   - Id: <%= Atlas.Mod.Cost('PQSM') %>
     Cost:
       $: GcCostProduct
       Id: POI_LOCATOR
-      Amount: 2
+      Amount: 1
   - Id: <%= Atlas.Mod.Cost('PQMD') %>
     Cost:
       $: GcCostProduct
       Id: POI_LOCATOR
-      Amount: 3
+      Amount: 2
   - Id: <%= Atlas.Mod.Cost('PQLG') %>
     Cost:
       $: GcCostProduct
       Id: POI_LOCATOR
-      Amount: 5
+      Amount: 3
   - Id: <%= Atlas.Mod.Cost('PQCX') %>
     Cost:
       $: GcCostProduct
       Id: POI_LOCATOR
-      Amount: 8
+      Amount: 4

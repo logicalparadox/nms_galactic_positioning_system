@@ -4,7 +4,7 @@ Dialog:
       - Signal Scanner BIOS <HIGHLIGHT>//<> Configuration Required <HIGHLIGHT>//<> Starting configuration wizard...
       - <STELLAR>IMMERSIVE MODE<> <HIGHLIGHT>//<> Scans require Navigation Data <HIGHLIGHT>//<> Exact target scan requires Atlas Pass <HIGHLIGHT>//<> Enable immersive mode?
     Options:
-      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_YES') %>
+      - $Name: Enable Immersive Mode
         $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode ENABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
@@ -26,7 +26,7 @@ Dialog:
                 ModifyType: Set
                 Amount: 1
           - <%= Atlas.Mod.Reward('GPS_HI') %>
-      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NO') %>
+      - $Name: Disable Immersive Mode
         $Text: Signal Scanner BIOS <HIGHLIGHT>//<> Immersive mode DISABLED <HIGHLIGHT>//<> Rebooting...
         MarkInteractionComplete: true
         KeepOpen: false
@@ -48,3 +48,5 @@ Dialog:
                 ModifyType: Set
                 Amount: 0
           - <%= Atlas.Mod.Reward('GPS_HI') %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_BACK') %>
+        NextInteraction: <%= Atlas.Config.HomeDialogId %>

@@ -177,6 +177,14 @@ DeepSpaceQuery:
     PlanetTitle: Prime Infestation ~ Voices
     Cost: MD
 
+  - $: PlanetOutlierQuery
+    MissionID: ALCH_SCAN_OD
+    ID: OD
+    Title: Wealthy Lush
+    Description: Wealthy System ~ Lush Biome ~ Overgrown Flora ~ Abundant Fauna ~ Passive Sentinels
+    PlanetTitle: Wealthy Lush ~ Citizens
+    Cost: SM
+
   #
   # System Generic
   #

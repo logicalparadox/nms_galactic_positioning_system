@@ -5,8 +5,9 @@ StatDefinitions:
 Rewards:
   # <% Atlas.Config.ScanEventTable.forEach((event) => { %>
   - Id: <%= Atlas.Mod.Reward(`${event.ID}_N`) %>
+    $RewardTable: SpecialRewardTable
     # RewardChoice: SelectAlwaysSilent
-    RewardChoice: SelectFromSuccessSilent
+    RewardChoice: SelectAlwaysSilent
     List:
       - $: GcRewardScanEvent
         Event: <%= Atlas.Mod.ScanEvent(`${event.ID}`) %>
@@ -14,7 +15,8 @@ Rewards:
         ScanEventTable: Planet
 
   - Id: <%= Atlas.Mod.Reward(`${event.ID}_S`) %>
-    RewardChoice: SelectFromSuccessSilent
+    $RewardTable: SpecialRewardTable
+    RewardChoice: SelectAlwaysSilent
     List:
       - $: GcRewardScanEvent
         Event: <%= Atlas.Mod.ScanEvent(`${event.ID}`) %>
@@ -23,8 +25,8 @@ Rewards:
   # <% }); %>
 
   - Id: <%= Atlas.Mod.Reward('GPS_HI') %>
-    # RewardChoice: SelectAlwaysSilent
-    RewardChoice: SelectFromSuccessSilent
+    $RewardTable: SpecialRewardTable
+    RewardChoice: SelectAlwaysSilent
     List:
       - $: GcRewardScanEvent
         Event: <%= Atlas.Mod.ScanEvent('GPS_INTRO') %>
