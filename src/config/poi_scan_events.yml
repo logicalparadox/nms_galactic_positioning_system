@@ -194,6 +194,30 @@ ScanEventTable:
       OSDMessage: UI_DRONEHIVE_LOCATED_OSD
       TooltipMessage: UI_DRONEHIVE_LOCATED
 
+  # 4.20
+  - Name: SENTCRASH
+    ID: DRCS
+    Cost: MD
+    OmitFromSignalSweep: true
+    Menu: UI_SENTINEL_CRASH_MARKER
+    ScanEvent:
+      BuildingClass: SentinelDistressSignal
+      OSDMessage: UI_CRASH_REVEAL_OSD
+      MarkerLabel: UI_CRASH_REVEAL_MARKER
+      TooltipMessage: UI_CRASH_REVEAL_MSG
+
+  # 4.20
+  - Name: ROBOTCAMP
+    ID: RBCP
+    Cost: SM
+    OmitFromSignalSweep: true
+    Menu: UI_ABAND_ROBOT_CAMP_NAME
+    ScanEvent:
+      BuildingClass: AbandonedRobotCamp
+      OSDMessage: UI_CAMP_REVEAL_OSD
+      TooltipMessage: UI_CAMP_REVEAL_MSG
+      MarkerLabel: UI_CAMP_REVEAL_MARKER
+
   - Name: GLITCHYSTORYBOX
     ID: GLCH
     Cost: MD

@@ -6,8 +6,8 @@ Mod:
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 2.3.0
-  GameVersion: 4.07
+  Version: 2.4.0
+  GameVersion: 4.21
   Language: English
   Metadata:
     Name: ALCH_SCAN
@@ -245,6 +245,13 @@ Missions:
       Name: ALCH_SCAN_RD
       ID: ALSCRD
 
+  - Source: ./src/missions/deep_space_queries/bespoke/sentinel_salvage.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_RE
+      ID: ALSCRE
+
   #
   # PLANET OUTLIERS
   #
@@ -277,6 +284,12 @@ Missions:
       Name: ALCH_SCAN_OD
       ID: ALSCOD
 
+  - Source: ./src/missions/deep_space_queries/planet_outlier/epicentre.yml
+    Archetypes:
+      - PlanetaryExpedition
+    Metadata:
+      Name: ALCH_SCAN_OE
+      ID: ALSCOE
   #
   # GENERIC SYSTEM
   #

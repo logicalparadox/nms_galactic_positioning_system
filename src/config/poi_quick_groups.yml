@@ -10,6 +10,6 @@ QuickScanGroups:
     - SHOP
     - OUTP
     - DIST
+    - DRCS
     - FACT
-    - CRFR
     - LBRY

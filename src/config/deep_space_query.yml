@@ -121,7 +121,7 @@ DeepSpaceQuery:
     Title: Ancient Bones
     Description: Ancient Bones
     PlanetTitle: Ancient Bones Detected
-    Cost: MD
+    Cost: SM
     ResourceHint: UI_BONES_HINT
 
   - $: PlanetResourceQuery
@@ -130,8 +130,16 @@ DeepSpaceQuery:
     Title: Salvageable Scrap
     Description: Salvageable Scrap
     PlanetTitle: Salvageable Scrap Detected
-    Cost: MD
+    Cost: SM
     ResourceHint: UI_SCRAP_HINT
+
+  - $: PlanetResourceQuery
+    MissionID: ALCH_SCAN_RE
+    ID: RE
+    Title: Corrupted Sentinels
+    Description: Any Biome ~ Corrupted Sentinels
+    PlanetTitle: Corrupted Sentinels Detected
+    Cost: MD
 
   - $: PlanetResourceQuery
     MissionID: ALCH_SCAN_RD
@@ -139,7 +147,7 @@ DeepSpaceQuery:
     Title: Storm Crystals
     Description: Storm Crystals
     PlanetTitle: Storm Crystals Detected
-    Cost: SM
+    Cost: MD
 
   - $: PlanetResourceQuery
     MissionID: ALCH_SCAN_RC
@@ -184,6 +192,14 @@ DeepSpaceQuery:
     Description: Wealthy System ~ Lush Biome ~ Overgrown Flora ~ Abundant Fauna ~ Passive Sentinels
     PlanetTitle: Wealthy Lush ~ Citizens
     Cost: SM
+
+  - $: PlanetOutlierQuery
+    MissionID: ALCH_SCAN_OE
+    ID: OE
+    Title: Corrupted Core
+    Description: Any Infested Biome ~ Corrupted Sentinel Signals
+    PlanetTitle: Corrupted Core ~ Epicentre
+    Cost: MD
 
   #
   # System Generic

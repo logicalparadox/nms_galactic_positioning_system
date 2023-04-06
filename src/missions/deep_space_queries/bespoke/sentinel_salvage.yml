@@ -1,0 +1,47 @@
+# <% const ScanMeta = Atlas.Config.DeepSpaceQuery.find((s) => s.MissionID === Atlas.Metadata.Name); %>
+
+ScanEvents:
+  - Name: <%= Atlas.ScanEvent('QRY') %>
+    EventStartType: Special
+
+    # UI
+    AlwaysShow: true
+    MessageAudio: VO_TUT_COORDSRECEIVED
+    MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
+    OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+    MarkerLabel: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+    # Search Params
+    BuildingLocation: Nearest
+    BuildingType: BuildingClass
+    BuildingClass: AbandonedRobotCamp
+    SolarSystemLocation: Near
+    SolarSystemAttributes:
+      RequireUndiscovered: true
+
+Mission:
+  $Table: NPCMISSIONTABLE
+  MissionID: <%= Atlas.Metadata.Name %>
+
+  MissionTitles:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
+
+  MissionDescriptions:
+    Format: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_DESC`) %>
+
+  Stages:
+    - $: GxMissionSequenceImport
+      Source: ../stage_scan_retry_loop.yml
+      Metadata:
+        Name: LOOP
+        ID: '00'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>
+
+    - $: GxMissionSequenceImport
+      Source: ../stage_planet_query.yml
+      Metadata:
+        Name: FIND
+        ID: '01'
+      Config:
+        ScanEvent: <%= Atlas.ScanEvent('QRY') %>

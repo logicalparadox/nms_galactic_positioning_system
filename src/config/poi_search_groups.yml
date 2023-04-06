@@ -4,9 +4,11 @@ SearchGroups:
     Cost: LG
     Events:
       - DPOD
-      - DPOT
       - DIST
+      - DPOT
       - CRFR
+      - RBCP
+      - DRCS
       - FACT
       - HARV
 
