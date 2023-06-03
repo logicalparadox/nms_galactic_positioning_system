@@ -38,10 +38,17 @@ Dialog:
         SelectedOnBackOut: true
 
   # <% Object.keys(Atlas.Config.SearchGroups).forEach((groupKey, i) => { %>
+
+  # The paginate tool allows for creating dynamic menus from an array.
+  # Paginate(allItemsArray, itemsPerPage, (thisPageArray, pageIndex, totalPages))
+  # - thisPageArray contains just the items for this page, use a forEach loop to create entries
+  # - if pageIndex === totalPages then you are on the last page
+  #
   # <% Atlas.Tools.Paginate(Atlas.Config.SearchGroups[groupKey].Events, 3, (eventKeys, p, t) => { %>
   - Id: <%= Atlas.Dialog(`${groupKey}_P${p}`) %>
     Text: <%= Atlas.Mod.LocKey(`GRP_${groupKey}_DESC`) %>
     Options:
+      # iterate through items on this page
       # <% eventKeys.forEach((eventId) => { %>
       # <% const event = Atlas.Config.ScanEventTable.find((se) => se.ID === eventId); %>
       # <% const idx = Atlas.Config.ScanEventTable.indexOf(event); %>
@@ -63,15 +70,22 @@ Dialog:
           - <%= Atlas.Reward(`FIX_${idx}`) %>
       # <% }); // end useCost loop %>
       # <% }); // end eventKey loop %>
+
+      # check for last page
       # <% if (p === t) { %>
       - Name: <%= Atlas.Mod.LocKey('MENU_OPT_HOME') %>
         NextInteraction: <%= Atlas.Dialog('SBS_P1') %>
-        # <% } else { %>
-      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
-        NextInteraction: <%= Atlas.Dialog(`${groupKey}_P${p + 1}`) %>
-        # <% } %>
         MarkInteractionComplete: true
         SelectedOnBackOut: true
         KeepOpen: true
+
+      # <% } else { %>
+      - Name: <%= Atlas.Mod.LocKey('MENU_OPT_NEXT') %>
+        NextInteraction: <%= Atlas.Dialog(`${groupKey}_P${p + 1}`) %>
+        MarkInteractionComplete: true
+        SelectedOnBackOut: true
+        KeepOpen: true
+      # <% } // end page check %>
+
   # <% }); // end search group paginate %>
   # <% }); // end search group keys %>
