@@ -14,7 +14,8 @@ ScanEvents:
     # Search Params
     BuildingLocation: Nearest
     BuildingType: BuildingClass
-    BuildingClass: AbandonedRobotCamp
+    BuildingClass: SentinelDistressSignal
+    SurveyDistance: 750
     SolarSystemLocation: Near
     SolarSystemAttributes:
       RequireUndiscovered: true
