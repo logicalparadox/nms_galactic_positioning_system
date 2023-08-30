@@ -223,6 +223,15 @@ DeepSpaceQuery:
     Cost: LG
     IsSystemTarget: true
 
+  # - $: SystemGenericQuery
+  #   MissionID: ALCH_SCAN_GC
+  #   ID: GC
+  #   Title: Dissonant Pirates
+  #   Description: Pirate Controlled System ~ Dissonant Sentinel Signals
+  #   PlanetTitle: Dissonant Pirates Detected
+  #   Cost: LG
+  #   IsSystemTarget: true
+
   #
   # System Trade
   #

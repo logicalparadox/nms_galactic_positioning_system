@@ -18,7 +18,8 @@ ScanEvents:
       RequireUndiscovered: true
       UseConflict: Pirate
       UseWealth: true
-      WealthClass: Pirate
+      TradingData:
+        WealthClass: Pirate
       AnyBiomeNotWeirdOrDead: true
       NeverAllowExtremeSentinelPlanet: true
       NeverAllowEmpty: true

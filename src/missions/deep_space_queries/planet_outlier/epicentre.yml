@@ -12,6 +12,7 @@ ScanEvents:
     MarkerLabel: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
 
     # Search Params
+    # BuildingLocation: PlanetSearch
     BuildingLocation: Nearest
     BuildingType: BuildingClass
     BuildingClass: SentinelDistressSignal
@@ -20,6 +21,7 @@ ScanEvents:
     SolarSystemAttributes:
       RequireUndiscovered: true
       AnyInfestedBiome: true
+      NeedsCorruptSentinelPlanet: true
 
 Mission:
   $Table: NPCMISSIONTABLE

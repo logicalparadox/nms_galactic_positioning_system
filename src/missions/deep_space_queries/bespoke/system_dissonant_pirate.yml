@@ -5,26 +5,26 @@ ScanEvents:
     EventStartType: Special
 
     # UI
-    AlwaysShow: true
     MessageAudio: VO_TUT_COORDSRECEIVED
     MarkerIcon: TEXTURES/UI/HUD/ICONS/MISSIONS/MISSION.PLANET.DDS
     OSDMessage: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
     MarkerLabel: <%= Atlas.Mod.LocKey(`PQ_${ScanMeta.ID}_TITLE`) %>
 
     # Search Params
+    # MustFindSystem: true
+    BuildingType: BuildingClass
+    BuildingClass: SentinelDistressSignal
+    SurveyDistance: 750
     BuildingLocation: PlanetSearch
-    SolarSystemLocation: LocalOrNear
+    SolarSystemLocation: Near
     SolarSystemAttributes:
       RequireUndiscovered: true
-      NeverAllowExtremeSentinelPlanet: true
+      # UseRace: Explorers
+      UseConflict: Pirate
+      # UseAnomaly: BlackHole
+      # NeedsCorruptSentinelPlanet: true
       NeverAllowEmpty: true
       NeverAllowAbandoned: true
-      NeedsPrimePlanet: true
-      NeedsBiome: true
-      NeedsBiomeType: Lush
-      UseBiomeSubType: HugeLush
-      # NeedsWaterPlanet: true
-      SuitableForCreatureDiscovery: true
 
 Mission:
   $Table: NPCMISSIONTABLE
@@ -46,7 +46,7 @@ Mission:
         ScanEvent: <%= Atlas.ScanEvent('QRY') %>
 
     - $: GxMissionSequenceImport
-      Source: ../stage_planet_query.yml
+      Source: ../stage_system_query.yml
       Metadata:
         Name: FIND
         ID: '01'

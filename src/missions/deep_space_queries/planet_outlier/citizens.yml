@@ -20,14 +20,13 @@ ScanEvents:
       NeverAllowEmpty: true
       NeverAllowAbandoned: true
       UseWealth: true
-      WealthClass: Wealthy
+      TradingData:
+        WealthClass: Wealthy
       NeedsBiome: true
       NeedsBiomeType: Lush
       UseBiomeSubType: HugeLush
       # NeedsWaterPlanet: true
       SuitableForCreatureDiscovery: true
-      #UseWealth: true
-      #WealthClass: Wealthy
 
 Mission:
   $Table: NPCMISSIONTABLE

@@ -17,9 +17,10 @@ ScanEvents:
       AllowUnsafeMatches: false
       RequireUndiscovered: false
       UseWealth: false
-      WealthClass: Wealthy
       UseTrading: true
-      TradingClass: <%= ScanMeta.TradingClass %>
+      TradingData:
+        WealthClass: Wealthy
+        TradingClass: <%= ScanMeta.TradingClass %>
       NeverAllowEmpty: true
       NeverAllowAbandoned: true
 

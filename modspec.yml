@@ -6,14 +6,14 @@ Mod:
     building by type or planet by biome. Optional costs and tech requirements.
 
     https://www.nexusmods.com/nomanssky/mods/2144
-  Version: 2.4.1
-  GameVersion: 4.26
+  Version: 2.4.2
   Language: English
   Metadata:
     Name: ALCH_SCAN
     ID: ALSCAN
   Templates:
-    ModLua: ./templates/mod.template.lua
+    ModLuaFooters:
+      - ./templates/mod.footer.lua
 
 # 1 ~ Load all config files
 # Files are loaded and deeply merged in the order specified.
@@ -290,6 +290,7 @@ Missions:
     Metadata:
       Name: ALCH_SCAN_OE
       ID: ALSCOE
+
   #
   # GENERIC SYSTEM
   #
@@ -307,6 +308,13 @@ Missions:
     Metadata:
       Name: ALCH_SCAN_GB
       ID: ALSCGB
+
+  # - Source: ./src/missions/deep_space_queries/bespoke/system_dissonant_pirate.yml
+  #   Archetypes:
+  #     - PlanetaryExpedition
+  #   Metadata:
+  #     Name: ALCH_SCAN_GC
+  #     ID: ALSCGC
 
   #
   # SYSTEM TRADE CLASS (not working in game)

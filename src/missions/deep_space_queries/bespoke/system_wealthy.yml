@@ -18,7 +18,8 @@ ScanEvents:
       RequireUndiscovered: true
       UseRace: <%= ScanMeta.Race || 'None' %>
       UseWealth: true
-      WealthClass: Wealthy
+      TradingData:
+        WealthClass: Wealthy
       AnyBiomeNotWeirdOrDead: true
       # NeverAllowExtremeSentinelPlanet: true
       NeverAllowEmpty: true

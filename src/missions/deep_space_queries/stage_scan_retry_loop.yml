@@ -36,9 +36,9 @@ Stage:
             - $: GcMissionSequenceStop
 
         - $: GcMissionSequenceGroup
-          ConditionTest: AnyTrue
           ObjectiveID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ') %>
           ObjectiveTipID: <%= Atlas.Mod.LocKey('PQ_ACTIVE_OBJ_TIP') %>
+          ConditionTest: AnyTrue
           Conditions:
             - $: GcMissionConditionOnMultiplayerMission
             - $: GcMissionConditionOnOtherSideOfPortal
